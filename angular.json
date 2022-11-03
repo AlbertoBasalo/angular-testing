@@ -20,7 +20,7 @@
           "type": "interface"
         },
         "@schematics/angular:module": {
-          "routing": true
+          "module": "app"
         },
         "@schematics/angular:pipe": {
           "flat": false
