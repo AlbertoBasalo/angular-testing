@@ -5,7 +5,27 @@
   "projects": {
     "angulab": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "changeDetection": "OnPush",
+          "flat": true,
+          "inlineTemplate": true,
+          "inlineStyle": false,
+          "style": "none"
+        },
+        "@schematics/angular:directive": {
+          "flat": true
+        },
+        "@schematics/angular:interface": {
+          "type": "interface"
+        },
+        "@schematics/angular:module": {
+          "routing": true
+        },
+        "@schematics/angular:pipe": {
+          "flat": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
