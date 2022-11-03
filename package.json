@@ -1,6 +1,12 @@
 {
   "name": "angulab",
-  "version": "0.0.0",
+  "version": "14.0.0",
+  "description": "Angular Laboratory",
+  "author": {
+    "name": "Alberto Basalo",
+    "email": "albertobasalo@hotmail.com",
+    "url": "https://albertobasalo.dev"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
