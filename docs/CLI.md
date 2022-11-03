@@ -12,4 +12,36 @@ npm i -D eslint-config-prettier eslint-plugin-prettier
 # Add a bit of style
 npm install @picocss/pico
 # angular.json : "./node_modules/@picocss/pico/css/pico.min.css",
+
+
+# add components
+ng g m components/header
+ng g c components/header --export=true
+ng g m components/footer
+ng g c components/footer --export=true
+
+# add services
+ng g s services/api
+
+# install a development server with a fake api
+npm i -D json-server json-server-auth
+npm run api
+
+# add models
+ng g i models/agency
+ng g i models/booking
+ng g i models/api
+ng g i models/app
+ng g i models/credentials
+ng g i models/guard
+ng g i models/trip
+ng g i models/user
+
+# add base store
+ng g class services/store --type=base
+
+# add pages
+ng g m routes/home --route=home -m=app
+ng g s routes/home
+ng g c routes/home/trips --type=list --selector=app-trips-list --flat=true
 ```

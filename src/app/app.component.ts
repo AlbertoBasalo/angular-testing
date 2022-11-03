@@ -2,21 +2,16 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
+
   template: `
-    <header>
-      <h1>{{ title }}</h1>
-    </header>
+    <app-header [title]="title"></app-header>
     <main>
       <router-outlet></router-outlet>
     </main>
-    <footer>
-      <h6>{{ title }}</h6>
-      <p>Welcome on board</p>
-      <a href="https://twitter.com/albertobasalo">Alberto Basalo</a>
-    </footer>
+    <app-footer [title]="title"></app-footer>
   `,
   styles: [],
 })
 export class AppComponent {
-  title = 'angulab';
+  title = 'Astro bookings';
 }

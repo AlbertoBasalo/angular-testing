@@ -19,9 +19,7 @@
         "@schematics/angular:interface": {
           "type": "interface"
         },
-        "@schematics/angular:module": {
-          "module": "app"
-        },
+        "@schematics/angular:module": {},
         "@schematics/angular:pipe": {
           "flat": false
         }
