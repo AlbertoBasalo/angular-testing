@@ -1,31 +1,15 @@
 # Angular Laboratory
 
-A sample project for an introductory course to Angular
-
-> Developing **Astro Bookings** a web app for a fictitious space travel company.
-
-- 🛣️ Follow the numbered branches of this repository.
+A sample project done for demos in Angular workshops.
 
 - 🚀 Execute `npm i` and `npm start` to run the app.
 
-- 📕 Read the `docs` folder content.
-
----
-
-## 🛠 VS Code
-
-### 🧩 Recommended extensions
-
-- [Abracadabra, refactor this!](https://marketplace.visualstudio.com/items?itemName=nicoespeon.abracadabra)
-- [Angular Essentials](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials)
-- [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
-- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
-- [IntelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)
+- 📕 Read the `docs` folder content for more info.
 
 ---
 
 <footer>
-  <h3>By Alberto Basalo</h3>
+  <h3>🧑🏼‍💻 By <a href="https://albertobasalo.dev" target="blank">Alberto Basalo</a> </h3>
   <p>
     <a href="https://twitter.com/albertobasalo" target="blank">
       <img src="https://img.shields.io/twitter/follow/albertobasalo?logo=twitter&style=for-the-badge" alt="twitter albertobasalo" />
