@@ -12,10 +12,10 @@ export class BaseStore<T> {
   select$<K>(selector: (state: T) => K): Observable<K> {
     return this.getState$().pipe(map(selector), distinctUntilChanged());
   }
-  getState(): T {
+  private getState(): T {
     return this.clone(this.state$.getValue());
   }
-  getState$(): Observable<T> {
+  private getState$(): Observable<T> {
     return this.state$.asObservable().pipe(map(this.clone));
   }
   private clone<K>(target: K): K {

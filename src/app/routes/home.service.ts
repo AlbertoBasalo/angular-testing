@@ -5,11 +5,11 @@ import { ApiStore } from '@services/api.store';
 
 @Injectable()
 export class HomeService {
-  constructor(private service: ApiService, private store: ApiStore<Trip>) {}
+  constructor(private api: ApiService, private store: ApiStore<Trip>) {}
 
   loadTrips() {
-    this.store.setWorking();
-    this.service.getTrips$().subscribe({
+    this.store.setIsWorking();
+    this.api.getTrips$().subscribe({
       next: (trips) => this.store.setData(trips),
       error: (error) => this.store.setError(error.message),
     });
