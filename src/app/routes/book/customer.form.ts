@@ -23,10 +23,12 @@ import {
         formControlName="phone"
         label="Phone"
       ></app-input-control>
-      <app-input-control
+      <app-options-control
         formControlName="gender"
         label="Gender"
-      ></app-input-control>
+        [options]="genderOptions"
+      >
+      </app-options-control>
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,6 +38,17 @@ import {
 })
 export class CustomerForm implements ControlValueAccessor {
   form: FormGroup;
+  genderOptions = [
+    {
+      value: 'male',
+      label: `Male`,
+    },
+    {
+      value: 'female',
+      label: `Female`,
+    },
+  ];
+
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       name: '',
