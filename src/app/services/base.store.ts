@@ -2,9 +2,11 @@ import { BehaviorSubject, distinctUntilChanged, map, Observable } from 'rxjs';
 
 export class BaseStore<T> {
   private state$: BehaviorSubject<T>;
+
   constructor(initialState: T) {
     this.state$ = new BehaviorSubject(this.clone(initialState));
   }
+
   setState(mutation: Partial<T>) {
     const newState = { ...this.getState(), ...this.clone(mutation) };
     this.state$.next(newState);

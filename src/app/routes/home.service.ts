@@ -14,7 +14,6 @@ export class HomeService {
       error: (error) => this.store.setError(error.message),
     });
   }
-
   selectState$() {
     return this.store.selectState$();
   }
