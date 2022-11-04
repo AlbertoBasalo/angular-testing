@@ -1,4 +1,4 @@
-# Angular Laboratory
+# Angular Laboratory CLI journal
 
 ```bash
 # generate a new project
