@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WorkingMessageComponent } from './working-message.component';
+import { ErrorComponent } from './error.component';
 
 
 
 @NgModule({
   declarations: [
-    WorkingMessageComponent
+    ErrorComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    WorkingMessageComponent
+    ErrorComponent
   ]
 })
-export class WorkingMessageModule { }
+export class ErrorModule { }

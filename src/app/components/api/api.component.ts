@@ -4,13 +4,9 @@ import { Api } from '@models/api.interface';
 @Component({
   selector: 'app-api',
   template: `
-    <app-working-message *ngIf="state.isWorking"></app-working-message>
+    <app-working *ngIf="state.isWorking"></app-working>
     <ng-content *ngIf="state.data.length > 0"></ng-content>
-    <app-error-message
-      *ngIf="state.error"
-      kind="⚠️📡"
-      [message]="state.error"
-    ></app-error-message>
+    <app-error *ngIf="state.error" [error]="state.error"></app-error>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

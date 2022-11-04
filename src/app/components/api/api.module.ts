@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ErrorMessageModule } from '@components/error-message/error-message.module';
-import { WorkingMessageModule } from '@components/working-message/working-message.module';
+import { ErrorModule } from '@components/error/error.module';
+import { WorkingModule } from '@components/working/working.module';
 import { ApiComponent } from './api.component';
 
 @NgModule({
   declarations: [ApiComponent],
-  imports: [WorkingMessageModule, ErrorMessageModule, CommonModule],
+  imports: [WorkingModule, ErrorModule, CommonModule],
   exports: [ApiComponent],
 })
 export class ApiModule {}
