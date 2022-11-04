@@ -1,8 +1,10 @@
 # Angular Laboratory
 
-A sample project done for demos in Angular workshops.
+> A sample project for Angular workshop demos
 
-- 🚀 Execute `npm i` and `npm start` to run the app.
+- 🚚 Install dependencies `npm i`
+
+- 🚀 Execute `npm run api` and `npm start` to run the app.
 
 - 📕 Read the `docs` folder content for more info.
 
