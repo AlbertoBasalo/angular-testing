@@ -8,6 +8,7 @@ import { Trip } from '@models/trip.interface';
       <li *ngFor="let trip of trips">
         <strong>{{ trip.destination }} </strong>
         <em>{{ trip.startDate | date: 'dd/MM/yyyy' }}</em>
+        <a [routerLink]="">Book trip</a>
       </li>
     </ul>
   `,

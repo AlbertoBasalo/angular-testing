@@ -41,7 +41,7 @@ ng g i models/user
 ng g class services/base --type=store
 ng g class services/api --type=store # make it injectable
 
-# add pages
+# add home page
 ng g m routes/home --route=home -m=app
 ng g s routes/home
 ng g c routes/home/trips --type=list --selector=app-trips-list --flat=true
@@ -51,4 +51,11 @@ ng g m components/working
 ng g c components/working --export=true
 ng g m components/error
 ng g c components/error --export=true
+ng g m components/link
+ng g c components/link --export=true
+
+# add booking page
+ng g m routes/book --route=book/:tripId -m=app
+ng g s routes/book
+ng g c routes/book --type=form --selector=app-book-form --flat=true
 ```

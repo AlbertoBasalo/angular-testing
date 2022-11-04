@@ -13,5 +13,5 @@ import { Component } from '@angular/core';
   styles: [],
 })
 export class AppComponent {
-  title = 'Astro bookings';
+  title = '🅰️ anguLab 🧫';
 }
