@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-book',
-  template: ` <app-book-form></app-book-form> ID:{{ tripId }} `,
+  template: ` <app-book-form [tripId]="tripId"></app-book-form> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponent {

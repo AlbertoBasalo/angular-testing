@@ -58,4 +58,7 @@ ng g c components/link --export=true
 ng g m routes/book --route=book/:tripId -m=app
 ng g s routes/book
 ng g c routes/book/book --type=form --selector=app-book-form --flat=true
+ng g c routes/book/customer --type=form --selector=app-customer-form --flat=true
+ng g m components/input
+ng g c components/input --type=control --selector=app-input-control --export=true
 ```
