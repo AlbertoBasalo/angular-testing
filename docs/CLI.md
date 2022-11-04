@@ -57,5 +57,5 @@ ng g c components/link --export=true
 # add booking page
 ng g m routes/book --route=book/:tripId -m=app
 ng g s routes/book
-ng g c routes/book --type=form --selector=app-book-form --flat=true
+ng g c routes/book/book --type=form --selector=app-book-form --flat=true
 ```
