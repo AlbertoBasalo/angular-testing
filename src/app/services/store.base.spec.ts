@@ -1,7 +1,7 @@
-import { Store } from './store.base';
+import { BaseStore } from './base.store';
 
 describe('Store', () => {
   it('should create an instance', () => {
-    expect(new Store()).toBeTruthy();
+    expect(new BaseStore()).toBeTruthy();
   });
 });

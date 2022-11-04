@@ -1,6 +1,6 @@
 import { BehaviorSubject, distinctUntilChanged, map, Observable } from 'rxjs';
 
-export class Store<T> {
+export class BaseStore<T> {
   private state$: BehaviorSubject<T>;
   constructor(initialState: T) {
     this.state$ = new BehaviorSubject(this.clone(initialState));

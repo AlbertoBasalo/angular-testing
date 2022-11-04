@@ -14,7 +14,7 @@ npm install @picocss/pico
 # angular.json : "./node_modules/@picocss/pico/css/pico.min.css",
 
 
-# add components
+# add layout components
 ng g m components/header
 ng g c components/header --export=true
 ng g m components/footer
@@ -37,11 +37,16 @@ ng g i models/guard
 ng g i models/trip
 ng g i models/user
 
-# add base store
-ng g class services/store --type=base
+# add base and api store
+ng g class services/base --type=store
+ng g class services/api --type=store # make it injectable
 
 # add pages
 ng g m routes/home --route=home -m=app
 ng g s routes/home
 ng g c routes/home/trips --type=list --selector=app-trips-list --flat=true
+
+# add shared components
+ng g m components/working
+ng g c components/working --export=true
 ```

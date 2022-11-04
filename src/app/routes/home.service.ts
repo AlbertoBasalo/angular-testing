@@ -1,43 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Api } from '@models/api.interface';
 import { Trip } from '@models/trip.interface';
 import { ApiService } from '@services/api.service';
-import { Store } from '@services/store.base';
+import { ApiStore } from '@services/api.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HomeService {
-  private initialState: Api<Trip[]> = {
-    isWorking: false,
-    error: '',
-    data: [],
-  };
-  private tripsStore = new Store<Api<Trip[]>>(this.initialState);
-
-  constructor(private api: ApiService) {}
+  constructor(private service: ApiService, private store: ApiStore<Trip>) {}
 
   loadTrips() {
-    this.tripsStore.setState({ isWorking: true });
-    this.api.getTrips$().subscribe({
-      next: (trips) =>
-        this.tripsStore.setState({ isWorking: false, error: '', data: trips }),
-      error: (error) =>
-        this.tripsStore.setState({
-          isWorking: false,
-          error: error.message,
-          data: [],
-        }),
+    this.store.setWorking();
+    this.service.getTrips$().subscribe({
+      next: (trips) => this.store.setData(trips),
+      error: (error) => this.store.setError(error.message),
     });
   }
 
   selectIsWorking$() {
-    return this.tripsStore.select$((state) => state.isWorking);
+    return this.store.selectIsWorking$();
   }
   selectTrips$() {
-    return this.tripsStore.select$((state) => state.data);
+    return this.store.selectData$();
   }
   selectError$() {
-    return this.tripsStore.select$((state) => state.error);
+    return this.store.selectError$();
   }
 }

@@ -13,10 +13,12 @@ import { HomeService } from '../home.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  isWorking$ = this.homeService.selectIsWorking$();
-  trips$ = this.homeService.selectTrips$();
-  error$ = this.homeService.selectError$();
-  constructor(private homeService: HomeService) {
-    this.homeService.loadTrips();
+  // ToDo: extract working and error to components
+
+  isWorking$ = this.service.selectIsWorking$();
+  trips$ = this.service.selectTrips$();
+  error$ = this.service.selectError$();
+  constructor(private service: HomeService) {
+    this.service.loadTrips();
   }
 }
