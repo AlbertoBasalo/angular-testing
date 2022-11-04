@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Api } from '@models/api.interface';
+import { Api, API_INITIAL_STATE } from '@models/api.interface';
 
 @Component({
   selector: 'app-api',
@@ -11,5 +11,5 @@ import { Api } from '@models/api.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApiComponent {
-  @Input() state: Api<unknown> = { isWorking: false, error: '', data: [] };
+  @Input() state: Api<unknown> = API_INITIAL_STATE;
 }

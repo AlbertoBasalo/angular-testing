@@ -6,7 +6,8 @@ import { Trip } from '@models/trip.interface';
   template: `
     <ul>
       <li *ngFor="let trip of trips">
-        {{ trip.destination }} - {{ trip.startDate | date: 'dd/MM/yyyy' }}
+        <strong>{{ trip.destination }} </strong>
+        <em>{{ trip.startDate | date: 'dd/MM/yyyy' }}</em>
       </li>
     </ul>
   `,
