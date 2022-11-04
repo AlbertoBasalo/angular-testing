@@ -3,9 +3,7 @@ import { Trip } from '@models/trip.interface';
 import { ApiService } from '@services/api.service';
 import { ApiStore } from '@services/api.store';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class HomeService {
   constructor(private service: ApiService, private store: ApiStore<Trip>) {}
 
@@ -17,13 +15,7 @@ export class HomeService {
     });
   }
 
-  selectIsWorking$() {
-    return this.store.selectIsWorking$();
-  }
-  selectTrips$() {
-    return this.store.selectData$();
-  }
-  selectError$() {
-    return this.store.selectError$();
+  selectState$() {
+    return this.store.selectState$();
   }
 }

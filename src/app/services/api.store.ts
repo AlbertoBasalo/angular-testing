@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Api } from '@models/api.interface';
+import { Api, API_INITIAL_STATE } from '@models/api.interface';
 import { BaseStore } from './base.store';
 
 @Injectable()
 export class ApiStore<T> {
-  private initialState: Api<T> = {
-    isWorking: false,
-    error: '',
-    data: [],
-  };
-  private baseStore = new BaseStore<Api<T>>(this.initialState);
+  private baseStore = new BaseStore<Api<T>>(API_INITIAL_STATE);
 
   setWorking() {
     this.baseStore.setState({ isWorking: true });
@@ -19,6 +14,9 @@ export class ApiStore<T> {
   }
   setError(error: string) {
     this.baseStore.setState({ isWorking: false, error, data: [] });
+  }
+  selectState$() {
+    return this.baseStore.select$((state) => state);
   }
   selectIsWorking$() {
     return this.baseStore.select$((state) => state.isWorking);

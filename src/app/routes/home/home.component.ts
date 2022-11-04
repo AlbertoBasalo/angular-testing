@@ -3,19 +3,15 @@ import { HomeService } from '../home.service';
 
 @Component({
   template: `
-    <app-working-message *ngIf="isWorking$ | async"></app-working-message>
-    <app-trips-list
-      *ngIf="trips$ | async as trips"
-      [trips]="trips"
-    ></app-trips-list>
-    <aside *ngIf="error$ | async as error">⚠️ {{ error }}</aside>
+    <app-api *ngIf="state$ | async as state" [state]="state">
+      <app-trips-list [trips]="state.data"></app-trips-list>
+    </app-api>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  isWorking$ = this.service.selectIsWorking$();
-  trips$ = this.service.selectTrips$();
-  error$ = this.service.selectError$();
+  state$ = this.service.selectState$();
+
   constructor(private service: HomeService) {
     this.service.loadTrips();
   }
