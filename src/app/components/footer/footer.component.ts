@@ -4,16 +4,23 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'app-footer',
   template: `
     <footer>
-      <h6>{{ title }}</h6>
-      <p>{{ subtitle }}</p>
-      <a [href]="authorUrl">{{ author }}</a>
+      <h6>
+        <app-link
+          [caption]="title"
+          [url]="repoUrl"
+          [title]="repoTitle"
+        ></app-link>
+        made by
+        <app-link [caption]="author" [url]="authorUrl"></app-link>
+      </h6>
     </footer>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
   @Input() title = '';
-  subtitle = 'angulab';
+  repoTitle = 'anguLab repository';
+  repoUrl = 'https://github.com/AlbertoBasalo/angulab';
   author = 'Alberto Basalo';
-  authorUrl = 'https://twitter.com/albertobasalo';
+  authorUrl = 'https://albertobasalo.dev';
 }
