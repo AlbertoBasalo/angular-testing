@@ -43,7 +43,7 @@ ng g class services/api --type=store # make it injectable
 
 # add home page
 ng g m routes/home --route=home -m=app
-ng g s routes/home
+ng g s routes/home/home
 ng g c routes/home/trips --type=list --selector=app-trips-list --flat=true
 
 # add shared components

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HomeService } from '../home.service';
+import { HomeService } from './home.service';
 
 @Component({
   template: `
