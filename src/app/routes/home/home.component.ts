@@ -3,7 +3,7 @@ import { HomeService } from '../home.service';
 
 @Component({
   template: `
-    <aside *ngIf="isWorking$ | async" aria-busy="true">Loading...</aside>
+    <app-working-message *ngIf="isWorking$ | async"></app-working-message>
     <app-trips-list
       *ngIf="trips$ | async as trips"
       [trips]="trips"
@@ -13,8 +13,6 @@ import { HomeService } from '../home.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  // ToDo: extract working and error to components
-
   isWorking$ = this.service.selectIsWorking$();
   trips$ = this.service.selectTrips$();
   error$ = this.service.selectError$();

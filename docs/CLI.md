@@ -47,6 +47,8 @@ ng g s routes/home
 ng g c routes/home/trips --type=list --selector=app-trips-list --flat=true
 
 # add shared components
-ng g m components/working
-ng g c components/working --export=true
+ng g m components/working-message
+ng g c components/working-message --export=true
+ng g m components/error-message
+ng g c components/error-message --export=true
 ```
