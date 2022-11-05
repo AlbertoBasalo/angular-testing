@@ -10,23 +10,29 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   selector: 'app-book-form',
   template: `
     <form [formGroup]="form">
-      <app-customer-form formControlName="customer"></app-customer-form>
-      <app-input-control
-        formControlName="seats"
-        label="Seats"
-        type="number"
-      ></app-input-control>
-      <app-input-control
-        formControlName="premiumFood"
-        label="Premium Food"
-        type="checkbox"
-      ></app-input-control>
-      <app-options-control
-        formControlName="paymentMethod"
-        label="Payment Method"
-        [options]="paymentMethodOptions"
-      >
-      </app-options-control>
+      <article>
+        <header>Customer information</header>
+        <app-customer-form formControlName="customer"></app-customer-form>
+      </article>
+      <article>
+        <header>Trip information</header>
+        <app-input-control
+          formControlName="seats"
+          label="Seats"
+          type="number"
+        ></app-input-control>
+        <app-input-control
+          formControlName="premiumFood"
+          label="Premium Food"
+          type="checkbox"
+        ></app-input-control>
+        <app-options-control
+          formControlName="paymentMethod"
+          label="Payment Method"
+          [options]="paymentMethodOptions"
+        >
+        </app-options-control>
+      </article>
       <button type="submit" (click)="onSubmit()">Make Trip Booking</button>
     </form>
   `,

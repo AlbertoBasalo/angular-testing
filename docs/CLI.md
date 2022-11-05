@@ -61,4 +61,6 @@ ng g c routes/book/book --type=form --selector=app-book-form --flat=true
 ng g c routes/book/customer --type=form --selector=app-customer-form --flat=true
 ng g m components/input
 ng g c components/input --type=control --selector=app-input-control --export=true
+ng g m components/options
+ng g c components/options --type=control --selector=app-options-control --export=true
 ```

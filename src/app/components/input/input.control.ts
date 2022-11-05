@@ -34,8 +34,8 @@ import {
 export class InputControl implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() formControlName: string = '';
-  @Input() type: 'text' | 'password' | 'email' | 'number' | 'checkbox' = 'text';
   @Input() control!: AbstractControl | null;
+  @Input() type: 'text' | 'password' | 'email' | 'number' | 'checkbox' = 'text';
 
   value: any;
   isDisabled: boolean = false;

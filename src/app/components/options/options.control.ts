@@ -13,13 +13,30 @@ import {
       <small *ngIf="mustShowError()">
         {{ getErrorMessage() }}
       </small>
+      <ng-container
+        *ngIf="options.length > 3; then select; else radios"
+      ></ng-container>
+    </div>
+    <ng-template #select>
       <select [id]="formControlName" (change)="onChange($event)">
         <option value="" selected>Choose one option 👇🏼</option>
         <option *ngFor="let option of options" [value]="option.value">
           {{ option.label }}
         </option>
       </select>
-    </div>
+    </ng-template>
+    <ng-template #radios>
+      <span *ngFor="let option of options">
+        <input
+          type="radio"
+          [name]="formControlName"
+          [id]="option.value"
+          [value]="option.value"
+          (click)="onChange($event)"
+        />
+        <label [for]="option.value">{{ option.label }}</label>
+      </span>
+    </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
