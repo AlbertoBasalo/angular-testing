@@ -89,5 +89,37 @@
       "name": "Alberto Basalo",
       "id": 1
     }
+  ],
+  "bookings": [
+    {
+      "id": 1,
+      "tripId": "space-y-moon-1",
+      "customer": {
+        "name": "Alberto Basalo",
+        "email": "albertobasalo@hotmail.com",
+        "phone": "609884782",
+        "gender": "male"
+      },
+      "seats": 1,
+      "premiumFood": "",
+      "paymentMethod": "debit-card",
+      "date": "2022-11-05T11:07:33.018Z",
+      "status": "Pending"
+    },
+    {
+      "id": "space-y-moon-1albertobasalo@hotmail.com",
+      "tripId": "space-y-moon-1",
+      "customer": {
+        "name": "Alberto Basalo",
+        "email": "albertobasalo@hotmail.com",
+        "phone": "609884782",
+        "gender": ""
+      },
+      "seats": 1,
+      "premiumFood": "",
+      "paymentMethod": "",
+      "date": "2022-11-05T11:11:09.797Z",
+      "status": "Pending"
+    }
   ]
 }

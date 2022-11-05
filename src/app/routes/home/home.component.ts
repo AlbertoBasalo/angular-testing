@@ -3,14 +3,14 @@ import { HomeService } from './home.service';
 
 @Component({
   template: `
-    <app-api *ngIf="state$ | async as state" [state]="state">
-      <app-trips-list [trips]="state.data"></app-trips-list>
+    <app-api *ngIf="trips$ | async as trips" [state]="trips">
+      <app-trips-list [trips]="trips.data"></app-trips-list>
     </app-api>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  state$ = this.service.selectState$();
+  trips$ = this.service.selectTrips$();
 
   constructor(private service: HomeService) {
     this.service.loadTrips();

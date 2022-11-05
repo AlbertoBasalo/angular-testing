@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Agency } from '@models/agency.interface';
+import { Booking } from '@models/booking.interface';
 import { Credentials } from '@models/credentials.interface';
 import { Trip } from '@models/trip.interface';
 import { User } from '@models/user.interface';
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
   private agenciesUrl = `${environment.apiServerUrl}/agencies`;
+  private bookingsUrl = `${environment.apiServerUrl}/bookings`;
   private tripsUrl = `${environment.apiServerUrl}/trips`;
   private usersUrl = `${environment.apiServerUrl}/users`;
   private loginUrl = `${environment.apiServerUrl}/login`;
@@ -31,8 +33,21 @@ export class ApiService {
     return this.http.delete<Agency>(`${this.agenciesUrl}/${agencyId}`);
   }
 
+  getBookings$(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(this.bookingsUrl);
+  }
+  getBookingById$(bookingId: string): Observable<Booking> {
+    return this.http.get<Booking>(`${this.bookingsUrl}/${bookingId}`);
+  }
+  postBooking$(booking: Booking): Observable<Booking> {
+    return this.http.post<Booking>(this.bookingsUrl, booking);
+  }
+
   getTrips$(): Observable<Trip[]> {
     return this.http.get<Trip[]>(this.tripsUrl);
+  }
+  getTripById$(tripId: string): Observable<Trip> {
+    return this.http.get<Trip>(`${this.tripsUrl}/${tripId}`);
   }
   getTripsByAgencyId$(agencyId: string): Observable<Trip[]> {
     return this.http.get<Trip[]>(`${this.tripsUrl}?agencyId=${agencyId}`);

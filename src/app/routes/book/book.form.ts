@@ -1,10 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Booking } from '@models/booking.interface';
 
 @Component({
   selector: 'app-book-form',
@@ -15,7 +18,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
         <app-customer-form formControlName="customer"></app-customer-form>
       </article>
       <article>
-        <header>Trip information</header>
+        <header>Booking information</header>
         <app-input-control
           formControlName="seats"
           label="Seats"
@@ -40,6 +43,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class BookForm implements OnInit {
   @Input() tripId = '';
+  @Output() book = new EventEmitter<Booking>();
   form!: FormGroup;
   paymentMethodOptions = [
     {
@@ -78,6 +82,6 @@ export class BookForm implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.form.value);
+    this.book.emit(this.form.value);
   }
 }

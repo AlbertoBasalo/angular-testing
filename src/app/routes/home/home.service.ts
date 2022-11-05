@@ -5,16 +5,16 @@ import { ApiStore } from '@services/api.store';
 
 @Injectable()
 export class HomeService {
-  constructor(private api: ApiService, private store: ApiStore<Trip>) {}
+  constructor(private api: ApiService, private tripsStore: ApiStore<Trip>) {}
 
   loadTrips() {
-    this.store.setIsWorking();
+    this.tripsStore.setIsWorking();
     this.api.getTrips$().subscribe({
-      next: (trips) => this.store.setData(trips),
-      error: (error) => this.store.setError(error.message),
+      next: (trips) => this.tripsStore.setData(trips),
+      error: (error) => this.tripsStore.setError(error.message),
     });
   }
-  selectState$() {
-    return this.store.selectState$();
+  selectTrips$() {
+    return this.tripsStore.selectState$();
   }
 }
