@@ -60,7 +60,7 @@ ng g c components/api --export=true
 
 # add booking page
 ng g m routes/book --route=book/:tripId -m=app
-ng g s routes/book
+ng g s routes/book/book
 ng g c routes/book/book --type=form --selector=app-book-form --flat=true
 ## sub form cva
 ng g c routes/book/customer --type=form --selector=app-customer-form --flat=true
@@ -83,4 +83,10 @@ ng g m routes/bookings --route=bookings -m=app
 
 # add utils service
 ng g s services/utils
+
+# add trips page
+ng g m routes/trips --route=trips -m=app
+ng g s routes/trips/trips
+ng g c routes/trips/trips --type=form --selector=app-trips-form --flat=true
+ng g c routes/trips/trips --type=list --selector=app-trips-list --flat=true
 ```
