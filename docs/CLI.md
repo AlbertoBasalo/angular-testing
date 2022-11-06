@@ -53,12 +53,19 @@ ng g m components/error
 ng g c components/error --export=true
 ng g m components/link
 ng g c components/link --export=true
+## content projector wrapper
+ng g m components/api
+ng g c components/api --export=true
+
 
 # add booking page
 ng g m routes/book --route=book/:tripId -m=app
 ng g s routes/book
 ng g c routes/book/book --type=form --selector=app-book-form --flat=true
+## sub form cva
 ng g c routes/book/customer --type=form --selector=app-customer-form --flat=true
+
+# add cva form controls
 ng g m components/input
 ng g c components/input --type=control --selector=app-input-control --export=true
 ng g m components/options
