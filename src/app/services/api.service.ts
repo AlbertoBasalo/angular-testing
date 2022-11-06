@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Agency } from '@models/agency.interface';
 import { Booking } from '@models/booking.interface';
-import { Credentials } from '@models/credentials.interface';
 import { Trip } from '@models/trip.interface';
-import { User } from '@models/user.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -15,10 +13,10 @@ export class ApiService {
   private agenciesUrl = `${environment.apiServerUrl}/agencies`;
   private bookingsUrl = `${environment.apiServerUrl}/bookings`;
   private tripsUrl = `${environment.apiServerUrl}/trips`;
-  private usersUrl = `${environment.apiServerUrl}/users`;
-  private loginUrl = `${environment.apiServerUrl}/login`;
 
   constructor(private http: HttpClient) {}
+
+  // ToDo: create CURD generic service
 
   getAgencies$(): Observable<Agency[]> {
     return this.http.get<Agency[]>(this.agenciesUrl);
@@ -42,6 +40,9 @@ export class ApiService {
   postBooking$(booking: Booking): Observable<Booking> {
     return this.http.post<Booking>(this.bookingsUrl + 'error', booking);
   }
+  deleteBooking$(bookingId: string): Observable<Booking> {
+    return this.http.delete<Booking>(`${this.bookingsUrl}/${bookingId}`);
+  }
 
   getTrips$(): Observable<Trip[]> {
     return this.http.get<Trip[]>(this.tripsUrl);
@@ -49,17 +50,10 @@ export class ApiService {
   getTripById$(tripId: string): Observable<Trip> {
     return this.http.get<Trip>(`${this.tripsUrl}/${tripId}`);
   }
-  getTripsByAgencyId$(agencyId: string): Observable<Trip[]> {
-    return this.http.get<Trip[]>(`${this.tripsUrl}?agencyId=${agencyId}`);
+  postTrip$(trip: Trip): Observable<Trip> {
+    return this.http.post<Trip>(this.tripsUrl, trip);
   }
-  getTripsByQuery$(query: string): Observable<Trip[]> {
-    return this.http.get<Trip[]>(`${this.tripsUrl}?q=${query}`);
-  }
-
-  register$(user: Partial<User>): Observable<string> {
-    return this.http.post<string>(this.usersUrl, user);
-  }
-  logIn$(credentials: Partial<Credentials>): Observable<string> {
-    return this.http.post<string>(this.loginUrl, credentials);
+  deleteTrips$(tripId: string): Observable<Trip> {
+    return this.http.delete<Trip>(`${this.tripsUrl}/${tripId}`);
   }
 }
