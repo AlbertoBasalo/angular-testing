@@ -6,7 +6,9 @@ import { ApiStore } from '@services/api.store';
 
 @Injectable()
 export class BookService {
-  constructor(private api: ApiService, private tripsStore: ApiStore<Trip>) {}
+  private tripsStore = new ApiStore<Trip>();
+  private bookingsStore = new ApiStore<Booking>();
+  constructor(private api: ApiService) {}
 
   loadTrip(tripId: string) {
     this.tripsStore.setIsWorking();
@@ -14,15 +16,26 @@ export class BookService {
       next: (trip) => this.tripsStore.setData([trip]),
       error: (error) => this.tripsStore.setError(error.message),
     });
-    return this.api.getTripById$(tripId);
   }
 
-  selectTrip$() {
+  selectTripState$() {
     return this.tripsStore.selectState$();
   }
 
   saveBooking(booking: Booking) {
+    this.bookingsStore.setIsWorking();
     booking.id = `${booking.tripId}-${booking.customer.email}`;
-    return this.api.postBooking$(booking);
+    this.api.postBooking$(booking).subscribe({
+      next: (booking) => this.bookingsStore.setData([booking]),
+      error: (error) => this.bookingsStore.setError(error.message),
+    });
+  }
+
+  selectBookingsState$() {
+    return this.bookingsStore.selectState$();
+  }
+  // ToDo: check finished ok
+  selectBookingsSuccess$() {
+    return this.bookingsStore.selectSuccess$();
   }
 }

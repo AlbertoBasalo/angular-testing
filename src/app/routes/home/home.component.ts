@@ -7,6 +7,7 @@ import { HomeService } from './home.service';
       <app-trips-list [trips]="trips.data"></app-trips-list>
     </app-api>
   `,
+  providers: [HomeService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {

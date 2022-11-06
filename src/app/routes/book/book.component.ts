@@ -7,24 +7,32 @@ import { BookService } from './book.service';
 @Component({
   selector: 'app-book',
   template: `
-    <ng-container *ngIf="trip$ | async as trip">
-      <app-api [state]="trip">
-        <span *ngFor="let item of trip.data[0] | keyvalue">
-          <em>{{ item.key }} </em> <strong>{{ item.value }} </strong>
-        </span>
-      </app-api>
-      <app-book-form
-        *ngIf="trip.data[0]"
-        [tripId]="trip.data[0].id"
-        [places]="trip.data[0].places"
-        (book)="onBook($event)"
-      ></app-book-form>
-    </ng-container>
+    <app-api
+      *ngIf="bookingsState$ | async as bookingsState"
+      [state]="bookingsState"
+    ></app-api>
+    <app-api *ngIf="tripState$ | async as tripState" [state]="tripState">
+      <ng-container *ngIf="tripState.data[0]">
+        <section>
+          <strong>🔭 {{ tripState.data[0].destination }} ➖ </strong>
+          <em>💸 {{ tripState.data[0].flightPrice | currency }} </em>
+          <em>🧑🏼‍🚀 {{ tripState.data[0].places }} </em>
+        </section>
+        <app-book-form
+          [tripId]="tripState.data[0].id"
+          [places]="tripState.data[0].places"
+          (book)="onBook($event)"
+        ></app-book-form>
+      </ng-container>
+    </app-api>
   `,
+  providers: [BookService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponent {
-  trip$ = this.service.selectTrip$();
+  tripState$ = this.service.selectTripState$();
+  bookingsState$ = this.service.selectBookingsState$();
+  bookingsSuccess$ = this.service.selectBookingsSuccess$();
 
   constructor(
     route: ActivatedRoute,
@@ -34,12 +42,12 @@ export class BookComponent {
   ) {
     const tripId = utils.getParam(route, 'tripId');
     this.service.loadTrip(tripId);
+    this.bookingsSuccess$.subscribe((success) => {
+      success && this.router.navigate(['/', 'bookings']);
+    });
   }
 
   onBook(booking: Booking) {
-    this.service.saveBooking(booking).subscribe({
-      next: (booking) => this.router.navigate(['/', 'bookings']),
-      error: (error) => console.log(error),
-    });
+    this.service.saveBooking(booking);
   }
 }

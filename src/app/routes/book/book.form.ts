@@ -17,14 +17,11 @@ import { Booking } from '@models/booking.interface';
 @Component({
   selector: 'app-book-form',
   template: `
-    {{ tripId }} - {{ places }}
     <form [formGroup]="form">
       <article>
-        <header>Customer information</header>
         <app-customer-form formControlName="customer"></app-customer-form>
       </article>
       <article>
-        <header>Booking information</header>
         <app-input-control
           formControlName="seats"
           label="Seats"

@@ -24,7 +24,6 @@ import {
         (blur)="touchedCallback()"
         (keyup)="onChange($event)"
       />
-      <em>{{ control?.validator | json }}</em>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -4,6 +4,7 @@ export class BaseStore<T> {
   private state$: BehaviorSubject<T>;
 
   constructor(initialState: T) {
+    console.warn('initialState', initialState);
     this.state$ = new BehaviorSubject(this.clone(initialState));
   }
 
@@ -21,6 +22,7 @@ export class BaseStore<T> {
     return this.state$.asObservable().pipe(map(this.clone));
   }
   private clone<K>(target: K): K {
+    //console.log('clone', target);
     return JSON.parse(JSON.stringify(target));
   }
 }

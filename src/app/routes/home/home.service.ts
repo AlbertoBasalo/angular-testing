@@ -5,7 +5,8 @@ import { ApiStore } from '@services/api.store';
 
 @Injectable()
 export class HomeService {
-  constructor(private api: ApiService, private tripsStore: ApiStore<Trip>) {}
+  private tripsStore = new ApiStore<Trip>();
+  constructor(private api: ApiService) {}
 
   loadTrips() {
     this.tripsStore.setIsWorking();

@@ -5,8 +5,8 @@ import { Api, API_INITIAL_STATE } from '@models/api.interface';
   selector: 'app-api',
   template: `
     <app-working *ngIf="state.isWorking"></app-working>
-    <ng-content *ngIf="state.data.length > 0"></ng-content>
     <app-error *ngIf="state.error" [error]="state.error"></app-error>
+    <ng-content></ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -40,7 +40,7 @@ export class ApiService {
     return this.http.get<Booking>(`${this.bookingsUrl}/${bookingId}`);
   }
   postBooking$(booking: Booking): Observable<Booking> {
-    return this.http.post<Booking>(this.bookingsUrl, booking);
+    return this.http.post<Booking>(this.bookingsUrl + 'error', booking);
   }
 
   getTrips$(): Observable<Trip[]> {
