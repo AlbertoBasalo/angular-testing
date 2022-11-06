@@ -6,17 +6,23 @@ import { BookService } from './book.service';
 @Component({
   selector: 'app-book',
   template: `
-    <app-api *ngIf="trip$ | async as trip" [state]="trip">
-      <span *ngFor="let item of trip.data[0] | keyvalue">
-        <em>{{ item.key }} </em> <strong>{{ item.value }} </strong>
-      </span>
-    </app-api>
-    <app-book-form [tripId]="tripId" (book)="onBook($event)"></app-book-form>
+    <ng-container *ngIf="trip$ | async as trip">
+      <app-api [state]="trip">
+        <span *ngFor="let item of trip.data[0] | keyvalue">
+          <em>{{ item.key }} </em> <strong>{{ item.value }} </strong>
+        </span>
+      </app-api>
+      <app-book-form
+        *ngIf="trip.data[0]"
+        [tripId]="trip.data[0].id"
+        [places]="trip.data[0].places"
+        (book)="onBook($event)"
+      ></app-book-form>
+    </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponent {
-  tripId = '';
   trip$ = this.service.selectTrip$();
 
   constructor(
@@ -24,8 +30,8 @@ export class BookComponent {
     private service: BookService,
     private router: Router
   ) {
-    this.tripId = route.snapshot.paramMap.get('tripId') || '';
-    this.service.loadTrip(this.tripId);
+    const tripId = route.snapshot.paramMap.get('tripId') || '';
+    this.service.loadTrip(tripId);
   }
 
   onBook(booking: Booking) {

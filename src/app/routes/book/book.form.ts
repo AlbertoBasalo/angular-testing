@@ -6,12 +6,18 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Booking } from '@models/booking.interface';
 
 @Component({
   selector: 'app-book-form',
   template: `
+    {{ tripId }} - {{ places }}
     <form [formGroup]="form">
       <article>
         <header>Customer information</header>
@@ -23,6 +29,7 @@ import { Booking } from '@models/booking.interface';
           formControlName="seats"
           label="Seats"
           type="number"
+          [control]="form.get('seats')"
         ></app-input-control>
         <app-input-control
           formControlName="premiumFood"
@@ -43,6 +50,7 @@ import { Booking } from '@models/booking.interface';
 })
 export class BookForm implements OnInit {
   @Input() tripId = '';
+  @Input() places = 1;
   @Output() book = new EventEmitter<Booking>();
   form!: FormGroup;
   paymentMethodOptions = [
@@ -69,14 +77,17 @@ export class BookForm implements OnInit {
   ];
 
   constructor(private formBuilder: FormBuilder) {}
+
+  // ! validation doesn't work
+
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       id: '',
       tripId: this.tripId,
       customer: '',
-      seats: 1,
+      seats: new FormControl(2, [Validators.min(1), Validators.max(2)]),
       premiumFood: '',
-      paymentMethod: '',
+      paymentMethod: new FormControl('credit-card', Validators.required),
       date: new Date().toISOString(),
       status: 'Pending',
     });
