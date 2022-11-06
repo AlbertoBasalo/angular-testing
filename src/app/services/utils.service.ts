@@ -12,9 +12,6 @@ export class UtilsService {
   }
 
   slugify(source: string): string {
-    return source
-      .toLowerCase()
-      .replace(/[^\w ]+/g, '')
-      .replace(/ +/g, '-');
+    return source.toLowerCase().replace(/ +/g, '-');
   }
 }

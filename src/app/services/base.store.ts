@@ -4,25 +4,24 @@ export class BaseStore<T> {
   private state$: BehaviorSubject<T>;
 
   constructor(initialState: T) {
-    console.warn('initialState', initialState);
     this.state$ = new BehaviorSubject(this.clone(initialState));
   }
 
   setState(mutation: Partial<T>) {
     const newState = { ...this.getState(), ...this.clone(mutation) };
+    console.warn('newState', newState);
     this.state$.next(newState);
   }
   select$<K>(selector: (state: T) => K): Observable<K> {
     return this.getState$().pipe(map(selector), distinctUntilChanged());
   }
-  private getState(): T {
+  public getState(): T {
     return this.clone(this.state$.getValue());
   }
   private getState$(): Observable<T> {
     return this.state$.asObservable().pipe(map(this.clone));
   }
   private clone<K>(target: K): K {
-    //console.log('clone', target);
     return JSON.parse(JSON.stringify(target));
   }
 }

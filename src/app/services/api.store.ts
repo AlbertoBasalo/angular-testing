@@ -9,13 +9,25 @@ export class ApiStore<T> {
   }
 
   setIsWorking(isWorking = true) {
-    this.baseStore.setState({ ...API_INITIAL_STATE, isWorking });
+    this.baseStore.setState({ isWorking, error: '' });
   }
   setData(data: T[]) {
-    this.baseStore.setState({ ...API_INITIAL_STATE, data });
+    this.baseStore.setState({ isWorking: false, data });
+  }
+  addItem(item: T) {
+    const currentState = this.baseStore.getState();
+    const data = [...currentState.data, item];
+    this.baseStore.setState({ isWorking: false, error: '', data });
+  }
+  deleteItem(item: T) {
+    const currentState = this.baseStore.getState();
+    const data = currentState.data.filter(
+      (i) => (i as any)['id'] !== (item as any)['id']
+    );
+    this.baseStore.setState({ isWorking: false, error: '', data });
   }
   setError(error: string) {
-    this.baseStore.setState({ ...API_INITIAL_STATE, error });
+    this.baseStore.setState({ isWorking: false, error });
   }
   selectState$() {
     return this.baseStore.select$((state) => state);

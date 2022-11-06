@@ -21,7 +21,7 @@
   ],
   "trips": [
     {
-      "id": "space-y-moon-1",
+      "id": "space-y_moon_2023-01-01",
       "agencyId": "space-y",
       "agencyTripCode": "moon",
       "destination": "The Moon",
@@ -36,7 +36,7 @@
       "premiumFoodPrice": 0
     },
     {
-      "id": "space-y-mars-2",
+      "id": "space-y_mars_2024-01-01",
       "agencyId": "space-y",
       "agencyTripCode": "mars",
       "destination": "Mars",
@@ -51,7 +51,7 @@
       "premiumFoodPrice": 0
     },
     {
-      "id": "green-origin-low-orbit-3",
+      "id": "green-origin_low-orbit_2022-04-01",
       "agencyId": "green-origin",
       "agencyTripCode": "low-orbit",
       "destination": "Low Orbit",
@@ -66,7 +66,7 @@
       "premiumFoodPrice": 1000
     },
     {
-      "id": "green-origin-iss-4",
+      "id": "green-origin_iss_2022-06-01",
       "agencyId": "green-origin",
       "agencyTripCode": "iss",
       "destination": "ISS",
@@ -79,6 +79,12 @@
       "status": "Waiting",
       "extraLuggagePricePerKilo": 0,
       "premiumFoodPrice": 1000
+    },
+    {
+      "destination": "Mercury",
+      "agencyId": "space-y",
+      "startDate": "2022-11-09",
+      "id": "space-y_mercury_2022-11-09"
     }
   ],
   "log-entries": [],
@@ -90,51 +96,5 @@
       "id": 1
     }
   ],
-  "bookings": [
-    {
-      "id": 1,
-      "tripId": "space-y-moon-1",
-      "customer": {
-        "name": "Alberto Basalo",
-        "email": "albertobasalo@hotmail.com",
-        "phone": "609884782",
-        "gender": "male"
-      },
-      "seats": 1,
-      "premiumFood": "",
-      "paymentMethod": "debit-card",
-      "date": "2022-11-05T11:07:33.018Z",
-      "status": "Pending"
-    },
-    {
-      "id": "space-y-moon-1albertobasalo@hotmail.com",
-      "tripId": "space-y-moon-1",
-      "customer": {
-        "name": "Alberto Basalo",
-        "email": "albertobasalo@hotmail.com",
-        "phone": "609884782",
-        "gender": ""
-      },
-      "seats": 1,
-      "premiumFood": "",
-      "paymentMethod": "",
-      "date": "2022-11-05T11:11:09.797Z",
-      "status": "Pending"
-    },
-    {
-      "id": "space-y-mars-2-elon@mars.com",
-      "tripId": "space-y-mars-2",
-      "customer": {
-        "name": "Elon",
-        "email": "elon@mars.com",
-        "phone": "",
-        "gender": "male"
-      },
-      "seats": 2,
-      "premiumFood": "",
-      "paymentMethod": "credit-card",
-      "date": "2022-11-06T09:20:40.018Z",
-      "status": "Pending"
-    }
-  ]
+  "bookings": []
 }

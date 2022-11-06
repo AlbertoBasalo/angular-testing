@@ -5,6 +5,7 @@ import { Booking } from '@models/booking.interface';
 import { Trip } from '@models/trip.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class ApiService {
   private bookingsUrl = `${environment.apiServerUrl}/bookings`;
   private tripsUrl = `${environment.apiServerUrl}/trips`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private utilsService: UtilsService) {}
 
   // ToDo: create CURD generic service
 
@@ -38,6 +39,8 @@ export class ApiService {
     return this.http.get<Booking>(`${this.bookingsUrl}/${bookingId}`);
   }
   postBooking$(booking: Booking): Observable<Booking> {
+    const bookingId = `${booking.tripId}_${booking.customer.email}`;
+    booking.id = this.utilsService.slugify(bookingId);
     return this.http.post<Booking>(this.bookingsUrl + 'error', booking);
   }
   deleteBooking$(bookingId: string): Observable<Booking> {
@@ -50,10 +53,12 @@ export class ApiService {
   getTripById$(tripId: string): Observable<Trip> {
     return this.http.get<Trip>(`${this.tripsUrl}/${tripId}`);
   }
-  postTrip$(trip: Trip): Observable<Trip> {
+  postTrip$(trip: Partial<Trip>): Observable<Trip> {
+    const tripId = `${trip.agencyId}_${trip.destination}_${trip.startDate}`;
+    trip.id = this.utilsService.slugify(tripId);
     return this.http.post<Trip>(this.tripsUrl, trip);
   }
-  deleteTrips$(tripId: string): Observable<Trip> {
+  deleteTrip$(tripId: string): Observable<Trip> {
     return this.http.delete<Trip>(`${this.tripsUrl}/${tripId}`);
   }
 }
