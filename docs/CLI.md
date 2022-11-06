@@ -77,4 +77,7 @@ ng g p pipes/time-span --export=true
 
 # add agencies page
 ng g m routes/agencies --route=agencies -m=app
+
+# add bookings page
+ng g m routes/bookings --route=bookings -m=app
 ```

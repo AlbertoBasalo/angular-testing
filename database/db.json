@@ -120,6 +120,21 @@
       "paymentMethod": "",
       "date": "2022-11-05T11:11:09.797Z",
       "status": "Pending"
+    },
+    {
+      "id": "space-y-mars-2-elon@mars.com",
+      "tripId": "space-y-mars-2",
+      "customer": {
+        "name": "Elon",
+        "email": "elon@mars.com",
+        "phone": "",
+        "gender": "male"
+      },
+      "seats": 2,
+      "premiumFood": "",
+      "paymentMethod": "credit-card",
+      "date": "2022-11-06T09:20:40.018Z",
+      "status": "Pending"
     }
   ]
 }

@@ -36,7 +36,7 @@ export class BookComponent {
 
   onBook(booking: Booking) {
     this.service.saveBooking(booking).subscribe({
-      next: (booking) => this.router.navigate(['/']),
+      next: (booking) => this.router.navigate(['/', 'bookings']),
       error: (error) => console.log(error),
     });
   }
