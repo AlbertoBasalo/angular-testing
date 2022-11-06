@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'app-footer',
   template: `
     <footer>
-      <h6>
+      <em>
         <app-link
           [caption]="title"
           [url]="repoUrl"
@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
         ></app-link>
         made by
         <app-link [caption]="author" [url]="authorUrl"></app-link>
-      </h6>
+      </em>
     </footer>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

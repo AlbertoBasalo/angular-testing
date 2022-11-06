@@ -70,4 +70,11 @@ ng g m components/input
 ng g c components/input --type=control --selector=app-input-control --export=true
 ng g m components/options
 ng g c components/options --type=control --selector=app-options-control --export=true
+
+# add a pipe
+ng g m pipes/time-span
+ng g p pipes/time-span --export=true
+
+# add agencies page
+ng g m routes/agencies --route=agencies -m=app
 ```

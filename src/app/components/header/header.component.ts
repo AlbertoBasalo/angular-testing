@@ -4,7 +4,14 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'app-header',
   template: `
     <header>
-      <h1>{{ title }}</h1>
+      <nav>
+        <ul>
+          <strong [routerLink]="['/']">{{ title }}</strong>
+        </ul>
+        <ul>
+          <li><a [routerLink]="['/', 'agencies']">➡️ Agencies</a></li>
+        </ul>
+      </nav>
     </header>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
