@@ -4,9 +4,7 @@ import { BaseStore } from './base.store';
 export class ApiStore<T> {
   private baseStore = new BaseStore<Api<T>>(API_INITIAL_STATE);
 
-  constructor() {
-    console.warn('apiStore', typeof this);
-  }
+  constructor() {}
 
   setIsWorking(isWorking = true) {
     this.baseStore.setState({ isWorking, error: '' });

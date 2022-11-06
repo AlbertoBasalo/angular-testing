@@ -26,6 +26,7 @@ export class ApiService {
     return this.http.get<Agency>(`${this.agenciesUrl}/${agencyId}`);
   }
   postAgency$(agency: Agency): Observable<Agency> {
+    agency.id = this.utilsService.getHyphened(agency.name);
     return this.http.post<Agency>(this.agenciesUrl, agency);
   }
   deleteAgency$(agencyId: string): Observable<Agency> {
@@ -40,7 +41,7 @@ export class ApiService {
   }
   postBooking$(booking: Booking): Observable<Booking> {
     const bookingId = `${booking.tripId}_${booking.customer.email}`;
-    booking.id = this.utilsService.slugify(bookingId);
+    booking.id = this.utilsService.getHyphened(bookingId);
     return this.http.post<Booking>(this.bookingsUrl + 'error', booking);
   }
   deleteBooking$(bookingId: string): Observable<Booking> {
@@ -55,7 +56,7 @@ export class ApiService {
   }
   postTrip$(trip: Partial<Trip>): Observable<Trip> {
     const tripId = `${trip.agencyId}_${trip.destination}_${trip.startDate}`;
-    trip.id = this.utilsService.slugify(tripId);
+    trip.id = this.utilsService.getHyphened(tripId);
     return this.http.post<Trip>(this.tripsUrl, trip);
   }
   deleteTrip$(tripId: string): Observable<Trip> {

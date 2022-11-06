@@ -40,7 +40,6 @@ export class TripsService {
   }
   saveTrip(trip: Partial<Trip>) {
     this.tripsStore.setIsWorking();
-
     this.api.postTrip$(trip).subscribe({
       next: (trip) => this.tripsStore.addItem(trip),
       error: (error) => this.tripsStore.setError(error.message),

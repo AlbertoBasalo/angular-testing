@@ -73,7 +73,7 @@ export class AgenciesComponent implements OnInit {
 
   onSaveClick() {
     const agencyForm = this.form.value as Agency;
-    const agencyId = this.utils.slugify(agencyForm.name);
+    const agencyId = this.utils.getHyphened(agencyForm.name);
     const newAgency: Agency = { ...agencyForm, id: agencyId };
     this.api.postAgency$(newAgency).subscribe(() => this.onApiSuccess());
   }

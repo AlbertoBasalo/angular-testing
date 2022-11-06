@@ -24,7 +24,6 @@ export class BookService {
 
   saveBooking(booking: Booking) {
     this.bookingsStore.setIsWorking();
-    booking.id = `${booking.tripId}-${booking.customer.email}`;
     this.api.postBooking$(booking).subscribe({
       next: (booking) => this.bookingsStore.setData([booking]),
       error: (error) => this.bookingsStore.setError(error.message),

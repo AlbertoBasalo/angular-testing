@@ -13,7 +13,9 @@ import { Trip } from '@models/trip.interface';
     <ul>
       <li *ngFor="let trip of trips">
         {{ trip.destination }} {{ trip.startDate | date: 'shortDate' }}
-        <span (click)="delete.emit(trip)">🗑️</span>
+        <span (click)="delete.emit(trip)"
+          >🗑️ <small>{{ trip.id }}</small></span
+        >
       </li>
     </ul>
   `,

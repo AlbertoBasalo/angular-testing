@@ -9,7 +9,6 @@ export class BaseStore<T> {
 
   setState(mutation: Partial<T>) {
     const newState = { ...this.getState(), ...this.clone(mutation) };
-    console.warn('newState', newState);
     this.state$.next(newState);
   }
   select$<K>(selector: (state: T) => K): Observable<K> {

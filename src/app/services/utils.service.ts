@@ -11,7 +11,8 @@ export class UtilsService {
     return route.snapshot.paramMap.get(key) || '';
   }
 
-  slugify(source: string): string {
+  getHyphened(source: string): string {
+    // replace space characters with a hyphen
     return source.toLowerCase().replace(/ +/g, '-');
   }
 }

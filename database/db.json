@@ -79,12 +79,6 @@
       "status": "Waiting",
       "extraLuggagePricePerKilo": 0,
       "premiumFoodPrice": 1000
-    },
-    {
-      "destination": "Mercury",
-      "agencyId": "space-y",
-      "startDate": "2022-11-09",
-      "id": "space-y_mercury_2022-11-09"
     }
   ],
   "log-entries": [],
