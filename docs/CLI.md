@@ -80,4 +80,7 @@ ng g m routes/agencies --route=agencies -m=app
 
 # add bookings page
 ng g m routes/bookings --route=bookings -m=app
+
+# add utils service
+ng g s services/utils
 ```

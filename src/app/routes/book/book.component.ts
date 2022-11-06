@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Booking } from '@models/booking.interface';
+import { UtilsService } from '@services/utils.service';
 import { BookService } from './book.service';
 
 @Component({
@@ -27,10 +28,11 @@ export class BookComponent {
 
   constructor(
     route: ActivatedRoute,
+    utils: UtilsService,
     private service: BookService,
     private router: Router
   ) {
-    const tripId = route.snapshot.paramMap.get('tripId') || '';
+    const tripId = utils.getParam(route, 'tripId');
     this.service.loadTrip(tripId);
   }
 
