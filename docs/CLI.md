@@ -94,6 +94,8 @@ ng g c routes/trips/trips --type=list --selector=app-trips-list --flat=true
 ## Testing
 
 ```bash
+# https://www.npmjs.com/package/karma-jasmine-html-reporter
+
 # https://www.npmjs.com/package/karma-mocha-reporter
 npm install karma-mocha-reporter --save-dev
 

@@ -23,15 +23,16 @@ module.exports = function (config) {
       },
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
-    jasmineHtmlReporter: {
-      suppressAll: true, // removes the duplicated traces
-    },
+
     coverageReporter: {
       dir: require("path").join(__dirname, "./coverage/angulab"),
       subdir: ".",
       reporters: [{ type: "html" }, { type: "text-summary" }],
     },
-    reporters: ["spec"],
+    reporters: ["kjhtml", "spec"],
+    jasmineHtmlReporter: {
+      suppressAll: true, // removes the duplicated traces
+    },
     mochaReporter: {
       output: "noFailures",
     },
@@ -55,7 +56,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_ERROR, // Default is config.LOG_INFO
     autoWatch: true,
-    browsers: ["ChromeHeadless"], // Default is Chrome
+    browsers: ["Chrome"], // Default is Chrome ChromeHeadless
     singleRun: false,
     restartOnFileChange: true,
   });
