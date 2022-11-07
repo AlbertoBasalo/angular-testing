@@ -2,6 +2,7 @@ import { BaseStore } from './base.store';
 
 describe('Store', () => {
   it('should create an instance', () => {
-    expect(new BaseStore()).toBeTruthy();
+    const initialState = {};
+    expect(new BaseStore(initialState)).toBeTruthy();
   });
 });

@@ -90,3 +90,17 @@ ng g s routes/trips/trips
 ng g c routes/trips/trips --type=form --selector=app-trips-form --flat=true
 ng g c routes/trips/trips --type=list --selector=app-trips-list --flat=true
 ```
+
+## Testing
+
+```bash
+# https://www.npmjs.com/package/karma-mocha-reporter
+npm install karma-mocha-reporter --save-dev
+
+# https://www.npmjs.com/package/karma-spec-reporter
+npm install karma-spec-reporter --save-dev
+
+# choose reporters: ["kjhtml", "mocha", "spec"],
+
+# Fix errors caused by TestBed dependencies
+```
