@@ -22,7 +22,7 @@ import {
         [attr.aria-invalid]="hasError()"
         [disabled]="isDisabled"
         (blur)="touchedCallback()"
-        (keyup)="onChange($event)"
+        (change)="onChange($event)"
       />
     </div>
   `,
