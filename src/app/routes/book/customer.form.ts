@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import {
   ControlValueAccessor,
   FormBuilder,
   FormGroup,
   NG_VALUE_ACCESSOR,
+  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -11,19 +12,23 @@ import {
   template: `
     <ng-container [formGroup]="form">
       <app-input-control
+        ngDefaultControl
         formControlName="name"
         label="Name"
       ></app-input-control>
       <app-input-control
+        ngDefaultControl
         formControlName="email"
         label="Email"
         type="email"
       ></app-input-control>
       <app-input-control
+        ngDefaultControl
         formControlName="phone"
         label="Phone"
       ></app-input-control>
       <app-options-control
+        ngDefaultControl
         formControlName="gender"
         label="Gender"
         [options]="genderOptions"
@@ -33,7 +38,11 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: CustomerForm, multi: true },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CustomerForm),
+      multi: true,
+    },
   ],
 })
 export class CustomerForm implements ControlValueAccessor {
@@ -52,7 +61,7 @@ export class CustomerForm implements ControlValueAccessor {
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       name: '',
-      email: '',
+      email: ['', [Validators.email]],
       phone: '',
       gender: '',
     });
@@ -61,13 +70,13 @@ export class CustomerForm implements ControlValueAccessor {
   touchedCallback!: () => void;
 
   writeValue(value: any): void {
-    value && this.form.setValue(value);
+    // value && this.form.setValue(value);
   }
   registerOnChange(changeCallBack: (nv: any) => void): void {
     this.form.valueChanges.subscribe(changeCallBack);
   }
   registerOnTouched(touchedCallback: () => void): void {
-    this.touchedCallback = touchedCallback;
+    // this.touchedCallback = touchedCallback;
   }
   setDisabledState?(isDisabled: boolean): void {
     isDisabled ? this.form.disable() : this.form.enable();

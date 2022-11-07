@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  Input,
+} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -22,13 +27,17 @@ import {
         [attr.aria-invalid]="hasError()"
         [disabled]="isDisabled"
         (blur)="touchedCallback()"
-        (keyup)="onChange($event)"
+        (change)="onChange($event)"
       />
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: InputControl, multi: true },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputControl),
+      multi: true,
+    },
   ],
 })
 export class InputControl implements ControlValueAccessor {
@@ -45,6 +54,7 @@ export class InputControl implements ControlValueAccessor {
   onChange(event: any) {
     const value = event.target.value;
     this.changeCallback(value);
+    this.touchedCallback();
   }
 
   writeValue(value: any): void {
