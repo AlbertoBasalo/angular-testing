@@ -2,8 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   ControlValueAccessor,
   FormBuilder,
+  FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
+  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -13,15 +15,19 @@ import {
       <app-input-control
         formControlName="name"
         label="Name"
+        [control]="form.get('name')"
       ></app-input-control>
       <app-input-control
         formControlName="email"
         label="Email"
         type="email"
+        [control]="form.get('email')"
       ></app-input-control>
       <app-input-control
         formControlName="phone"
         label="Phone"
+        type="tel"
+        [control]="form.get('phone')"
       ></app-input-control>
       <app-options-control
         formControlName="gender"
@@ -51,9 +57,16 @@ export class CustomerForm implements ControlValueAccessor {
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
-      name: '',
-      email: '',
-      phone: '',
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30),
+      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl('', [
+        Validators.minLength(6),
+        Validators.maxLength(16),
+      ]),
       gender: '',
     });
   }
