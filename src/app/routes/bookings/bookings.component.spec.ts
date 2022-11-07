@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookingsComponent } from './bookings.component';
@@ -8,9 +9,9 @@ describe('BookingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BookingsComponent ]
-    })
-    .compileComponents();
+      declarations: [BookingsComponent],
+      imports: [HttpClientTestingModule], // ! http client dependency double
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BookingsComponent);
     component = fixture.componentInstance;
