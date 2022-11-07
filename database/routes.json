@@ -1,6 +1,9 @@
 {
   "agencies": 666,
+  "agency-ranges": 666,
+  "agency-statuses": 666,
   "bookings": 666,
   "trips": 666,
-  "log-entries": 666
+  "trip-kinds": 666,
+  "trip-statuses": 666
 }

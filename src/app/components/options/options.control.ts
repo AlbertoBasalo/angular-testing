@@ -4,6 +4,7 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
+import { Option } from '../../models/option.type';
 
 @Component({
   selector: 'app-options-control',
@@ -47,7 +48,7 @@ export class OptionsControl implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() formControlName: string = '';
   @Input() control!: AbstractControl | null;
-  @Input() options: { value: string; label: string }[] = [];
+  @Input() options: Option[] = [];
   // ToDo: change select for a radio button group when the options are 3 or less
 
   value: any;

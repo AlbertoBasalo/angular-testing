@@ -19,6 +19,26 @@
       "status": "Pending"
     }
   ],
+  "agency-ranges": [
+    {
+      "label": "Interplanetary",
+      "value": "Interplanetary"
+    },
+    {
+      "label": "Orbital",
+      "value": "Orbital"
+    }
+  ],
+  "agency-statuses": [
+    {
+      "label": "Active",
+      "value": "Active"
+    },
+    {
+      "label": "Pending",
+      "value": "Pending"
+    }
+  ],
   "trips": [
     {
       "id": "space-y_moon_2023-01-01",
@@ -79,15 +99,41 @@
       "status": "Waiting",
       "extraLuggagePricePerKilo": 0,
       "premiumFoodPrice": 1000
+    },
+    {
+      "id": "virgin-way_karman-line_2023-02-01",
+      "agencyId": "virgin-way",
+      "agencyTripCode": "iss",
+      "destination": "Karman Line",
+      "places": 4,
+      "startDate": "2023-02-01",
+      "endDate": "2023-02-02",
+      "flightPrice": 70000,
+      "stayingNightPrice": 0,
+      "kind": "TripOnly",
+      "status": "Waiting",
+      "extraLuggagePricePerKilo": 0,
+      "premiumFoodPrice": 500
     }
   ],
-  "log-entries": [],
-  "users": [
+  "trip-kinds": [
     {
-      "email": "admin@world.org",
-      "password": "$2a$10$BjjlwgwHx9C2gyU9O7d3au/MOPrPHXuEjMR7JESkXJKdfXv7a2cWG",
-      "name": "Alberto Basalo",
-      "id": 1
+      "label": "Trip Only",
+      "value": "TripOnly"
+    },
+    {
+      "label": "With Stay",
+      "value": "WithStay"
+    }
+  ],
+  "trip-statuses": [
+    {
+      "label": "Confirmed",
+      "value": "Confirmed"
+    },
+    {
+      "label": "Waiting",
+      "value": "Waiting"
     }
   ],
   "bookings": []
