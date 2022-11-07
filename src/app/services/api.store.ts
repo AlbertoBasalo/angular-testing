@@ -31,11 +31,12 @@ export class ApiStore<T> {
     return this.baseStore.select$((state) => state);
   }
   selectSuccess$() {
-    return this.baseStore.select$(
-      (state) =>
-        state.isWorking === false &&
-        state.error === null &&
-        state.data.length > 0
+    return this.baseStore.select$((state) => this.isSuccess(state));
+  }
+
+  private isSuccess(state: Api<T>): boolean {
+    return (
+      state.isWorking === false && state.error === '' && state.data.length > 0
     );
   }
 }

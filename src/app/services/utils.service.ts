@@ -12,7 +12,7 @@ export class UtilsService {
   }
 
   getHyphened(source: string): string {
-    // replace space characters with a hyphen
-    return source.toLowerCase().replace(/ +/g, '-');
+    // replace non alphanumeric characters with a hyphen
+    return source.toLowerCase().replace(/\W+/g, '-');
   }
 }

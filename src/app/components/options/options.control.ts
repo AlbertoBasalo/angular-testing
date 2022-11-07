@@ -4,7 +4,7 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
-import { Option } from '../../models/option.type';
+import { Option } from '../../models/option.interface';
 
 @Component({
   selector: 'app-options-control',

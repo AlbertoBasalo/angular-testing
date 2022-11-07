@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Agency } from '@models/agency.interface';
 import { Booking } from '@models/booking.interface';
+import { Option } from '@models/option.interface';
 import { Trip } from '@models/trip.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -17,7 +18,11 @@ export class ApiService {
 
   constructor(private http: HttpClient, private utilsService: UtilsService) {}
 
-  // ToDo: create CURD generic service
+  // ToDo: create generic methods
+
+  getOptions$(resource: string): Observable<Option[]> {
+    return this.http.get<Option[]>(`${environment.apiServerUrl}/${resource}`);
+  }
 
   getAgencies$(): Observable<Agency[]> {
     return this.http.get<Agency[]>(this.agenciesUrl);
@@ -42,7 +47,7 @@ export class ApiService {
   postBooking$(booking: Booking): Observable<Booking> {
     const bookingId = `${booking.tripId}_${booking.customer.email}`;
     booking.id = this.utilsService.getHyphened(bookingId);
-    return this.http.post<Booking>(this.bookingsUrl + 'error', booking);
+    return this.http.post<Booking>(this.bookingsUrl, booking);
   }
   deleteBooking$(bookingId: string): Observable<Booking> {
     return this.http.delete<Booking>(`${this.bookingsUrl}/${bookingId}`);

@@ -7,8 +7,6 @@ import {
 import { FormBuilder } from '@angular/forms';
 import { Agency } from '@models/agency.interface';
 import { ApiService } from '@services/api.service';
-import { UtilsService } from '@services/utils.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-agencies',
@@ -37,12 +35,32 @@ import { Observable } from 'rxjs';
     <article>
       <header>Add a new agency</header>
       <form [formGroup]="form">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" formControlName="name" />
-        <label for="range">Range</label>
-        <input type="text" id="range" name="range" formControlName="range" />
-        <label for="status">Status</label>
-        <input type="text" id="status" name="status" formControlName="status" />
+        <fieldset>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" formControlName="name" />
+          <label for="range">Range</label>
+          <span *ngFor="let option of agencyRanges$ | async as options">
+            <input
+              type="radio"
+              name="range"
+              formControlName="range"
+              [id]="option.value"
+              [value]="option.value"
+            />
+            <label [for]="option.value">{{ option.label }}</label>
+          </span>
+          <label for="status">Status</label>
+          <span *ngFor="let option of agencyStatuses$ | async as options">
+            <input
+              type="radio"
+              name="status"
+              formControlName="status"
+              [id]="option.value"
+              [value]="option.value"
+            />
+            <label [for]="option.value">{{ option.label }}</label>
+          </span>
+        </fieldset>
         <button (click)="onSaveClick()">Submit</button>
       </form>
     </article>
@@ -50,7 +68,9 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgenciesComponent implements OnInit {
-  agencies$: Observable<Agency[]> = this.api.getAgencies$();
+  agencies$ = this.api.getAgencies$();
+  agencyRanges$ = this.api.getOptions$('agency-ranges');
+  agencyStatuses$ = this.api.getOptions$('agency-statuses');
   form = this.formBuilder.group({
     name: '',
     range: 'Orbital',
@@ -59,7 +79,6 @@ export class AgenciesComponent implements OnInit {
   constructor(
     private api: ApiService,
     private formBuilder: FormBuilder,
-    private utils: UtilsService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -73,9 +92,7 @@ export class AgenciesComponent implements OnInit {
 
   onSaveClick() {
     const agencyForm = this.form.value as Agency;
-    const agencyId = this.utils.getHyphened(agencyForm.name);
-    const newAgency: Agency = { ...agencyForm, id: agencyId };
-    this.api.postAgency$(newAgency).subscribe(() => this.onApiSuccess());
+    this.api.postAgency$(agencyForm).subscribe(() => this.onApiSuccess());
   }
 
   onDeleteClick(agencyId: string) {

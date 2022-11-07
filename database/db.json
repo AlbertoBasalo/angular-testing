@@ -17,6 +17,12 @@
       "name": "Virgin Way",
       "range": "Orbital",
       "status": "Pending"
+    },
+    {
+      "name": "Ng Star",
+      "range": "Orbital",
+      "status": "Active",
+      "id": "ng-star"
     }
   ],
   "agency-ranges": [
