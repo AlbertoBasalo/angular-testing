@@ -28,6 +28,7 @@ import {
         [disabled]="isDisabled"
         (blur)="touchedCallback()"
         (change)="onChange($event)"
+        (keyUp)="onChange($event)"
       />
     </div>
   `,
@@ -44,7 +45,8 @@ export class InputControl implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() formControlName: string = '';
   @Input() control!: AbstractControl | null;
-  @Input() type: 'text' | 'password' | 'email' | 'number' | 'checkbox' = 'text';
+  @Input() type: 'text' | 'password' | 'email' | 'tel' | 'number' | 'checkbox' =
+    'text';
 
   value: any;
   isDisabled: boolean = false;

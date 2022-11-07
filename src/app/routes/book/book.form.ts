@@ -78,14 +78,15 @@ export class BookForm implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  // ! validation doesn't work
-
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       id: '',
       tripId: this.tripId,
-      customer: { name: '', email: '', phone: '', gender: '' },
-      seats: new FormControl(2, [Validators.min(1), Validators.max(2)]),
+      customer: '',
+      seats: new FormControl(2, [
+        Validators.min(1),
+        Validators.max(this.places),
+      ]),
       premiumFood: '',
       paymentMethod: new FormControl('credit-card', Validators.required),
       date: new Date().toISOString(),
