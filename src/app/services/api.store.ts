@@ -30,6 +30,7 @@ export class ApiStore<T> {
   selectState$() {
     return this.baseStore.select$((state) => state);
   }
+
   selectSuccess$() {
     return this.baseStore.select$((state) => this.isSuccess(state));
   }
