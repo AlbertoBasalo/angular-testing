@@ -1,5 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { OptionsService } from './options.service';
+
+/*
+ * 3️⃣ Decoupled implementation:
+ * Delegated responsibility to presenter components
+ * On Push change detection strategy
+ * Reactive form
+ * Async pipe subscription
+ * Using the router as a state management
+ * State management delegated to the service
+ */
 
 @Component({
   selector: 'app-options',
@@ -12,7 +23,7 @@ import { OptionsService } from './options.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OptionsComponent implements OnInit {
-  constructor(private service: OptionsService) {}
+  constructor(private service: OptionsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {}
 }
