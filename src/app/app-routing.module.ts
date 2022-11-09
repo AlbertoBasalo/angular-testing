@@ -27,6 +27,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./routes/trips/trips.module').then((m) => m.TripsModule),
   },
+  { path: 'options', loadChildren: () => import('./routes/options/options.module').then(m => m.OptionsModule) },
 ];
 
 @NgModule({

@@ -22,6 +22,5 @@ export class BaseStore<T> {
   }
   private clone<K>(target: K): K {
     return Object.assign({}, target);
-    // return JSON.parse(JSON.stringify(target));
   }
 }

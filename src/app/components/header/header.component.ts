@@ -12,6 +12,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
           <li><a [routerLink]="['/', 'agencies']">➡️ Agencies</a></li>
           <li><a [routerLink]="['/', 'trips']">➡️ Trips</a></li>
           <li><a [routerLink]="['/', 'bookings']">➡️ Bookings</a></li>
+          <li><a [routerLink]="['/', 'options']">➡️ Options</a></li>
         </ul>
       </nav>
     </header>

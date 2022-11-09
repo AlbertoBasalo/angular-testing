@@ -3,7 +3,17 @@ import {
   ChangeDetectorRef,
   Component,
 } from '@angular/core';
+import { Booking } from '@models/booking.interface';
 import { ApiService } from '@services/api.service';
+import { Observable, of } from 'rxjs';
+
+/*
+ * 1️⃣ Simple implementation:
+ * All responsibility on the same place
+ * On Push change detection strategy
+ * Reactive form
+ * Async pipe subscription
+ */
 
 @Component({
   selector: 'app-bookings',
@@ -34,12 +44,19 @@ import { ApiService } from '@services/api.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookingsComponent {
-  bookings$ = this.api.getBookings$();
-  constructor(private api: ApiService, private cdr: ChangeDetectorRef) {}
+  bookings$: Observable<Booking[]> = of([]);
+
+  constructor(private api: ApiService, private cdr: ChangeDetectorRef) {
+    this.loadBookings();
+  }
+
+  loadBookings() {
+    this.bookings$ = this.api.getBookings$();
+  }
 
   onDeleteClick(bookingId: string) {
     this.api.deleteBooking$(bookingId).subscribe(() => {
-      this.bookings$ = this.api.getBookings$();
+      this.loadBookings();
       this.cdr.detectChanges();
     });
   }

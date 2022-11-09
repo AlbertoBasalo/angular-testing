@@ -89,6 +89,13 @@ ng g m routes/trips --route=trips -m=app
 ng g s routes/trips/trips
 ng g c routes/trips/trips --type=form --selector=app-trips-form --flat=true
 ng g c routes/trips/trips --type=list --selector=app-trips-list --flat=true
+
+# add Options page
+ng g m routes/options --route=options -m=app
+ng g s routes/options/options
+ng g c routes/options/options --type=nav --selector=app-options-nav --flat=true
+ng g c routes/options/options --type=form --selector=app-options-form --flat=true
+ng g c routes/options/options --type=list --selector=app-options-list --flat=true
 ```
 
 ## Testing
