@@ -23,6 +23,12 @@
       "range": "Orbital",
       "status": "Active",
       "id": "ng-star"
+    },
+    {
+      "id": "tmplate-driven",
+      "name": "tmplate driven",
+      "range": "Interplanetary",
+      "status": "Pending"
     }
   ],
   "agency-ranges": [
