@@ -20,10 +20,6 @@ export class ApiService {
 
   // ToDo: create generic methods
 
-  getOptions$(resource: string): Observable<Option[]> {
-    return this.http.get<Option[]>(`${environment.apiServerUrl}/${resource}`);
-  }
-
   getAgencies$(): Observable<Agency[]> {
     return this.http.get<Agency[]>(this.agenciesUrl);
   }
@@ -66,5 +62,21 @@ export class ApiService {
   }
   deleteTrip$(tripId: string): Observable<Trip> {
     return this.http.delete<Trip>(`${this.tripsUrl}/${tripId}`);
+  }
+
+  getOptions$(resource: string): Observable<Option[]> {
+    return this.http.get<Option[]>(`${environment.apiServerUrl}/${resource}`);
+  }
+  postOption$(resource: string, option: Partial<Option>): Observable<Option> {
+    option.id = this.utilsService.getHyphened(option.label || '');
+    return this.http.post<Option>(
+      `${environment.apiServerUrl}/${resource}`,
+      option
+    );
+  }
+  deleteOption$(resource: string, optionId: string): Observable<Option> {
+    return this.http.delete<Option>(
+      `${environment.apiServerUrl}/${resource}/${optionId}`
+    );
   }
 }

@@ -21,6 +21,6 @@ export class BaseStore<T> {
     return this.state$.asObservable().pipe(map(this.clone));
   }
   private clone<K>(target: K): K {
-    return JSON.parse(JSON.stringify(target));
+    return Object.assign({}, target);
   }
 }

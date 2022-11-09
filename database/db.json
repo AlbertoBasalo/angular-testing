@@ -23,6 +23,12 @@
       "range": "Orbital",
       "status": "Active",
       "id": "ng-star"
+    },
+    {
+      "id": "tmplate-driven",
+      "name": "tmplate driven",
+      "range": "Interplanetary",
+      "status": "Pending"
     }
   ],
   "agency-ranges": [
@@ -33,6 +39,16 @@
     {
       "label": "Orbital",
       "value": "Orbital"
+    },
+    {
+      "label": "Interstellar",
+      "value": "Interstellar",
+      "id": "interstellar"
+    },
+    {
+      "label": "Asteroid",
+      "value": "Asteroid",
+      "id": "asteroid"
     }
   ],
   "agency-statuses": [
