@@ -4,8 +4,6 @@ import { Trip } from '@models/trip.interface';
 import { ApiService } from '@services/api.service';
 import { ApiStore } from '@services/api.store';
 
-// ToDo: a version without stores
-
 @Injectable({
   providedIn: 'root',
 })

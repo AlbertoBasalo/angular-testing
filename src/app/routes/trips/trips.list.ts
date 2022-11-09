@@ -1,19 +1,14 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Trip } from '@models/trip.interface';
+import { TripsService } from './trips.service';
 
 @Component({
   selector: 'app-trips-list',
   template: `
-    <ul>
-      <li *ngFor="let trip of trips">
+    <ul *ngIf="tripsState$ | async as tripsState">
+      <li *ngFor="let trip of tripsState.data">
         {{ trip.destination }} {{ trip.startDate | date: 'shortDate' }}
-        <span (click)="delete.emit(trip)"
+        <span (click)="onDeleteTrip(trip)"
           >🗑️ <small>{{ trip.id }}</small></span
         >
       </li>
@@ -22,6 +17,15 @@ import { Trip } from '@models/trip.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TripsList {
-  @Input() trips: Trip[] = [];
-  @Output() delete = new EventEmitter<Trip>();
+  // @Input() trips: Trip[] = [];
+  // @Output() delete = new EventEmitter<Trip>();
+  tripsState$ = this.service.selectTripsState$();
+
+  constructor(private service: TripsService) {
+    this.service.loadTrips();
+  }
+
+  onDeleteTrip(trip: Trip) {
+    this.service.deleteTrip(trip);
+  }
 }
