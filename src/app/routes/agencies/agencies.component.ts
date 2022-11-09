@@ -4,11 +4,11 @@ import { Option } from '@models/option.interface';
 import { ApiService } from '@services/api.service';
 
 /*
- * Minimal rookie implementation
+ * 0️⃣ Minimal rookie implementation:
+ * All responsibility on the same place
  * Default change detection strategy
  * Template form
- * 🤮 All responsibility on the same place
- * 🤮 Subscription madness
+ * Subscription madness
  */
 
 @Component({
