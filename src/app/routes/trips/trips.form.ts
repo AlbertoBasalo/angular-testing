@@ -16,7 +16,6 @@ import { Trip } from '@models/trip.interface';
       <label>Destination</label>
       <input type="text" formControlName="destination" />
       <label>Agency</label>
-
       <select formControlName="agencyId">
         <option *ngFor="let agency of agencies" [value]="agency.id">
           {{ agency.name }}

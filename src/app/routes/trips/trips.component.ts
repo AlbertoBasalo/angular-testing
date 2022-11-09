@@ -2,6 +2,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Trip } from '@models/trip.interface';
 import { TripsService } from './trips.service';
 
+/*
+ * 2️⃣ Decoupled implementation:
+ * Shared responsibility
+ * On Push change detection strategy
+ * Reactive form
+ * Async pipe subscription
+ * Container - presenters pattern
+ * State management delegated to the service
+ */
+
 @Component({
   selector: 'app-trips',
   template: `
