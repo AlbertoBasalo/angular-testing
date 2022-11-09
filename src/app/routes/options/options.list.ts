@@ -10,9 +10,10 @@ import { Option } from '@models/option.interface';
   selector: 'app-options-list',
   template: `
     <ul>
-      <li><em>The Label:</em> ➖ <code>The Value</code><span>🗑️</span></li>
-      <li>
-        <em>Another Label:</em> ➖ <code>Another Value</code><span>🗑️</span>
+      <li *ngFor="let option of options">
+        <em>{{ option.label }}</em> ➖
+        <code>{{ option.value }}</code>
+        <span (click)="delete.emit(option)">🗑️</span>
       </li>
     </ul>
   `,
