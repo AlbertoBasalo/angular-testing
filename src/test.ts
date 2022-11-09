@@ -35,6 +35,6 @@ const pipesContext = require.context('./', true, /pipe.spec\.ts$/);
 const componentsContext = require.context('./', true, /component.spec\.ts$/);
 const formsContext = require.context('./', true, /form.spec\.ts$/);
 const fullContext = require.context('./', true, /\.spec\.ts$/);
-const context = servicesContext;
+const context = pipesContext;
 // And load the modules.
 context.keys().forEach(context);
