@@ -9,14 +9,18 @@ describe('The BaseStore class', () => {
     type State = { destination: string; startDate: Date };
     const input: State = {
       destination: 'The Moon',
-      startDate: new Date(),
+      startDate: new Date('2022-11-10'),
     };
     const sut = new BaseStore(input);
     // Act
     const actual = sut.getState();
     // Assert
-    const expected = input;
+    const expected = {
+      destination: 'The Moon',
+      startDate: new Date('2022-11-10'),
+    };
     expect(actual).toEqual(expected);
+    expect(actual).not.toBe(input);
   });
   it('should return the last state set', () => {
     // Arrange
