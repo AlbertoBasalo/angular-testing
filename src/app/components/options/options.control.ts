@@ -16,9 +16,8 @@ import { Option } from '../../models/option.interface';
       <small *ngIf="mustShowError()">
         {{ getErrorMessage() }}
       </small>
-      <ng-container
-        *ngIf="options.length > 3; then select; else radios"
-      ></ng-container>
+      <ng-container *ngIf="options.length > 3; then select; else radios">
+      </ng-container>
     </div>
     <ng-template #select>
       <select [id]="formControlName" (change)="onChange($event)">

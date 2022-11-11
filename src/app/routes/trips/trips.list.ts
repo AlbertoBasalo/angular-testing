@@ -7,10 +7,15 @@ import { TripsService } from './trips.service';
   template: `
     <ul *ngIf="tripsState$ | async as tripsState">
       <li *ngFor="let trip of tripsState.data">
-        {{ trip.destination }} {{ trip.startDate | date: 'shortDate' }}
-        <span (click)="onDeleteTrip(trip)"
-          >🗑️ <small>{{ trip.id }}</small></span
-        >
+        <span>
+          <strong>🔭 {{ trip.destination }} </strong>
+        </span>
+        <span>
+          <em>🚀 {{ trip.startDate | date: 'dd/MM/yyyy' }} </em>
+        </span>
+        <span (click)="onDeleteTrip(trip)">
+          🗑️ <small>{{ trip.id }}</small>
+        </span>
       </li>
     </ul>
   `,

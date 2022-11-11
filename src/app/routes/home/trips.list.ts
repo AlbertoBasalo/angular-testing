@@ -7,10 +7,16 @@ import { TimeSpan } from 'src/app/pipes/time-span/time-span.pipe';
   template: `
     <ul>
       <li *ngFor="let trip of trips">
-        <strong>🔭 {{ trip.destination }} ➖ </strong>
-        <em>🚀 {{ trip.startDate | date: 'dd/MM/yyyy' }} ➖ </em>
-        <span>⏱️ {{ getTripTimeSpan(trip) | timeSpan }} ➖ </span>
-        <a [routerLink]="['book', trip.id]" role="button">✍🏼 Book trip</a>
+        <span>
+          <strong>🔭 {{ trip.destination }} </strong>
+        </span>
+        <span>
+          <em>🚀 {{ trip.startDate | date: 'dd/MM/yyyy' }} </em>
+        </span>
+        <span>⏱️ {{ getTripTimeSpan(trip) | timeSpan }} </span>
+        <span>
+          <a [routerLink]="['book', trip.id]" role="button">✍🏼 Book trip</a>
+        </span>
       </li>
     </ul>
   `,
