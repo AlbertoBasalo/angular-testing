@@ -11,8 +11,12 @@ import { Option } from '@models/option.interface';
   template: `
     <ul>
       <li *ngFor="let option of options">
-        <em>{{ option.label }}</em> ➖
-        <code>{{ option.value }}</code>
+        <span>
+          <em>{{ option.label }}</em>
+        </span>
+        <span>
+          <code>{{ option.value }}</code>
+        </span>
         <span (click)="delete.emit(option)">🗑️</span>
       </li>
     </ul>
