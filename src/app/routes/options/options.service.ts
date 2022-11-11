@@ -13,6 +13,7 @@ export class OptionsService {
     return this.api.postOption$(endpoint, option);
   }
   deleteOption$(endpoint: string, option: Partial<Option>) {
-    return this.api.deleteOption$(endpoint, option.id || '');
+    if (!option.id) throw new Error('option.id is required');
+    return this.api.deleteOption$(endpoint, option.id);
   }
 }

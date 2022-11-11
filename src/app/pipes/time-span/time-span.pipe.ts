@@ -10,10 +10,10 @@ export interface TimeSpan {
 })
 export class TimeSpanPipe implements PipeTransform {
   transform(value: TimeSpan, ...args: unknown[]): string {
-    return this.calculateTimeSpan(value);
+    return this.timeSpanCalculator(value);
   }
 
-  private calculateTimeSpan = calculateTimeSpan;
+  private timeSpanCalculator = calculateTimeSpan;
 
   // private calculateTimeSpan(value: TimeSpan): string {
   //   const diffMilliseconds = value.end.getTime() - value.start.getTime();

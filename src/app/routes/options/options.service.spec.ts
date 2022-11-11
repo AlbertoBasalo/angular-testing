@@ -1,44 +1,80 @@
 import { OptionsService } from './options.service';
 
-// describe('OptionsService', () => {
-//   let service: OptionsService;
-
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({});
-//     service = TestBed.inject(OptionsService);
-//   });
-
-//   it('should be created', () => {
-//     expect(service).toBeTruthy();
-//   });
-// });
-
-describe('The OptionsService Unit', () => {
+describe('The options service', () => {
+  it('should call the api correct method', () => {
+    // Arrange
+    const double = jasmine.createSpyObj('ApiService', ['getOptions$']);
+    const sut = new OptionsService(double);
+    const input = 'agency-ranges';
+    // Act
+    sut.getOptionsForEndPoint$(input);
+    // Assert
+    const actual = double.getOptions$;
+    expect(actual).toHaveBeenCalled();
+  });
   it('should call the api get with the correct endpoint', () => {
-    const api = jasmine.createSpyObj('ApiService', ['getOptions$']);
-    const service = new OptionsService(api);
-    service.getOptionsForEndPoint$('test');
-    expect(api.getOptions$).toHaveBeenCalledWith('test');
+    // Arrange
+    const double = jasmine.createSpyObj('ApiService', ['getOptions$']);
+    const sut = new OptionsService(double);
+    const input = 'agency-ranges';
+    // Act
+    sut.getOptionsForEndPoint$(input);
+    // Assert
+    const actual = double.getOptions$;
+    const expected = 'agency-ranges';
+    expect(actual).toHaveBeenCalledWith(expected);
   });
-  it('should call the api post with the correct endpoint and option', () => {
-    const api = jasmine.createSpyObj('ApiService', ['postOption$']);
-    const service = new OptionsService(api);
-    const option = { id: '1', label: 'inputLabel', value: 'inputValue' };
-    service.saveOption$('test', option);
-    expect(api.postOption$).toHaveBeenCalledWith('test', option);
+  it('should call once the api get with the correct endpoint', () => {
+    // Arrange
+    const apiService = jasmine.createSpyObj('ApiService', ['getOptions$']);
+    const optionsService = new OptionsService(apiService);
+    const endPoint = 'agency-ranges';
+    // Act
+    optionsService.getOptionsForEndPoint$(endPoint);
+    // Assert
+    const actual = apiService.getOptions$;
+    expect(actual).toHaveBeenCalledTimes(1);
   });
-  it('should call the api delete with the correct endpoint and option', () => {
-    const api = jasmine.createSpyObj('ApiService', ['deleteOption$']);
-    const service = new OptionsService(api);
-    const option = { id: '1', label: 'inputLabel', value: 'inputValue' };
-    service.deleteOption$('test', option);
-    expect(api.deleteOption$).toHaveBeenCalledWith('test', '1');
+  it('should call the api post with the correct endpoint and payload', () => {
+    // Arrange
+    const double = jasmine.createSpyObj('ApiService', ['postOption$']);
+    const sut = new OptionsService(double);
+    const inputEndPoint = 'agency-ranges';
+    const inputPayload = { id: '1', label: 'Asteroid', value: 'asteroid' };
+    // Act
+    sut.saveOption$(inputEndPoint, inputPayload);
+    // Assert
+    const actual = double.postOption$;
+    const expectedEndPoint = 'agency-ranges';
+    const expectedPayload = { id: '1', label: 'Asteroid', value: 'asteroid' };
+    expect(actual).toHaveBeenCalledWith(expectedEndPoint, expectedPayload);
   });
-  it('should call the api delete with a blanc id when id is not present', () => {
-    const api = jasmine.createSpyObj('ApiService', ['deleteOption$']);
-    const service = new OptionsService(api);
-    const option = { label: 'inputLabel', value: 'inputValue' };
-    service.deleteOption$('test', option);
-    expect(api.deleteOption$).toHaveBeenCalledWith('test', '');
+
+  // DRY [seco] don`t repeat yourself
+  // DAMP [húmedo] descriptive and meaningful phrases
+  // WET [mojado] write everything twice
+
+  it('should call the api delete with the correct endpoint and id', () => {
+    // Arrange
+    const double = jasmine.createSpyObj('ApiService', ['deleteOption$']);
+    const sut = new OptionsService(double);
+    const inputEndPoint = 'agency-ranges';
+    const inputPayload = { id: '1', label: 'Asteroid', value: 'asteroid' };
+    // Act
+    sut.deleteOption$(inputEndPoint, inputPayload);
+    // Assert
+    const actual = double.deleteOption$;
+    const expectedEndPoint = 'agency-ranges';
+    const expectedPayload = '1';
+    expect(actual).toHaveBeenCalledWith(expectedEndPoint, expectedPayload);
+  });
+  it('should call the api delete with the correct endpoint and blanc whe no id', () => {
+    // Arrange
+    const double = jasmine.createSpyObj('ApiService', ['deleteOption$']);
+    const sut = new OptionsService(double);
+    const inputEndPoint = 'agency-ranges';
+    const inputPayload = { label: 'Asteroid', value: 'asteroid' };
+    // Act & Assert
+    expect(() => sut.deleteOption$(inputEndPoint, inputPayload)).toThrow();
   });
 });

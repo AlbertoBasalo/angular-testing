@@ -26,9 +26,9 @@ describe('TimeSpanPipe', () => {
       start: new Date(2020, 1, 1),
       end: new Date(2020, 1, 2),
     };
-    const spy = spyOn<any>(pipe, 'calculateTimeSpan');
+    const spy = spyOn<any>(pipe, 'timeSpanCalculator');
     // Act
-    const actual = pipe.transform(input);
+    pipe.transform(input);
     // Assert
     expect(spy).toHaveBeenCalledWith(input);
   });
@@ -39,7 +39,7 @@ describe('TimeSpanPipe', () => {
       start: new Date(2020, 1, 1),
       end: new Date(2020, 1, 1),
     };
-    const spy = spyOn<any>(pipe, 'calculateTimeSpan');
+    const spy = spyOn<any>(pipe, 'timeSpanCalculator');
     spy.and.returnValue('the result');
     // Act
     const actual = pipe.transform(input);

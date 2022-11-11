@@ -20,6 +20,18 @@ describe('The BaseStore class', () => {
       startDate: new Date('2022-11-10'),
     };
     expect(actual).toEqual(expected);
+  });
+  it('should return another instance', () => {
+    // Arrange
+    type State = { destination: string; startDate: Date };
+    const input: State = {
+      destination: 'The Moon',
+      startDate: new Date('2022-11-10'),
+    };
+    const sut = new BaseStore(input);
+    // Act
+    const actual = sut.getState();
+    // Assert
     expect(actual).not.toBe(input);
   });
   it('should return the last state set', () => {
@@ -118,5 +130,30 @@ describe('The BaseStore class', () => {
         const expected = 'The Moon';
         expect(actual).toEqual(expected);
       });
+  });
+  it('should select full state repetitively', () => {
+    // Arrange
+    type State = { destination: string };
+    const input: State = {
+      destination: 'The Moon',
+    };
+    const sut = new BaseStore(input);
+    const inputs = ['The Moon', 'Mars', 'Venus'];
+    let index = 0;
+    // Act
+    sut
+      .select$((state) => state.destination)
+      .subscribe((actual) => {
+        // Assert
+        const expected = inputs[index];
+        index++;
+        expect(actual).toEqual(expected);
+      });
+    sut.setState({
+      destination: 'Mars',
+    });
+    sut.setState({
+      destination: 'Venus',
+    });
   });
 });
