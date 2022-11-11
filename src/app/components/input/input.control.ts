@@ -33,7 +33,11 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: InputControl, multi: true },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: InputControl,
+      multi: true,
+    },
   ],
 })
 export class InputControl implements ControlValueAccessor {
@@ -57,14 +61,15 @@ export class InputControl implements ControlValueAccessor {
   writeValue(value: any): void {
     this.value = value;
   }
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
+  }
+
   registerOnChange(changeCallBack: (nv: any) => void): void {
     this.changeCallback = changeCallBack;
   }
   registerOnTouched(touchedCallback: () => void): void {
     this.touchedCallback = touchedCallback;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
   }
 
   getLabel() {
@@ -74,10 +79,10 @@ export class InputControl implements ControlValueAccessor {
     }
     return label.toUpperCase();
   }
-
   isRequired(): boolean {
     return this.control?.hasValidator(Validators.required) || false;
   }
+
   hasError(): boolean {
     return this.control?.invalid || false;
   }

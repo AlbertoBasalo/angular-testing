@@ -3,6 +3,7 @@ import {
   AbstractControl,
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
+  Validators,
 } from '@angular/forms';
 import { Option } from '../../models/option.interface';
 
@@ -10,7 +11,8 @@ import { Option } from '../../models/option.interface';
   selector: 'app-options-control',
   template: `
     <div>
-      <label [for]="formControlName">{{ label | uppercase }}</label>
+      <span *ngIf="isRequired()" aria-label="required">❕</span>
+      <span>{{ getLabel() }}</span>
       <small *ngIf="mustShowError()">
         {{ getErrorMessage() }}
       </small>
@@ -72,6 +74,17 @@ export class OptionsControl implements ControlValueAccessor {
   }
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+  }
+
+  getLabel() {
+    let label = this.label || this.formControlName;
+    if (!this.label.trim().endsWith(':')) {
+      label += ':';
+    }
+    return label.toUpperCase();
+  }
+  isRequired(): boolean {
+    return this.control?.hasValidator(Validators.required) || false;
   }
 
   hasError(): boolean {

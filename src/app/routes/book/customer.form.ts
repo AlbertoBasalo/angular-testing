@@ -16,7 +16,8 @@ import {
         formControlName="name"
         label="Full name"
         [control]="form.get('name')"
-      ></app-input-control>
+      >
+      </app-input-control>
       <app-input-control
         formControlName="email"
         label="Email address"
