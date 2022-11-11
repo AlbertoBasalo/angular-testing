@@ -14,18 +14,19 @@ import {
     <ng-container [formGroup]="form">
       <app-input-control
         formControlName="name"
-        label="Name"
+        label="Full name"
         [control]="form.get('name')"
-      ></app-input-control>
+      >
+      </app-input-control>
       <app-input-control
         formControlName="email"
-        label="Email"
+        label="Email address"
         type="email"
         [control]="form.get('email')"
       ></app-input-control>
       <app-input-control
         formControlName="phone"
-        label="Phone"
+        label="Phone number"
         type="tel"
         [control]="form.get('phone')"
       ></app-input-control>
