@@ -3,28 +3,32 @@ import {
   AbstractControl,
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
+  Validators,
 } from '@angular/forms';
 
 @Component({
   selector: 'app-input-control',
   template: `
     <div>
-      <label [for]="formControlName">{{ label | uppercase }}</label>
-      <small *ngIf="mustShowError()">
-        {{ getErrorMessage() }}
-      </small>
-      <input
-        [id]="formControlName"
-        [name]="formControlName"
-        [type]="type"
-        [placeholder]="label"
-        [value]="value"
-        [attr.aria-invalid]="hasError()"
-        [disabled]="isDisabled"
-        (blur)="touchedCallback()"
-        (change)="onChange($event)"
-        (keyUp)="onChange($event)"
-      />
+      <label [for]="formControlName">
+        <span *ngIf="isRequired()" aria-label="required">❕</span>
+        <span>{{ getLabel() }}</span>
+        <input
+          [id]="formControlName"
+          [name]="formControlName"
+          [type]="type"
+          [placeholder]="label"
+          [value]="value"
+          [disabled]="isDisabled"
+          [attr.aria-invalid]="hasError()"
+          (blur)="touchedCallback()"
+          (change)="onChange($event)"
+          (keyup)="onChange($event)"
+        />
+        <small *ngIf="mustShowError()">
+          {{ getErrorMessage() }}
+        </small>
+      </label>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,6 +67,17 @@ export class InputControl implements ControlValueAccessor {
     this.isDisabled = isDisabled;
   }
 
+  getLabel() {
+    let label = this.label || this.formControlName;
+    if (!this.label.trim().endsWith(':')) {
+      label += ':';
+    }
+    return label.toUpperCase();
+  }
+
+  isRequired(): boolean {
+    return this.control?.hasValidator(Validators.required) || false;
+  }
   hasError(): boolean {
     return this.control?.invalid || false;
   }
