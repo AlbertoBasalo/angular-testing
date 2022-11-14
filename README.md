@@ -18,7 +18,7 @@
 - Options Service
 - TimeSpan Pipe
 
-## Test Bed
+## Test Bed: imports and providers
 
 - Utils Service
 - Api service
