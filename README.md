@@ -21,7 +21,8 @@
 ## Test Bed: imports and providers
 
 - Utils Service
-- Api service
+- Api Service
+- Home Service
 
 ## Component testing
 

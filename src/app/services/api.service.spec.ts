@@ -7,7 +7,7 @@ import {
 import { ApiService } from './api.service';
 import { UtilsService } from './utils.service';
 
-fdescribe('Teh API Service', () => {
+describe('Teh API Service', () => {
   let service: ApiService;
   // ! http client spy and mock
   let httpTestingController: HttpTestingController;
