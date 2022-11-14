@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { UtilsService } from './utils.service';
 
-fdescribe('The Utils Service', () => {
+describe('The Utils Service', () => {
   let service: UtilsService;
 
   beforeEach(() => {
