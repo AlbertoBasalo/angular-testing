@@ -82,8 +82,8 @@ export class AgenciesComponent implements OnInit {
   };
 
   constructor(private api: ApiService) {
-    this.loadAgencies();
-    this.loadOptions();
+    // this.loadAgencies();
+    // this.loadOptions();
   }
 
   private loadOptions() {
@@ -95,7 +95,10 @@ export class AgenciesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadAgencies();
+    this.loadOptions();
+  }
 
   loadAgencies() {
     this.api.getAgencies$().subscribe((agencies) => {

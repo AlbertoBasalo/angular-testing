@@ -26,6 +26,8 @@
 
 ## Component testing
 
+- Agencies Component
+
 ## Component interaction testing
 
 ## End to End testing

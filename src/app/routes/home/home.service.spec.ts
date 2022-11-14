@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 
 import { HomeService } from './home.service';
 
-fdescribe('The Home Service integrated', () => {
+describe('The Home Service integrated', () => {
   let service: HomeService;
 
   beforeEach(() => {
@@ -23,7 +23,7 @@ fdescribe('The Home Service integrated', () => {
   });
 });
 
-fdescribe('The Home Service isolated', () => {
+describe('The Home Service isolated', () => {
   let service: HomeService;
   // ! mock the ApiService dependencies
   let apiServiceSpy: jasmine.SpyObj<ApiService>;
