@@ -8,6 +8,27 @@
 
 - 📕 Read the `docs` folder content for more info.
 
+## Unit testing Jasmine alone
+
+- Base Store
+- Api Store
+
+## Jasmine Spy and test doubles
+
+- Options Service
+- TimeSpan Pipe
+
+## Test Bed
+
+- Utils Service
+- Api service
+
+## Component testing
+
+## Component interaction testing
+
+## End to End testing
+
 ---
 
 <footer>
