@@ -82,6 +82,7 @@ export class AgenciesComponent implements OnInit {
   };
 
   constructor(private api: ApiService) {
+    // ! is not easy to test constructor logic
     // this.loadAgencies();
     // this.loadOptions();
   }

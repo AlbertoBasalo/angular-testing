@@ -8,14 +8,15 @@ import { AgenciesComponent } from './agencies.component';
 
 // ToDo: use IoC to inject an ApiService double
 
-fdescribe('The Agencies Component semi-integrated', () => {
+fdescribe('The Agencies Component _semi-integrated_', () => {
   let component: AgenciesComponent;
   let fixture: ComponentFixture<AgenciesComponent>;
-  let apiService: ApiService;
+  let apiService: ApiService; // ! the real ApiService
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AgenciesComponent],
-      // ! FormsModule and HttpClientTestingModule just for compiling the component
+      // ! Real FormsModule just for compiling the component
+      // ! and HttpClientTestingModule fake to not really call the api
       imports: [FormsModule, HttpClientTestingModule],
     }).compileComponents();
     apiService = TestBed.inject(ApiService);
@@ -40,7 +41,9 @@ fdescribe('The Agencies Component semi-integrated', () => {
 
   it('should call getAgencies$ on loadAgencies', () => {
     // Arrange
-    spyOn(apiService, 'getAgencies$').and.returnValue(of([]));
+    // ! is a stub with predefined output
+    const output = of([]);
+    spyOn(apiService, 'getAgencies$').and.returnValue(output);
     // Act
     component.loadAgencies();
     // Assert
