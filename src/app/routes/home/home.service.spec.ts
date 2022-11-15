@@ -7,27 +7,28 @@ import { Observable, of } from 'rxjs';
 
 import { HomeService } from './home.service';
 
-describe('The Home Service integrated', () => {
+fdescribe('The Home Service _integrated_', () => {
   let service: HomeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], // ! http client dependency double
-      providers: [HomeService], // ! because it is not provided in the module
+      imports: [HttpClientTestingModule], // ! http client dependency fake
+      providers: [HomeService], // ! provide it before using it
     });
-    service = TestBed.inject(HomeService);
+    service = TestBed.inject(HomeService); // ! claimed as a dependency
   });
 
   it('should be created', () => {
+    // ! no constructor call at all
     expect(service).toBeTruthy();
   });
 });
 
-describe('The Home Service isolated', () => {
+describe('The Home Service _isolated_', () => {
   let service: HomeService;
-  // ! mock the ApiService dependencies
-  let apiServiceSpy: jasmine.SpyObj<ApiService>;
-  let apiStoreSpy: jasmine.SpyObj<ApiStore<Trip>>;
+  // ! define doubles for the ApiService dependencies
+  let apiServiceSpy: jasmine.SpyObj<ApiService>; // ! an injected dependency
+  let apiStoreSpy: jasmine.SpyObj<ApiStore<Trip>>; // ! a constructed dependency
   beforeEach(() => {
     // ! configure spy to be injected
     apiServiceSpy = jasmine.createSpyObj('ApiService', ['getTrips$']);
