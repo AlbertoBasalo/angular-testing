@@ -13,14 +13,16 @@ describe('Teh API Service', () => {
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
+    // ! predefined response for any call
+    const utilsServiceStub = {
+      getHyphened: (source: string) => 'space-y',
+    };
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], // ! http client module double
+      imports: [HttpClientTestingModule], // ! http client module fake
       providers: [
         {
           provide: UtilsService,
-          useValue: {
-            getHyphened: (source: string) => 'space-y',
-          },
+          useValue: utilsServiceStub,
         },
       ],
     });
@@ -29,7 +31,8 @@ describe('Teh API Service', () => {
   });
 
   afterEach(() => {
-    httpTestingController.verify(); // not forget to check all of your requests
+    // !not forget to check all of your requests
+    httpTestingController.verify();
   });
 
   it('should be created', () => {
@@ -49,7 +52,7 @@ describe('Teh API Service', () => {
 
   it('should return right data when calling get method ', () => {
     // Arrange
-    const expected = [
+    const input = [
       {
         id: 'space-y',
         name: 'Space Y',
@@ -66,11 +69,25 @@ describe('Teh API Service', () => {
     // Act
     service.getAgencies$().subscribe((actual) => {
       // Assert
+      const expected = [
+        {
+          id: 'space-y',
+          name: 'Space Y',
+          range: 'Interplanetary',
+          status: 'Active',
+        },
+        {
+          id: 'green-origin',
+          name: 'Green Origin',
+          range: 'Orbital',
+          status: 'Active',
+        },
+      ];
       expect(actual).toEqual(expected);
     });
     const expectedUrl = 'http://localhost:3000/agencies';
     const controller = httpTestingController.expectOne(expectedUrl);
-    controller.flush(expected);
+    controller.flush(input);
   });
 
   it('should call post method with the right url and payload', () => {

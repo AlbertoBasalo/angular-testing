@@ -1,25 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { UtilsService } from './utils.service';
 
-describe('The Utils Service', () => {
+fdescribe('The Utils Service', () => {
   let service: UtilsService;
 
   beforeEach(() => {
+    // ! activated route double to be injected instead of the real one
+    const activatedRouteMock = {
+      snapshot: {
+        paramMap: {
+          get: (paramId: string) => (paramId === 'id' ? '1' : null),
+        },
+      },
+    };
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [],
       providers: [
         {
           provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              paramMap: {
-                get: (paramId: string) => (paramId === 'id' ? '1' : null),
-              },
-            },
-          },
+          useValue: activatedRouteMock,
         },
       ],
     });
@@ -49,6 +50,8 @@ describe('The Utils Service', () => {
     const expected = 'the-1-email-address-of-the-moon-is-moon-earth-sun';
     expect(actual).toEqual(expected);
   });
+
+  // ! need an activated route to be injected
 
   it('should get the default param from the ActivatedRoute', () => {
     // Arrange
