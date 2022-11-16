@@ -31,6 +31,7 @@
 ## Component testing
 
 - Agencies Component
+- Bookings Component
 
 ## Component interaction testing
 

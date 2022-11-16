@@ -121,45 +121,36 @@ fdescribe('The Agencies Component _presentation_', () => {
   });
 
   // ToDo: it should allow to fill the form
-  // it('should allow to fill the form', () => {
-  //   // Arrange
-  //   const native = fixture.nativeElement;
-  //   const debug = fixture.debugElement;
-  //   const expectedName = 'SpaceX';
-  //   const expectedRange = 'Interplanetary';
-  //   const expectedStatus = 'Active';
-  //   component.agencyRanges = [
-  //     { label: 'Interplanetary', value: 'Interplanetary' },
-  //     { label: 'Orbital', value: 'Orbital' },
-  //   ];
-  //   component.agencyStatuses = [
-  //     { label: 'Active', value: 'Active' },
-  //     { label: 'Inactive', value: 'Inactive' },
-  //   ];
-  //   fixture.detectChanges();
-  //   // Act
-  //   const actualNameInput = native.querySelector('input[name="name"]');
-  //   const actualInterplanetaryRadio = native.querySelector('#Interplanetary');
-  //   // const actualInterplanetaryRadio = debug.queryAll(
-  //   //   By.css('#Interplanetary')
-  //   // )[0];
-  //   // const actualStatusInput = native.querySelector('input[name="status"]');
-  //   actualNameInput.value = expectedName;
-  //   actualInterplanetaryRadio.checked = true;
-  //   // actualStatusInput.value = expectedStatus;
-  //   actualNameInput.dispatchEvent(new Event('input'));
-  //   actualInterplanetaryRadio.dispatchEvent(new Event('input'));
-  //   //actualInterplanetaryRadio.triggerEventHandler('click', null);
-  //   // actualInterplanetaryRadio.triggerEventHandler('change', {
-  //   //   target: { selected: true },
-  //   // });
-  //   // actualStatusInput.dispatchEvent(new Event('input'));
-  //   fixture.detectChanges();
-  //   // Assert
-  //   expect(component.agency.name).toBe(expectedName);
-  //   expect(component.agency.range).toBe(expectedRange);
-  //   //expect(component.agency.status).toBe(expectedStatus);
-  // });
+  it('should allow to fill the form', () => {
+    // Arrange
+    const native = fixture.nativeElement;
+    const debug = fixture.debugElement;
+    const expectedName = 'SpaceX';
+    const expectedRange = 'Interplanetary';
+    const expectedStatus = 'Active';
+    component.agencyRanges = [
+      { label: 'Interplanetary', value: 'Interplanetary' },
+      { label: 'Orbital', value: 'Orbital' },
+    ];
+    component.agencyStatuses = [
+      { label: 'Active', value: 'Active' },
+      { label: 'Inactive', value: 'Inactive' },
+    ];
+    fixture.detectChanges();
+    // Act
+    const actualNameInput = native.querySelector('input[name="name"]');
+    const actualRangeElement = native.querySelector('#Interplanetary');
+    actualNameInput.value = expectedName;
+    actualNameInput.dispatchEvent(new Event('input'));
+    console.log(actualRangeElement.checked);
+    actualRangeElement.checked = true;
+    console.log(actualRangeElement.checked);
+    actualRangeElement.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    // Assert
+    expect(component.agency.name).toBe(expectedName);
+    expect(component.agency.range).toBe(expectedRange);
+  });
 });
 
 // it should call onSaveClick on save button click
