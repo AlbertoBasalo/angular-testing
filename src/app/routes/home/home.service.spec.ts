@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 
 import { HomeService } from './home.service';
 
-fdescribe('The Home Service _integrated_', () => {
+describe('The Home Service _integrated_', () => {
   let sut: HomeService;
 
   beforeEach(() => {

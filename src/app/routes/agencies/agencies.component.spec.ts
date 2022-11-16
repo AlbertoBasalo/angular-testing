@@ -22,7 +22,7 @@ fdescribe('The Agencies Component _semi-integrated_', () => {
     apiService = TestBed.inject(ApiService);
     fixture = TestBed.createComponent(AgenciesComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges();
+    // fixture.detectChanges(); // ! not needed because we are not testing the template
   });
 
   it('should create', () => {
@@ -34,14 +34,13 @@ fdescribe('The Agencies Component _semi-integrated_', () => {
     spyOn(component, 'loadAgencies');
     // Act
     component.ngOnInit();
-
     // Assert
     expect(component.loadAgencies).toHaveBeenCalled();
   });
 
   it('should call getAgencies$ on loadAgencies', () => {
     // Arrange
-    // ! is a stub with predefined output
+    // ! can make apiService a stub with predefined output
     const output = of([]);
     spyOn(apiService, 'getAgencies$').and.returnValue(output);
     // Act
