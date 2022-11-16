@@ -36,7 +36,7 @@ import { ApiService } from '@services/api.service';
       </table>
     </article>
     <article>
-      <header>Add a new agency</header>
+      <header>Add a new Agency</header>
       <form>
         <fieldset>
           <label for="name">Name</label>
