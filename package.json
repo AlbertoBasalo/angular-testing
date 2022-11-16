@@ -2,6 +2,11 @@
   "name": "angulab",
   "version": "14.0.0",
   "description": "Angular Laboratory",
+  "site": "https://github.com/AlbertoBasalo/angulab/tree/1-test_basics",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlbertoBasalo/angulab/tree/1-test_basics.git"
+  },
   "author": {
     "name": "Alberto Basalo",
     "email": "albertobasalo@hotmail.com",

@@ -8,62 +8,62 @@ import { Observable, of } from 'rxjs';
 import { HomeService } from './home.service';
 
 fdescribe('The Home Service _integrated_', () => {
-  let service: HomeService;
+  let sut: HomeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule], // ! http client dependency fake
       providers: [HomeService], // ! provide it before using it
     });
-    service = TestBed.inject(HomeService); // ! claimed as a dependency
+    sut = TestBed.inject(HomeService); // ! claimed as a dependency
   });
 
   it('should be created', () => {
     // ! no constructor call at all
-    expect(service).toBeTruthy();
+    expect(sut).toBeTruthy();
   });
 });
 
 describe('The Home Service _isolated_', () => {
-  let service: HomeService;
+  let sut: HomeService;
   // ! define doubles for the ApiService dependencies
-  let apiServiceSpy: jasmine.SpyObj<ApiService>; // ! an injected dependency
+  let apiServiceStub: jasmine.SpyObj<ApiService>; // ! an injected dependency
   let apiStoreSpy: jasmine.SpyObj<ApiStore<Trip>>; // ! a constructed dependency
   beforeEach(() => {
     // ! configure spy to be injected
-    apiServiceSpy = jasmine.createSpyObj('ApiService', ['getTrips$']);
+    apiServiceStub = jasmine.createSpyObj('ApiService', ['getTrips$']);
     const output: Observable<Trip[]> = of([]);
-    apiServiceSpy.getTrips$.and.returnValue(output);
+    apiServiceStub.getTrips$.and.returnValue(output);
     TestBed.configureTestingModule({
       imports: [], // ! no need to import http client double
       providers: [
         HomeService,
-        { provide: ApiService, useValue: apiServiceSpy },
+        { provide: ApiService, useValue: apiServiceStub },
       ],
     });
-    service = TestBed.inject(HomeService);
+    sut = TestBed.inject(HomeService);
     // ! configure spy to be instantiated (add methods as needed)
     apiStoreSpy = jasmine.createSpyObj('ApiStore', ['setIsWorking', 'setData']);
-    service['tripsStore'] = apiStoreSpy;
+    sut['tripsStore'] = apiStoreSpy;
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(sut).toBeTruthy();
   });
 
   it('should call the api service getTrips$ method on loadTrips', () => {
     // Arrange
     // Act
-    service.loadTrips();
+    sut.loadTrips();
     // Assert
-    expect(apiServiceSpy.getTrips$).toHaveBeenCalled();
+    expect(apiServiceStub.getTrips$).toHaveBeenCalled();
   });
 
   it('should call the apiStore setIsWorking  method on loadTrips', () => {
     // Arrange
-    service['tripsStore'] = apiStoreSpy;
+    sut['tripsStore'] = apiStoreSpy;
     // Act
-    service.loadTrips();
+    sut.loadTrips();
     // Assert
     expect(apiStoreSpy.setIsWorking).toHaveBeenCalled();
   });
@@ -71,9 +71,9 @@ describe('The Home Service _isolated_', () => {
   it('should call the api store set data method on loadTrips success', () => {
     // Arrange
     const output: Observable<Trip[]> = of([]);
-    apiServiceSpy.getTrips$.and.returnValue(output);
+    apiServiceStub.getTrips$.and.returnValue(output);
     // Act
-    service.loadTrips();
+    sut.loadTrips();
     // Assert
     const expected: Trip[] = [];
     expect(apiStoreSpy.setData).toHaveBeenCalledWith(expected);

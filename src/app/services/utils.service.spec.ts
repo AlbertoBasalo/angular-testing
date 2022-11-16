@@ -3,15 +3,51 @@ import { ActivatedRoute } from '@angular/router';
 
 import { UtilsService } from './utils.service';
 
-describe('The Utils Service', () => {
-  let service: UtilsService;
+describe('The Utils Service _without TestBed_', () => {
+  let sut: UtilsService;
 
   beforeEach(() => {
+    sut = new UtilsService();
+  });
+
+  it('should be created', () => {
+    expect(sut).toBeTruthy();
+  });
+
+  it('should return a hyphened string', () => {
+    // Arrange
+    const input = 'The Moon';
+    // Act
+    const actual = sut.getHyphened(input);
+    // Arrange
+    const expected = 'the-moon';
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return a hyphened string for complex inputs', () => {
+    // Arrange
+    const input = 'The #1 email address of The Moon is: moon@earth.sun';
+    // Act
+    const actual = sut.getHyphened(input);
+    // Arrange
+    const expected = 'the-1-email-address-of-the-moon-is-moon-earth-sun';
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('The Utils Service', () => {
+  let sut: UtilsService;
+  let inputActivatedRoute: ActivatedRoute;
+  const inputNotFoundParam = 'notFound';
+  beforeEach(() => {
     // ! activated route double to be injected instead of the real one
+    // simulates a not found key returning null
+    // otherwise returns the received param as the value
     const activatedRouteMock = {
       snapshot: {
         paramMap: {
-          get: (paramId: string) => (paramId === 'id' ? '1' : null),
+          get: (paramId: string) =>
+            paramId === inputNotFoundParam ? null : paramId,
         },
       },
     };
@@ -24,18 +60,18 @@ describe('The Utils Service', () => {
         },
       ],
     });
-    service = TestBed.inject(UtilsService);
+    sut = TestBed.inject(UtilsService);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(sut).toBeTruthy();
   });
 
   it('should return a hyphened string', () => {
     // Arrange
     const input = 'The Moon';
     // Act
-    const actual = service.getHyphened(input);
+    const actual = sut.getHyphened(input);
     // Assert
     const expected = 'the-moon';
     expect(actual).toEqual(expected);
@@ -45,41 +81,41 @@ describe('The Utils Service', () => {
     // Arrange
     const input = 'The #1 email address of The Moon is: moon@earth.sun';
     // Act
-    const actual = service.getHyphened(input);
+    const actual = sut.getHyphened(input);
     // Assert
     const expected = 'the-1-email-address-of-the-moon-is-moon-earth-sun';
     expect(actual).toEqual(expected);
   });
 
-  // ! need an activated route to be injected
+  // ! testing the getParam method needs an activated route to be injected
 
   it('should get the default param from the ActivatedRoute', () => {
     // Arrange
-    const inputRoute = TestBed.inject(ActivatedRoute);
+    inputActivatedRoute = TestBed.inject(ActivatedRoute);
     // Act
-    const actual = service.getParam(inputRoute);
+    const actual = sut.getParam(inputActivatedRoute);
     // Assert
-    const expected = '1';
+    const expected = 'id';
     expect(actual).toEqual(expected);
   });
 
   it('should get the specified param from the ActivatedRoute', () => {
     // Arrange
-    const inputRoute = TestBed.inject(ActivatedRoute);
-    const inputParam = 'id';
+    inputActivatedRoute = TestBed.inject(ActivatedRoute);
+    const inputParam = 'tripId';
     // Act
-    const actual = service.getParam(inputRoute, inputParam);
+    const actual = sut.getParam(inputActivatedRoute, inputParam);
     // Assert
-    const expected = '1';
+    const expected = 'tripId';
     expect(actual).toEqual(expected);
   });
 
   it('should get empty string for not found params', () => {
     // Arrange
-    const inputRoute = TestBed.inject(ActivatedRoute);
-    const inputParam = 'not-found';
+    inputActivatedRoute = TestBed.inject(ActivatedRoute);
+    const inputParam = inputNotFoundParam;
     // Act
-    const actual = service.getParam(inputRoute, inputParam);
+    const actual = sut.getParam(inputActivatedRoute, inputParam);
     // Assert
     const expected = '';
     expect(actual).toEqual(expected);

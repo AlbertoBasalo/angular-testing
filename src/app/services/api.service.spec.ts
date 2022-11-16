@@ -7,42 +7,43 @@ import {
 import { ApiService } from './api.service';
 import { UtilsService } from './utils.service';
 
-describe('Teh API Service', () => {
-  let service: ApiService;
+describe('The API Service', () => {
+  let sut: ApiService;
   // ! http client spy and mock
   let httpTestingController: HttpTestingController;
+  const outputId = 'space-y';
 
   beforeEach(() => {
     // ! predefined response for any call
     const utilsServiceStub = {
-      getHyphened: (source: string) => 'space-y',
+      getHyphened: (source: string) => outputId,
     };
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule], // ! http client module fake
       providers: [
         {
-          provide: UtilsService,
-          useValue: utilsServiceStub,
+          provide: UtilsService, // * Dependency to be injected
+          useValue: utilsServiceStub, // ! stub to be injected instead of the real one
         },
       ],
     });
-    service = TestBed.inject(ApiService);
+    sut = TestBed.inject(ApiService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    // !not forget to check all of your requests
+    // ! not forget to check all of your pending untested requests
     httpTestingController.verify();
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(sut).toBeTruthy();
   });
 
   it('should call the http client get method with the right url', () => {
     // Arrange
     // Act
-    service.getAgencies$().subscribe();
+    sut.getAgencies$().subscribe();
     // Assert
     const expectedUrl = 'http://localhost:3000/agencies';
     const controller = httpTestingController.expectOne(expectedUrl);
@@ -52,7 +53,7 @@ describe('Teh API Service', () => {
 
   it('should return right data when calling get method ', () => {
     // Arrange
-    const input = [
+    const output = [
       {
         id: 'space-y',
         name: 'Space Y',
@@ -67,7 +68,7 @@ describe('Teh API Service', () => {
       },
     ];
     // Act
-    service.getAgencies$().subscribe((actual) => {
+    sut.getAgencies$().subscribe((actual) => {
       // Assert
       const expected = [
         {
@@ -87,7 +88,7 @@ describe('Teh API Service', () => {
     });
     const expectedUrl = 'http://localhost:3000/agencies';
     const controller = httpTestingController.expectOne(expectedUrl);
-    controller.flush(input);
+    controller.flush(output); // ! flush the predefined response (like a stub)
   });
 
   it('should call post method with the right url and payload', () => {
@@ -99,26 +100,26 @@ describe('Teh API Service', () => {
       status: 'Active',
     };
     // Act
-    service.postAgency$(input).subscribe();
+    sut.postAgency$(input).subscribe();
     // Assert
     const expectedUrl = 'http://localhost:3000/agencies';
     const controller = httpTestingController.expectOne(expectedUrl);
     const expectedMethod = 'POST';
     expect(controller.request.method).toEqual(expectedMethod);
-    const expected = {
-      id: 'space-y',
+    const expectedPayload = {
+      id: outputId, // ! stubbed output (sut method with two responsibilities)
       name: 'Space Y',
       range: 'Interplanetary',
       status: 'Active',
     };
-    expect(controller.request.body).toEqual(expected);
+    expect(controller.request.body).toEqual(expectedPayload);
   });
 
   it('should call the delete method with the right url', () => {
     // Arrange
     const input = 'space-y';
     // Act
-    service.deleteAgency$(input).subscribe();
+    sut.deleteAgency$(input).subscribe();
     // Assert
     const expectedUrl = 'http://localhost:3000/agencies/space-y';
     const controller = httpTestingController.expectOne(expectedUrl);
