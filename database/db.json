@@ -29,6 +29,12 @@
       "name": "tmplate driven",
       "range": "Interplanetary",
       "status": "Pending"
+    },
+    {
+      "id": "sofftek-stars",
+      "name": "Sofftek Stars",
+      "range": "Interplanetary",
+      "status": "Active"
     }
   ],
   "agency-ranges": [

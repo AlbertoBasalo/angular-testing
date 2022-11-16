@@ -72,7 +72,7 @@ fdescribe('The Agencies Component _presentation_', () => {
       getAgencies$: () => of(inputAgencies),
       getOptions$: (r: string) => of([]),
       postAgency$: (a: Agency) => of(a),
-      deleteAgency$: () => of({}),
+      deleteAgency$: (a: string) => of({}),
     };
     await TestBed.configureTestingModule({
       declarations: [AgenciesComponent],
@@ -85,19 +85,81 @@ fdescribe('The Agencies Component _presentation_', () => {
   });
   it('should present a table with agencies', () => {
     // Arrange
+    const native = fixture.nativeElement;
     // Act
-    const actualTable = fixture.nativeElement.querySelector('table');
+    const actualTable = native.querySelector('table');
     // Assert
     expect(actualTable).toBeTruthy();
-    let actualBodyRows = fixture.nativeElement.querySelectorAll('tbody>tr');
+    let actualBodyRows = native.querySelectorAll('tbody>tr');
     const actualBodyRowsLength = actualBodyRows.length;
     const expectedBodyRowsLength = inputAgencies.length;
     expect(actualBodyRowsLength).toBe(expectedBodyRowsLength);
   });
+  it('should call onDeleteClick on delete button click', () => {
+    // Arrange
+    spyOn(component, 'onDeleteClick');
+    const native = fixture.nativeElement;
+    // Act
+    const actualDeleteButtons = native.querySelectorAll('tbody>tr>td>button');
+    const firstButton = actualDeleteButtons[0];
+    firstButton.click();
+    const expected = inputAgencies[0].id;
+    // Assert
+    expect(component.onDeleteClick).toHaveBeenCalledWith(expected);
+  });
+
+  it('should call onSaveClick on save button click', () => {
+    // Arrange
+    spyOn(component, 'onSaveClick');
+    const native = fixture.nativeElement;
+    // Act
+    const actualSaveButtons = native.querySelectorAll('form>button');
+    const firstButton = actualSaveButtons[0];
+    firstButton.click();
+    // Assert
+    expect(component.onSaveClick).toHaveBeenCalled();
+  });
+
+  // ToDo: it should allow to fill the form
+  // it('should allow to fill the form', () => {
+  //   // Arrange
+  //   const native = fixture.nativeElement;
+  //   const debug = fixture.debugElement;
+  //   const expectedName = 'SpaceX';
+  //   const expectedRange = 'Interplanetary';
+  //   const expectedStatus = 'Active';
+  //   component.agencyRanges = [
+  //     { label: 'Interplanetary', value: 'Interplanetary' },
+  //     { label: 'Orbital', value: 'Orbital' },
+  //   ];
+  //   component.agencyStatuses = [
+  //     { label: 'Active', value: 'Active' },
+  //     { label: 'Inactive', value: 'Inactive' },
+  //   ];
+  //   fixture.detectChanges();
+  //   // Act
+  //   const actualNameInput = native.querySelector('input[name="name"]');
+  //   const actualInterplanetaryRadio = native.querySelector('#Interplanetary');
+  //   // const actualInterplanetaryRadio = debug.queryAll(
+  //   //   By.css('#Interplanetary')
+  //   // )[0];
+  //   // const actualStatusInput = native.querySelector('input[name="status"]');
+  //   actualNameInput.value = expectedName;
+  //   actualInterplanetaryRadio.checked = true;
+  //   // actualStatusInput.value = expectedStatus;
+  //   actualNameInput.dispatchEvent(new Event('input'));
+  //   actualInterplanetaryRadio.dispatchEvent(new Event('input'));
+  //   //actualInterplanetaryRadio.triggerEventHandler('click', null);
+  //   // actualInterplanetaryRadio.triggerEventHandler('change', {
+  //   //   target: { selected: true },
+  //   // });
+  //   // actualStatusInput.dispatchEvent(new Event('input'));
+  //   fixture.detectChanges();
+  //   // Assert
+  //   expect(component.agency.name).toBe(expectedName);
+  //   expect(component.agency.range).toBe(expectedRange);
+  //   //expect(component.agency.status).toBe(expectedStatus);
+  // });
 });
-
-// it should call onDeleteClick on delete button click
-
-// it should allow to fill the form
 
 // it should call onSaveClick on save button click
