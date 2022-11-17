@@ -32,6 +32,8 @@
 
 - Agencies Component
 - Bookings Component
+- Options List (inside / outside)
+- Options Component (instantiation.... )
 
 ## Component interaction testing
 

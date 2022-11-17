@@ -17,7 +17,7 @@ import { Option } from '@models/option.interface';
         <span>
           <code>{{ option.value }}</code>
         </span>
-        <span (click)="delete.emit(option)">🗑️</span>
+        <span name="delete" (click)="delete.emit(option)">🗑️</span>
       </li>
     </ul>
   `,
