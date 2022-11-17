@@ -2,8 +2,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Option } from '@models/option.interface';
 import { Observable, of } from 'rxjs';
 import { OptionsService } from './options.service';
@@ -32,7 +33,7 @@ import { OptionsService } from './options.service';
   providers: [OptionsService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OptionsComponent {
+export class OptionsComponent implements OnInit {
   options$: Observable<Option[]> = of([]);
   endpoint = '';
 
@@ -40,8 +41,10 @@ export class OptionsComponent {
     private service: OptionsService,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
-  ) {
-    this.route.queryParamMap.subscribe((paramMap) => {
+  ) {}
+
+  ngOnInit() {
+    this.route.queryParamMap.subscribe((paramMap: ParamMap) => {
       this.endpoint = paramMap.get('endpoint') || '';
       this.options$ = this.service.getOptionsForEndPoint$(this.endpoint);
     });

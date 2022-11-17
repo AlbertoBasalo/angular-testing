@@ -49,7 +49,7 @@ describe('The Agencies Component _semi-integrated_', () => {
   });
 });
 
-fdescribe('The Agencies Component _presentation_', () => {
+describe('The Agencies Component _presentation_', () => {
   let component: AgenciesComponent;
   let fixture: ComponentFixture<AgenciesComponent>;
   let apiServiceStub: any;
