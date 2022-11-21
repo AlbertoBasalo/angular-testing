@@ -33,7 +33,7 @@
 - Agencies Component
 - Bookings Component
 - Options List (inside / outside)
-- Options Component (instantiation.... )
+- Home Component (dependencies... )
 
 ## Component interaction testing
 
