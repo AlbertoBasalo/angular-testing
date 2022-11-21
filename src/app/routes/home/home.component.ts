@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 
 @Component({
@@ -10,10 +10,12 @@ import { HomeService } from './home.service';
   providers: [HomeService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   trips$ = this.service.selectTrips$();
 
-  constructor(private service: HomeService) {
+  constructor(private service: HomeService) {}
+
+  ngOnInit(): void {
     this.service.loadTrips();
   }
 }

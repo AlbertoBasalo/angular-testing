@@ -23,6 +23,7 @@ module.exports = function (config) {
         random: false,
       },
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
+      captureConsole: false,
     },
 
     coverageReporter: {
