@@ -37,6 +37,6 @@ const componentsContext = require.context('./', true, /component.spec\.ts$/);
 const listsContext = require.context('./', true, /list.spec\.ts$/);
 const formsContext = require.context('./', true, /form.spec\.ts$/);
 const fullContext = require.context('./', true, /\.spec\.ts$/);
-const context = componentsContext;
+const context = formsContext;
 // And load the modules.
 context.keys().forEach(context);

@@ -37,6 +37,8 @@
 
 ## Component interaction testing
 
+- Trips Form (fill form)
+
 ## End to End testing
 
 ---

@@ -23,7 +23,7 @@ const trip: Trip = {
   endDate: '2020-01-01',
 };
 
-fdescribe('The Home Component with fakes imports', () => {
+describe('The Home Component with fakes imports', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let homeServiceStub: jasmine.SpyObj<HomeService>;
@@ -52,7 +52,7 @@ fdescribe('The Home Component with fakes imports', () => {
   });
 });
 
-fdescribe('The Home Component with nested dependencies', () => {
+describe('The Home Component with nested dependencies', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let homeServiceStub: jasmine.SpyObj<HomeService>;
@@ -95,7 +95,7 @@ class HomeServiceStub {
   }
 }
 
-fdescribe('The Home Component with testBed providers', () => {
+describe('The Home Component with testBed providers', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
