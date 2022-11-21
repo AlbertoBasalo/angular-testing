@@ -43,7 +43,6 @@ describe('The Options List component', () => {
     expect(actual).toBe(expected);
   });
 
-  // should emit delete event when delete button is clicked
   it('should emit delete event when delete button is clicked', () => {
     // arrange
     const input = [
@@ -78,16 +77,18 @@ class HostComponent {
     { label: 'test', value: 'test' },
     { label: 'test2', value: 'test2' },
   ];
-  toBeDeleted: any = null;
+  token: any = null;
   onDelete(event: any) {
-    this.toBeDeleted = event;
+    this.token = event;
   }
 }
 
 describe('The Options List hosted component', () => {
+  // ! testing from the host perspective
   let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
-  // ! testing form the host perspective
+  let native: any;
+  let debug: any;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HostComponent, OptionsList],
@@ -95,6 +96,8 @@ describe('The Options List hosted component', () => {
 
     fixture = TestBed.createComponent(HostComponent);
     component = fixture.componentInstance;
+    native = fixture.nativeElement;
+    debug = fixture.debugElement;
     fixture.detectChanges();
   });
 
@@ -102,7 +105,7 @@ describe('The Options List hosted component', () => {
     // arrange
     fixture.detectChanges();
     // act
-    const actualListItems = fixture.nativeElement.querySelectorAll('li');
+    const actualListItems = native.querySelectorAll('li');
     // assert
     const actual = actualListItems.length;
     const expected = 2;
@@ -112,14 +115,12 @@ describe('The Options List hosted component', () => {
   it('should subscribe to delete event', () => {
     // arrange
     fixture.detectChanges();
-    const deleteButtons = fixture.debugElement.queryAll(
-      By.css('span[name="delete"]')
-    );
+    const deleteButtons = debug.queryAll(By.css('span[name="delete"]'));
     // act
     deleteButtons[0].triggerEventHandler('click', null);
     fixture.detectChanges();
     // assert
-    const actual = component.toBeDeleted; // ! using an effect instead of spy
+    const actual = component.token; // ! using an effect instead of spy
     const expected = component.input[0];
     expect(actual).toEqual(expected);
   });

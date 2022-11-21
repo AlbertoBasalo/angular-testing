@@ -85,4 +85,18 @@ describe('BookingsComponent', () => {
     // Assert
     expect(component.loadBookings).toHaveBeenCalled();
   });
+
+  it('should call onDeleteClick for each booking', () => {
+    // Arrange
+    const debug = fixture.debugElement;
+    spyOn(component, 'onDeleteClick');
+    const allDeleteButtons = debug.queryAll(By.css('tbody>tr>td>button'));
+    // Act
+    allDeleteButtons.forEach((b, i) => {
+      b.triggerEventHandler('click', null);
+      // Assert
+      const expected = inputBookings[i].id;
+      expect(component.onDeleteClick).toHaveBeenCalledWith(expected);
+    });
+  });
 });

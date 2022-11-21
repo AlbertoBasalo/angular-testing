@@ -25,6 +25,9 @@ describe('The Agencies Component _semi-integrated_', () => {
   });
 
   it('should create', () => {
+    // ! constructor cant be spied
+    // expect(component.loadAgencies).toHaveBeenCalled();
+    // * check effects
     expect(component).toBeTruthy();
   });
 
@@ -32,7 +35,7 @@ describe('The Agencies Component _semi-integrated_', () => {
     // Arrange
     spyOn(component, 'loadAgencies');
     // Act
-    component.ngOnInit();
+    component.ngOnInit(); // ! must call ngOnInit
     // Assert
     expect(component.loadAgencies).toHaveBeenCalled();
   });
