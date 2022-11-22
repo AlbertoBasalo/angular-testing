@@ -23,7 +23,7 @@ const trip: Trip = {
   endDate: '2020-01-01',
 };
 
-describe('The Home Component with fakes imports', () => {
+describe('The Home Component with fake imports', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let homeServiceStub: jasmine.SpyObj<HomeService>;
