@@ -1,4 +1,4 @@
-describe('My First Test', () => {
+describe('The Home Page', () => {
   before(() => {
     cy.log('runs only once before all the tests');
   });
