@@ -1,3 +1,7 @@
+/*
+ * Assertion samples
+ */
+
 describe('The Home Page', () => {
   before(() => {
     cy.log('runs only once before all the tests');
@@ -20,7 +24,7 @@ describe('The Home Page', () => {
   });
 
   it('shows a list of items', () => {
-    cy.get('ul').should('be.visible');
+    cy.get('main ul').should('be.visible');
   });
 
   it('should have link to a agencies url', () => {

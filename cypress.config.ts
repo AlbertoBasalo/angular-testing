@@ -13,4 +13,7 @@ export default defineConfig({
     },
     specPattern: '**/*.cy.ts',
   },
+  env: {
+    apiUrl: 'http://localhost:3000',
+  },
 });
