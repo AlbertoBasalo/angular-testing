@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "../src/app/routes/home/trips-list.cy.ts"],
   "exclude": [],
   "compilerOptions": {
     "sourceMap": false,

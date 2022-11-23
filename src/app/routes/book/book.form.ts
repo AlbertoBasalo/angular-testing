@@ -89,7 +89,7 @@ export class BookForm implements OnInit {
       ]),
       premiumFood: '',
       paymentMethod: new FormControl('credit-card', Validators.required),
-      date: new Date().toISOString(),
+      date: new Date().toISOString().substring(0, 10),
       status: 'Pending',
     });
   }
