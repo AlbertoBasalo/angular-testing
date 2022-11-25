@@ -1,5 +1,10 @@
 import { TimeSpanModule } from 'src/app/pipes/time-span/time-span.module';
 import { TripsList } from './trips.list';
+
+/*
+ * 4 Component samples
+ */
+
 describe('The trips Component', () => {
   beforeEach(() => {
     cy.fixture('trips').then((trips) => {

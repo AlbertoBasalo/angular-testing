@@ -16,9 +16,9 @@ export default defineConfig({
   env: {
     apiUrl: 'http://localhost:3000',
   },
-  screenshotOnRunFailure: true,
-  screenshotsFolder: 'cypress/reports/screenshots',
-  video: true,
-  videoCompression: 48,
-  videosFolder: 'cypress/reports/videos',
+  // screenshotOnRunFailure: true,
+  // screenshotsFolder: 'cypress/reports/screenshots',
+  // video: true,
+  // videoCompression: 48,
+  // videosFolder: 'cypress/reports/videos',
 });

@@ -5,6 +5,10 @@ import { OptionsModule } from '../options/options.module';
 import { BookForm } from './book.form';
 import { CustomerForm } from './customer.form';
 
+/*
+ * 5 Form samples
+ */
+
 describe('The book form', () => {
   beforeEach(() => {
     cy.viewport(500, 700);

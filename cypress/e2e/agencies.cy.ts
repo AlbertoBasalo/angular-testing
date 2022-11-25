@@ -1,5 +1,5 @@
 /*
- * Network interception samples
+ * 2 Network interception samples
  */
 
 describe('The agencies page', () => {
