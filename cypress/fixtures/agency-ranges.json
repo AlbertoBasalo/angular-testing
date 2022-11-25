@@ -1,0 +1,20 @@
+[
+  {
+    "label": "Interplanetary",
+    "value": "Interplanetary"
+  },
+  {
+    "label": "Orbital",
+    "value": "Orbital"
+  },
+  {
+    "label": "Interstellar",
+    "value": "Interstellar",
+    "id": "interstellar"
+  },
+  {
+    "label": "Asteroid",
+    "value": "Asteroid",
+    "id": "asteroid"
+  }
+]

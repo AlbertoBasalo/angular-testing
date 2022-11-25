@@ -23,12 +23,14 @@
       "@components/*": ["src/app/components/*"],
       "@models/*": ["src/app/models/*"],
       "@services/*": ["src/app/services/*"]
-    }
+    },
+    "typeRoots": ["node_modules/@types", "./@types"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "exclude": ["node_modules/cypress/*", "cypress/global.d.ts"]
 }

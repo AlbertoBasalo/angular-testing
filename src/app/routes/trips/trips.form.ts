@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Trip } from '@models/trip.interface';
 import { TripsService } from './trips.service';
 
@@ -18,7 +18,7 @@ import { TripsService } from './trips.service';
         </select>
         <label>Departure</label>
         <input type="date" formControlName="startDate" />
-        <button type="submit">Submit</button>
+        <button type="submit" [disabled]="form.invalid">Submit</button>
       </form>
     </ng-container>
   `,
@@ -28,7 +28,7 @@ export class TripsForm {
   agenciesState$ = this.service.selectAgenciesState$();
 
   form = this.formBuilder.group({
-    destination: '',
+    destination: ['', Validators.required],
     agencyId: '',
     startDate: '',
   });
