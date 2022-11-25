@@ -1,8 +1,8 @@
-# Angular Laboratory
+# Angular Testing
 
 > A sample project for Angular workshop demos
 
-[Repository](https://github.com/AlbertoBasalo/angulab/tree/1-test_basics)
+[Repository](https://github.com/AlbertoBasalo/angular-testing)
 
 - 🚚 Install dependencies `npm i`
 

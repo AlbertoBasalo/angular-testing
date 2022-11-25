@@ -1,11 +1,11 @@
 {
-  "name": "angulab",
+  "name": "angular-testing",
   "version": "14.0.0",
   "description": "Angular Laboratory",
-  "site": "https://github.com/AlbertoBasalo/angulab/tree/1-test_basics",
+  "site": "https://github.com/AlbertoBasalo/angular-testing",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AlbertoBasalo/angulab/tree/1-test_basics.git"
+    "url": "https://github.com/AlbertoBasalo/angular-testing.git"
   },
   "author": {
     "name": "Alberto Basalo",
