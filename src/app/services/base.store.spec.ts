@@ -1,159 +1,141 @@
 import { BaseStore } from './base.store';
 
-describe('The BaseStore class', () => {
+fdescribe('The BaseStore class', () => {
+  type State = { destination: string; startDate: Date; price: number };
+  const initialState: State = {
+    destination: 'The Moon',
+    startDate: new Date('2023-02-23'),
+    price: 100,
+  };
+
   it('should create an instance', () => {
     expect(new BaseStore(null)).toBeTruthy();
   });
-  it('should return initial state after instantiation', () => {
+  it('should return initial state on instantiation', () => {
     // Arrange
-    type State = { destination: string; startDate: Date };
-    const input: State = {
-      destination: 'The Moon',
-      startDate: new Date('2022-11-10'),
-    };
-    const sut = new BaseStore(input);
+    const sut = new BaseStore(initialState);
     // Act
     const actual = sut.getState();
     // Assert
     const expected = {
       destination: 'The Moon',
-      startDate: new Date('2022-11-10'),
+      startDate: new Date('2023-02-23'),
+      price: 100,
     };
     expect(actual).toEqual(expected);
   });
-  it('should return another instance', () => {
+  it('should return a different instance', () => {
     // Arrange
-    type State = { destination: string; startDate: Date };
-    const input: State = {
-      destination: 'The Moon',
-      startDate: new Date('2022-11-10'),
-    };
-    const sut = new BaseStore(input);
+    const sut = new BaseStore(initialState);
     // Act
     const actual = sut.getState();
     // Assert
-    expect(actual).not.toBe(input);
+    expect(actual).not.toBe(initialState);
   });
+  // ToDo: student exercise
   it('should return the last state set', () => {
     // Arrange
-    type State = { destination: string };
-    const initialState: State = {
-      destination: 'The Moon',
-    };
     const sut = new BaseStore(initialState);
     const input: State = {
       destination: 'Mars',
+      startDate: new Date('2024-02-24'),
+      price: 200,
     };
-    // Act
     sut.setState(input);
+    // Act
     const actual = sut.getState();
     // Assert
     const expected = {
       destination: 'Mars',
+      startDate: new Date('2024-02-24'),
+      price: 200,
     };
     expect(actual).toEqual(expected);
   });
   it('should change state with partial mutations', () => {
     // Arrange
-    type State = { destination: string; price: number };
-    const initialState: State = {
-      destination: 'The Moon',
-      price: 100,
-    };
     const sut = new BaseStore(initialState);
     const input: Partial<State> = {
       price: 200,
     };
-    // Act
     sut.setState(input);
+    // Act
     const actual = sut.getState();
     // Assert
     const expected = {
       destination: 'The Moon',
+      startDate: new Date('2023-02-23'),
       price: 200,
     };
     expect(actual).toEqual(expected);
   });
   it('should select full state', () => {
     // Arrange
-    type State = { destination: string };
-    const input: State = {
+    const sut = new BaseStore(initialState);
+    const expected = {
       destination: 'The Moon',
+      startDate: new Date('2023-02-23'),
+      price: 100,
     };
-    const sut = new BaseStore(input);
     // Act
     sut
       .select$((state) => state)
       .subscribe((actual) => {
         // Assert
-        const expected = {
-          destination: 'The Moon',
-        };
         expect(actual).toEqual(expected);
       });
   });
+  // ToDo: student exercise
   it('should select partial state', () => {
     // Arrange
-    type State = { destination: string };
-    const input: State = {
-      destination: 'The Moon',
-    };
-    const sut = new BaseStore(input);
+    const sut = new BaseStore(initialState);
+    const expected = 'The Moon';
     // Act
     sut
       .select$((state) => state.destination)
       .subscribe((actual) => {
         // Assert
-        const expected = 'The Moon';
         expect(actual).toEqual(expected);
       });
   });
-  it('should select partial state with multiple subscriptions', () => {
+  it('should select same result for any subscriptor', () => {
     // Arrange
-    type State = { destination: string };
-    const input: State = {
-      destination: 'The Moon',
-    };
-    const sut = new BaseStore(input);
+    const sut = new BaseStore(initialState);
+    const expected = 'The Moon';
     // Act
     sut
       .select$((state) => state.destination)
       .subscribe((actual) => {
         // Assert
-        const expected = 'The Moon';
         expect(actual).toEqual(expected);
       });
     sut
       .select$((state) => state.destination)
       .subscribe((actual) => {
         // Assert
-        const expected = 'The Moon';
         expect(actual).toEqual(expected);
       });
   });
-  it('should select full state repetitively', () => {
+  // ToDo: student exercise
+  it('should emit any state change', () => {
     // Arrange
-    type State = { destination: string };
-    const input: State = {
-      destination: 'The Moon',
-    };
-    const sut = new BaseStore(input);
-    const inputs = ['The Moon', 'Mars', 'Venus'];
+    const sut = new BaseStore(initialState);
+    const inputs = ['Mars', 'Venus'];
+    const expected = ['The Moon', 'Mars', 'Venus'];
     let index = 0;
     // Act
     sut
       .select$((state) => state.destination)
       .subscribe((actual) => {
         // Assert
-        const expected = inputs[index];
+        expect(actual).toEqual(expected[index]);
         index++;
-        expect(actual).toEqual(expected);
       });
     sut.setState({
-      destination: 'Mars',
+      destination: inputs[0],
     });
     sut.setState({
-      destination: 'Venus',
+      destination: inputs[1],
     });
   });
 });
