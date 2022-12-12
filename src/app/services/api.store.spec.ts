@@ -1,51 +1,59 @@
+import { API_INITIAL_STATE } from '@models/api.interface';
 import { ApiStore } from './api.store';
 
+// * Is an INTEGRATION test
+// * The BaseStore class is not mocked
+
 describe('ApiStore', () => {
-  it('should create an instance', () => {
-    expect(new ApiStore()).toBeTruthy();
+  // * prefer well named types and variables with realistic values
+  type Trip = { destination: string; startDate: Date; price: number };
+  let tripsApiStore: ApiStore<Trip>;
+  const trips: Trip[] = [
+    {
+      destination: 'The Moon',
+      startDate: new Date('2023-02-23'),
+      price: 100,
+    },
+  ];
+  beforeEach(() => {
+    // *  Arrange before each test
+    tripsApiStore = new ApiStore<Trip>();
   });
-  it('should set initial state', () => {
-    const initialState = {
-      isWorking: false,
-      error: '',
-      data: [],
+  // * be descriptive with test names
+  it('should create an instance without arguments', () => {
+    expect(new ApiStore<Trip>()).toBeTruthy();
+  });
+  it('should have an initial state', () => {
+    // *  Be descriptive with variable names
+    tripsApiStore.selectState$().subscribe((tripsApiState) => {
+      expect(tripsApiState).toEqual(API_INITIAL_STATE);
+    });
+  });
+  // ToDo: student exercise
+  it('should set is working state to true', () => {
+    tripsApiStore.setIsWorking();
+    tripsApiStore.selectState$().subscribe((tripsApiState) => {
+      expect(tripsApiState.isWorking).toEqual(true);
+    });
+  });
+  it('should set a trips array', () => {
+    tripsApiStore.setData(trips);
+    tripsApiStore.selectState$().subscribe((tripsApiState) => {
+      expect(tripsApiState.data).toEqual(trips);
+    });
+  });
+  // ToDo: student exercise
+  it('should add a new trip', () => {
+    tripsApiStore.setData(trips);
+    const newTrip = {
+      destination: 'Mars',
+      startDate: new Date('2024-02-24'),
+      price: 200,
     };
-    const store = new ApiStore();
-    store.selectState$().subscribe((actual) => {
-      const expected = initialState;
-      expect(actual).toEqual(expected);
-    });
-  });
-  it('should set is working', () => {
-    const store = new ApiStore();
-    store.setIsWorking();
-    store.selectState$().subscribe((actual) => {
-      const expected = true;
-      expect(actual.isWorking).toEqual(expected);
-    });
-  });
-  it('should set data', () => {
-    const store = new ApiStore();
-    const data = [{ id: 1 }, { id: 2 }];
-    store.setData(data);
-    store.selectState$().subscribe((actual) => {
-      const expected = data;
-      expect(actual.data).toEqual(expected);
-    });
-  });
-  it('should add item', () => {
-    const store = new ApiStore();
-    const data = [{ destination: 'The Moon' }, { destination: 'Mars' }];
-    store.setData(data);
-    const newItem = { destination: 'Earth orbit' };
-    store.addItem(newItem);
-    store.selectState$().subscribe((actual) => {
-      const expected = [
-        { destination: 'The Moon' },
-        { destination: 'Mars' },
-        { destination: 'Earth orbit' },
-      ];
-      expect(actual.data).toEqual(expected);
+    tripsApiStore.addItem(newTrip);
+    tripsApiStore.selectState$().subscribe((tripsApiState) => {
+      const expected = [...trips, newTrip];
+      expect(tripsApiState.data).toEqual(expected);
     });
   });
 });

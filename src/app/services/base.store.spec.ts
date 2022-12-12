@@ -1,6 +1,11 @@
 import { BaseStore } from './base.store';
 
-fdescribe('The BaseStore class', () => {
+// * Is a UNIT test for the BaseStore class
+// * External RxJs dependencies are not mocked
+// * Don`t mock what you don`t own
+
+describe('The BaseStore class', () => {
+  // * Definitions and setup
   type State = { destination: string; startDate: Date; price: number };
   const initialState: State = {
     destination: 'The Moon',

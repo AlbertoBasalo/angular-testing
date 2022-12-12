@@ -1,6 +1,6 @@
 import { Api, API_INITIAL_STATE } from '@models/api.interface';
 import { BaseStore } from './base.store';
-/** Specialized Store to manage API calls state */
+/** Specialized Store to manage API calls state (an array of T) */
 export class ApiStore<T> {
   private baseStore = new BaseStore<Api<T>>(API_INITIAL_STATE);
 
@@ -10,7 +10,7 @@ export class ApiStore<T> {
   setIsWorking(isWorking = true) {
     this.baseStore.setState({ isWorking, error: '' });
   }
-  /** Used for setting the data returned from an API call */
+  /** Used for setting the data array returned from an API call */
   setData(data: T[]) {
     this.baseStore.setState({ isWorking: false, data });
   }
