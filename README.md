@@ -14,8 +14,9 @@
 
 ## Unit and Integration testing with only Jasmine alone
 
-- Base Store (Unit)
-- Api Store (Integration)
+- [Base Store](src\app\services\base.store.ts) (Unit)
+- [Api Store](src\app\services\api.store.ts) (Integration)
+- [Karma Config](karma.conf.js)(Configuration)
 
 ## Jasmine Spy and test doubles
 

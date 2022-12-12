@@ -31,7 +31,7 @@ module.exports = function (config) {
       subdir: ".",
       reporters: [{ type: "html" }, { type: "text-summary" }],
     },
-    reporters: ["kjhtml", "spec"],
+    reporters: ["kjhtml", "spec"], // Default was "progress", changed to "spec"
     jasmineHtmlReporter: {
       suppressAll: true, // removes the duplicated traces
     },

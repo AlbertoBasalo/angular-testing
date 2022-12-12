@@ -14,14 +14,11 @@
   },
   "scripts": {
     "ng": "ng",
-    "gr": "ng g m --routing",
-    "gp": "ng g c --type=page --skip-selector --flat",
-    "start": "ng serve -o --port=4914",
+    "start": "ng serve -o ",
+    "api": "json-server-auth ./database/db.json -r ./database/routes.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "test:base": "ng test --include=src/app/services/base.store.spec.ts",
-    "api": "json-server-auth ./database/db.json -r ./database/routes.json"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
