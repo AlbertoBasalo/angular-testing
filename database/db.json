@@ -17,24 +17,6 @@
       "name": "Virgin Way",
       "range": "Orbital",
       "status": "Pending"
-    },
-    {
-      "name": "Ng Star",
-      "range": "Orbital",
-      "status": "Active",
-      "id": "ng-star"
-    },
-    {
-      "id": "tmplate-driven",
-      "name": "tmplate driven",
-      "range": "Interplanetary",
-      "status": "Pending"
-    },
-    {
-      "id": "sofftek-stars",
-      "name": "Sofftek Stars",
-      "range": "Interplanetary",
-      "status": "Active"
     }
   ],
   "agency-ranges": [
