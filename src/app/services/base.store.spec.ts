@@ -16,6 +16,14 @@ describe('The BaseStore class', () => {
   it('should create an instance', () => {
     expect(new BaseStore(null)).toBeTruthy();
   });
+  it('should instantiate with initial state ', () => {
+    // Arrange
+    const input = initialState;
+    // Act
+    const sut = new BaseStore(input);
+    // Assert
+    expect(sut).toBeTruthy();
+  });
   it('should return initial state on instantiation', () => {
     // Arrange
     const sut = new BaseStore(initialState);
@@ -29,12 +37,18 @@ describe('The BaseStore class', () => {
     };
     expect(actual).toEqual(expected);
   });
-  it('should return a different instance', () => {
+  it('should return a different instance with the same initial state', () => {
     // Arrange
     const sut = new BaseStore(initialState);
     // Act
     const actual = sut.getState();
     // Assert
+    const expected = {
+      destination: 'The Moon',
+      startDate: new Date('2023-02-23'),
+      price: 100,
+    };
+    expect(actual).toEqual(expected);
     expect(actual).not.toBe(initialState);
   });
   // ToDo: student exercise
