@@ -32,8 +32,8 @@ describe('The ApiStore ', () => {
         expect(tripsApiState).toEqual(API_INITIAL_STATE);
       });
     });
-    // ToDo: student exercise
     it('should set is working state to true', () => {
+      // ToDo: student exercise
       tripsApiStore.setIsWorking();
       tripsApiStore.selectState$().subscribe((tripsApiState) => {
         expect(tripsApiState.isWorking).toEqual(true);
@@ -45,8 +45,8 @@ describe('The ApiStore ', () => {
         expect(tripsApiState.data).toEqual(trips);
       });
     });
-    // ToDo: student exercise
     it('should add a new trip', () => {
+      // ToDo: student exercise
       tripsApiStore.setData(trips);
       const newTrip = {
         destination: 'Mars',
@@ -60,6 +60,11 @@ describe('The ApiStore ', () => {
       });
     });
   });
+
+  // ! session 2
+  // ! Is an UNIT test
+  // ! The BaseStore class is now doubled
+
   describe('Spying the BaseStore dependency use', () => {
     // * the BaseStore double will be used to spy on the BaseStore methods
     // * typed as any to avoid TS complaining
@@ -76,6 +81,7 @@ describe('The ApiStore ', () => {
       expect(tripsApiStore['baseStore'].setState).toHaveBeenCalled();
     });
     it('should call setState correctly when setIsWorking', () => {
+      // ToDo: student exercise
       tripsApiStore.setIsWorking();
       const setStateSpy = tripsApiStore['baseStore'].setState;
       expect(setStateSpy).toHaveBeenCalledTimes(1);

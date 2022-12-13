@@ -1,8 +1,10 @@
 import { BaseStore } from './base.store';
 
-// * Is a UNIT test for the BaseStore class
-// * External RxJs dependencies are not mocked
-// * Don`t mock what you don`t own
+// ! session 1
+
+// ! Is a UNIT test for the BaseStore class
+// ! External RxJs dependencies are not mocked
+// ! Don`t mock what you don`t own
 
 describe('The BaseStore class', () => {
   // * Definitions and setup
@@ -104,8 +106,8 @@ describe('The BaseStore class', () => {
         expect(actual).toEqual(expected);
       });
   });
-  // ToDo: student exercise
   it('should select partial state', () => {
+    // ToDo: student exercise
     // Arrange
     const sut = new BaseStore(initialState);
     const expected = 'The Moon';
@@ -135,8 +137,8 @@ describe('The BaseStore class', () => {
         expect(actual).toEqual(expected);
       });
   });
-  // ToDo: student exercise
   it('should emit any state change', () => {
+    // ToDo: student exercise
     // Arrange
     const sut = new BaseStore(initialState);
     const inputs = ['Mars', 'Venus'];
@@ -157,6 +159,10 @@ describe('The BaseStore class', () => {
       destination: inputs[1],
     });
   });
+
+  // ! session 2
+  // ! Spy on a private method
+
   it('should call clone when getState is called', () => {
     // Arrange
     const sut = new BaseStore(initialState);

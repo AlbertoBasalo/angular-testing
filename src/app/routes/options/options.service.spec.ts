@@ -1,5 +1,8 @@
 import { OptionsService } from './options.service';
 
+// ! session 2
+// ! A unit test with double instead of collaborator
+
 describe('The Options service with ApiService collaborator doubled', () => {
   const inputEndPoint = 'agency-ranges';
   const inputPayload = { id: 'asteroid', label: 'Asteroid', value: 'asteroid' };
@@ -20,23 +23,30 @@ describe('The Options service with ApiService collaborator doubled', () => {
     const apiServiceSpy = jasmine.createSpyObj('ApiService', ['postOption$']);
     const optionsService = new OptionsService(apiServiceSpy);
     optionsService.saveOption$(inputEndPoint, inputPayload);
-    const actual = apiServiceSpy.postOption$;
+    const postOptions$Spy = apiServiceSpy.postOption$;
     const expectedEndPoint = 'agency-ranges';
     const expectedPayload = {
       id: 'asteroid',
       label: 'Asteroid',
       value: 'asteroid',
     };
-    expect(actual).toHaveBeenCalledWith(expectedEndPoint, expectedPayload);
+    expect(postOptions$Spy).toHaveBeenCalledWith(
+      expectedEndPoint,
+      expectedPayload
+    );
   });
   it('should call the api delete with the correct endpoint and id', () => {
+    // ToDo: student exercise
     const apiServiceSpy = jasmine.createSpyObj('ApiService', ['deleteOption$']);
     const optionsService = new OptionsService(apiServiceSpy);
     optionsService.deleteOption$(inputEndPoint, inputPayload);
-    const actual = apiServiceSpy.deleteOption$;
+    const deleteOptions$Spy = apiServiceSpy.deleteOption$;
     const expectedEndPoint = 'agency-ranges';
     const expectedPayload = 'asteroid';
-    expect(actual).toHaveBeenCalledWith(expectedEndPoint, expectedPayload);
+    expect(deleteOptions$Spy).toHaveBeenCalledWith(
+      expectedEndPoint,
+      expectedPayload
+    );
   });
   it('should call throw an exception when no id', () => {
     const apiServiceSpy = jasmine.createSpyObj('ApiService', ['deleteOption$']);

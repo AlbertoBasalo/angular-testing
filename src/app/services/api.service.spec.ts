@@ -7,6 +7,10 @@ import {
 import { ApiService } from './api.service';
 import { UtilsService } from './utils.service';
 
+// ! session 3
+// ! using the angular TestBed
+// ! to test the api service
+
 describe('The API Service', () => {
   let apiService: ApiService;
   // * http client double to spy and stub http calls
@@ -58,6 +62,7 @@ describe('The API Service', () => {
     });
 
     it('should call the http client get method with the right url', () => {
+      // ToDo: student exercise
       apiService.getAgencies$().subscribe();
       const expectedUrl = 'http://localhost:3000/agencies';
       const controller = httpTestingController.expectOne(expectedUrl);

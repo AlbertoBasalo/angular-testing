@@ -1,5 +1,8 @@
 import { humanize, TimeSpan, TimeSpanPipe } from './time-span.pipe';
 
+// ! session 2
+// ! Extracting domain logic from angular artifacts
+
 fdescribe('The TimeSpan Pipe', () => {
   let pipe: TimeSpanPipe;
   let input: TimeSpan;
@@ -9,9 +12,6 @@ fdescribe('The TimeSpan Pipe', () => {
       start: new Date(2020, 1, 1),
       end: new Date(2020, 1, 1),
     };
-  });
-  it('create an instance', () => {
-    expect(pipe).toBeTruthy();
   });
   it('should return _0d 0h_ for same start-end dates', () => {
     const actual = pipe.transform(input);
@@ -33,6 +33,10 @@ fdescribe('The TimeSpan Pipe', () => {
   });
 });
 
+// ! session 2
+// ! testing a pure function
+// ! could remove the first pipe test
+
 fdescribe('The humanize function', () => {
   let input: TimeSpan;
   beforeEach(() => {
@@ -53,6 +57,7 @@ fdescribe('The humanize function', () => {
     expect(actual).toEqual(expected);
   });
   it('should return _0d 1h_ for 1 hour difference', () => {
+    // ToDo: student exercise
     input.end = new Date(2020, 1, 1, 1);
     const actual = humanize(input);
     const expected = ' 0D 1H ';
