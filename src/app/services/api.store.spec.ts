@@ -4,20 +4,21 @@ import { ApiStore } from './api.store';
 // * Is an INTEGRATION test
 // * The BaseStore class is not mocked
 
-describe('ApiStore', () => {
+describe('The ApiStore wrapping BaseStore ', () => {
   // * prefer well named types and variables with realistic values
   type Trip = { destination: string; startDate: Date; price: number };
   let tripsApiStore: ApiStore<Trip>;
-  const trips: Trip[] = [
-    {
-      destination: 'The Moon',
-      startDate: new Date('2023-02-23'),
-      price: 100,
-    },
-  ];
+  let trips: Trip[];
   beforeEach(() => {
     // *  Arrange before each test
     tripsApiStore = new ApiStore<Trip>();
+    trips = [
+      {
+        destination: 'The Moon',
+        startDate: new Date('2023-02-23'),
+        price: 100,
+      },
+    ];
   });
   // * be descriptive with test names
   it('should create an instance without arguments', () => {
