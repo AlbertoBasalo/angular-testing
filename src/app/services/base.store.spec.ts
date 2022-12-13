@@ -4,7 +4,7 @@ import { BaseStore } from './base.store';
 // * External RxJs dependencies are not mocked
 // * Don`t mock what you don`t own
 
-describe('The BaseStore class', () => {
+fdescribe('The BaseStore class', () => {
   // * Definitions and setup
   type State = { destination: string; startDate: Date; price: number };
   const initialState: State = {
@@ -156,5 +156,14 @@ describe('The BaseStore class', () => {
     sut.setState({
       destination: inputs[1],
     });
+  });
+  it('should call clone when getState is called', () => {
+    // Arrange
+    const sut = new BaseStore(initialState);
+    const cloneMethodSpy = spyOn(sut as any, 'clone');
+    // Act
+    sut.getState();
+    // Assert
+    expect(cloneMethodSpy).toHaveBeenCalled();
   });
 });

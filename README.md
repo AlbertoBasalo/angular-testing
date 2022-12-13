@@ -12,7 +12,7 @@
 
 - 📕 Read the `docs` folder content for more info.
 
-## Unit and Integration testing with only Jasmine alone
+## Unit and Integration testing with Jasmine alone
 
 - [Base Store](src\app\services\base.store.ts) (Unit)
 - [Api Store](src\app\services\api.store.ts) (Integration)
@@ -22,8 +22,11 @@
 
 ## Jasmine Spy and test doubles
 
-- TimeSpan Pipe (Spy calls to DoC)
+- [Base Store](src\app\services\base.store.ts) (Unit)
+- [Api Store](src\app\services\api.store.ts) (Integration)
+- [Api Service](src\app\services\api.service.ts) (HttpClientTestingModule)
 - Options Service (Spy calls to DoC)
+- TimeSpan Pipe (Spy calls to DoC)
 
 ## Test Bed: imports and providers
 
