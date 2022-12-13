@@ -4,7 +4,7 @@ import { BaseStore } from './base.store';
 // * External RxJs dependencies are not mocked
 // * Don`t mock what you don`t own
 
-fdescribe('The BaseStore class', () => {
+describe('The BaseStore class', () => {
   // * Definitions and setup
   type State = { destination: string; startDate: Date; price: number };
   const initialState: State = {

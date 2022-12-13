@@ -22,16 +22,15 @@
 
 ## Jasmine Spy and test doubles
 
-- [Base Store](src\app\services\base.store.ts) (Unit)
-- [Api Store](src\app\services\api.store.ts) (Integration)
-- [Api Service](src\app\services\api.service.ts) (HttpClientTestingModule)
+- [Base Store](src\app\services\base.store.ts) (Spy private methods)
+- [Api Store](src\app\services\api.store.ts) (Spy and stub dependencies)
 - Options Service (Spy calls to DoC)
 - TimeSpan Pipe (Spy calls to DoC)
 
 ## Test Bed: imports and providers
 
+- [Api Service](src\app\services\api.service.ts) (HttpClientTestingModule)
 - Utils Service (inject a mock)
-- Api Service (HttpClientTestingModule)
 - Home Service (integrated -> imports vs isolated -> providers)
 
 ## Component testing
