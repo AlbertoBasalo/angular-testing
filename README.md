@@ -22,10 +22,10 @@
 
 ## Jasmine Spy and test doubles
 
+- [Options Service](src\app\routes\options\options.service.ts) (Spy calls to Collaborator)
 - [Base Store](src\app\services\base.store.ts) (Spy private methods)
 - [Api Store](src\app\services\api.store.ts) (Spy and stub dependencies)
-- Options Service (Spy calls to DoC)
-- TimeSpan Pipe (Spy calls to DoC)
+- [TimeSpan Pipe](src\app\pipes\time-span\time-span.pipe.ts) (Extract logic from Angular artifacts)
 
 ## Test Bed: imports and providers
 

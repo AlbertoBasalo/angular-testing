@@ -9,27 +9,28 @@ export interface TimeSpan {
   name: 'timeSpan',
 })
 export class TimeSpanPipe implements PipeTransform {
-  transform(value: TimeSpan, ...args: unknown[]): string {
-    return this.timeSpanCalculator(value);
-  }
-
-  private timeSpanCalculator = calculateTimeSpan;
-
-  // private calculateTimeSpan(value: TimeSpan): string {
+  // transform(value: TimeSpan, ...args: unknown[]): string {
   //   const diffMilliseconds = value.end.getTime() - value.start.getTime();
   //   const diffDays = diffMilliseconds / (24 * 60 * 60 * 1000);
   //   const days = Math.floor(diffDays);
   //   const remainingHours = (diffDays % 1) * 24;
   //   const hours = Math.floor(remainingHours);
-  //   return `${days}d ${hours}h `;
+  //   return `${days}d ${hours}h`;
   // }
+
+  private timeSpanCalculator = humanize;
+
+  transform(value: TimeSpan, ...args: unknown[]): string {
+    const humanize = this.timeSpanCalculator(value);
+    return humanize?.toLowerCase().trim() || '';
+  }
 }
 
-function calculateTimeSpan(value: TimeSpan): string {
+export function humanize(value: TimeSpan): string {
   const diffMilliseconds = value.end.getTime() - value.start.getTime();
   const diffDays = diffMilliseconds / (24 * 60 * 60 * 1000);
   const days = Math.floor(diffDays);
   const remainingHours = (diffDays % 1) * 24;
   const hours = Math.floor(remainingHours);
-  return `${days}d ${hours}h `;
+  return ` ${days}D ${hours}H `;
 }
