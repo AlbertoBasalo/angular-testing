@@ -53,8 +53,8 @@ describe('The BaseStore class', () => {
     expect(actual).toEqual(expected);
     expect(actual).not.toBe(initialState);
   });
-  // ToDo: student exercise
   it('should return the last state set', () => {
+    // ToDo: student exercise
     // Arrange
     const sut = new BaseStore(initialState);
     const input: State = {
@@ -74,6 +74,7 @@ describe('The BaseStore class', () => {
     expect(actual).toEqual(expected);
   });
   it('should change state with partial mutations', () => {
+    // ToDo: student exercise
     // Arrange
     const sut = new BaseStore(initialState);
     const input: Partial<State> = {
