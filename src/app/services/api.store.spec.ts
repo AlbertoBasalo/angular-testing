@@ -2,8 +2,9 @@ import { API_INITIAL_STATE } from '@models/api.interface';
 import { of } from 'rxjs';
 import { ApiStore } from './api.store';
 
-// * Is an INTEGRATION test
-// * The BaseStore class is not mocked
+// ! session 1
+// ! Is an INTEGRATION test
+// ! The BaseStore class is not mocked
 
 describe('The ApiStore ', () => {
   // * prefer well named types and variables with realistic values

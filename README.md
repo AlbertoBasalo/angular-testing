@@ -30,7 +30,7 @@
 ## Test Bed: imports and providers
 
 - [Api Service](src\app\services\api.service.ts) (HttpClientTestingModule)
-- Utils Service (inject a mock)
+- [Utils Service](src\app\services\utils.service.ts) (inject a mock)
 - Home Service (integrated -> imports vs isolated -> providers)
 
 ## Component testing

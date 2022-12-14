@@ -18,6 +18,7 @@ fdescribe('The TimeSpan Pipe', () => {
     const expected = '0d 0h';
     expect(actual).toEqual(expected);
   });
+  // * after refactor
   it('should call the calculateTimeSpan function correctly', () => {
     const spy = spyOn<any>(pipe, 'timeSpanCalculator');
     pipe.transform(input);
