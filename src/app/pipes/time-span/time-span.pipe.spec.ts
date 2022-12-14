@@ -3,7 +3,7 @@ import { humanize, TimeSpan, TimeSpanPipe } from './time-span.pipe';
 // ! session 2
 // ! Extracting domain logic from angular artifacts
 
-fdescribe('The TimeSpan Pipe', () => {
+describe('The TimeSpan Pipe', () => {
   let pipe: TimeSpanPipe;
   let input: TimeSpan;
   beforeEach(() => {
@@ -38,7 +38,7 @@ fdescribe('The TimeSpan Pipe', () => {
 // ! testing a pure function
 // ! could remove the first pipe test
 
-fdescribe('The humanize function', () => {
+describe('The humanize function', () => {
   let input: TimeSpan;
   beforeEach(() => {
     input = {

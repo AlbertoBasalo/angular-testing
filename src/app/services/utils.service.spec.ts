@@ -33,7 +33,7 @@ describe('The Utils Service _without TestBed_', () => {
 // ! to test the getParam method
 // ! who needs an activated route as a parameter
 
-fdescribe('The Utils Service _with TestBed_', () => {
+describe('The Utils Service _with TestBed_', () => {
   let utilsService: UtilsService;
   let activatedRoute: ActivatedRoute;
   const aNotFoundParam = 'badParam';

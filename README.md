@@ -31,7 +31,7 @@
 
 - [Api Service](src\app\services\api.service.ts) (HttpClientTestingModule)
 - [Utils Service](src\app\services\utils.service.ts) (inject a mock)
-- Home Service (integrated -> imports vs isolated -> providers)
+- [Home Service](src\app\routes\home\home.service.ts) (integrated -> imports vs isolated -> providers)
 
 ## Component testing
 

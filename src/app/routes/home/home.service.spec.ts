@@ -7,74 +7,70 @@ import { Observable, of } from 'rxjs';
 
 import { HomeService } from './home.service';
 
-describe('The Home Service _integrated_', () => {
-  let sut: HomeService;
+// ! session 3
+// ! integration test (not e2e)
+// ! the TestBed provides its dependencies
+fdescribe('The Home Service _integrated_', () => {
+  let homeService: HomeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], // ! http client dependency fake
-      providers: [HomeService], // ! provide it before using it
+      imports: [HttpClientTestingModule], // * http client dependency fake (no e2e)
+      providers: [HomeService], // * provide dependencies before using it
     });
-    sut = TestBed.inject(HomeService); // ! claimed as a dependency
+    homeService = TestBed.inject(HomeService); // * constructed by the framework
   });
 
   it('should be created', () => {
-    // ! no constructor call at all
-    expect(sut).toBeTruthy();
+    // * no constructor call at all
+    expect(homeService).toBeTruthy();
   });
 });
 
-describe('The Home Service _isolated_', () => {
-  let sut: HomeService;
-  // ! define doubles for the ApiService dependencies
-  let apiServiceStub: jasmine.SpyObj<ApiService>; // ! an injected dependency
-  let apiStoreSpy: jasmine.SpyObj<ApiStore<Trip>>; // ! a constructed dependency
+// ! session 3
+// ! unit test
+// ! the TestBed provides doubles for all its dependencies
+
+fdescribe('The Home Service _isolated_', () => {
+  let homeService: HomeService;
+  // * define doubles for the ApiService dependencies
+  let apiServiceStub: jasmine.SpyObj<ApiService>; // * an injected dependency
+  let apiStoreSpy: jasmine.SpyObj<ApiStore<Trip>>; // * a constructed dependency
   beforeEach(() => {
-    // ! configure spy to be injected
+    // * arrange the stub to be injected
     apiServiceStub = jasmine.createSpyObj('ApiService', ['getTrips$']);
     const output: Observable<Trip[]> = of([]);
     apiServiceStub.getTrips$.and.returnValue(output);
     TestBed.configureTestingModule({
-      imports: [], // ! no need to import http client double
+      imports: [], // * no need to import http client double
       providers: [
-        HomeService,
-        { provide: ApiService, useValue: apiServiceStub },
+        HomeService, // * himself
+        { provide: ApiService, useValue: apiServiceStub }, // * the IoC stub
       ],
     });
-    sut = TestBed.inject(HomeService);
-    // ! configure spy to be instantiated (add methods as needed)
+    homeService = TestBed.inject(HomeService);
+    // * arrange a double spy (add methods as needed)
     apiStoreSpy = jasmine.createSpyObj('ApiStore', ['setIsWorking', 'setData']);
-    sut['tripsStore'] = apiStoreSpy;
+    // * manual inject of the double spy
+    homeService['tripsStore'] = apiStoreSpy;
   });
 
   it('should be created', () => {
-    expect(sut).toBeTruthy();
+    expect(homeService).toBeTruthy();
   });
 
   it('should call the api service getTrips$ method on loadTrips', () => {
-    // Arrange
-    // Act
-    sut.loadTrips();
-    // Assert
+    homeService.loadTrips();
     expect(apiServiceStub.getTrips$).toHaveBeenCalled();
   });
 
   it('should call the apiStore setIsWorking  method on loadTrips', () => {
-    // Arrange
-    sut['tripsStore'] = apiStoreSpy;
-    // Act
-    sut.loadTrips();
-    // Assert
+    homeService.loadTrips();
     expect(apiStoreSpy.setIsWorking).toHaveBeenCalled();
   });
 
   it('should call the api store set data method on loadTrips success', () => {
-    // Arrange
-    const output: Observable<Trip[]> = of([]);
-    apiServiceStub.getTrips$.and.returnValue(output);
-    // Act
-    sut.loadTrips();
-    // Assert
+    homeService.loadTrips();
     const expected: Trip[] = [];
     expect(apiStoreSpy.setData).toHaveBeenCalledWith(expected);
   });
