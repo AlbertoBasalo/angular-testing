@@ -97,7 +97,7 @@ describe('The ApiStore ', () => {
       baseStoreStub = jasmine.createSpyObj('BaseStore', ['select$']);
       tripsApiStore['baseStore'] = baseStoreStub;
     });
-    it('should return an observable with initial state', () => {
+    it('should return an observable with initial state whe call select$', () => {
       // * arrange method with stubbed return values
       baseStoreStub.select$ = jasmine
         .createSpy()

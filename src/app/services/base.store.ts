@@ -28,6 +28,7 @@ export class BaseStore<T> {
   }
   /** Takes a target of type K and returns a clone of it. */
   private clone<K>(target: K): K {
-    return Object.assign({}, target);
+    return structuredClone(target);
+    // return Object.assign({}, target);
   }
 }
