@@ -7,7 +7,7 @@ import { OptionsList } from './options.list';
 // ! session 4
 // ! component OnPush
 
-fdescribe('The Options List component', () => {
+describe('The Options List component', () => {
   let component: OptionsList;
   let fixture: ComponentFixture<OptionsList>;
 
@@ -81,7 +81,7 @@ class HostComponent {
   }
 }
 
-fdescribe('The Options List hosted component', () => {
+describe('The Options List hosted component', () => {
   // * testing from the host perspective
   let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;

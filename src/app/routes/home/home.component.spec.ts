@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Trip } from '@models/trip.interface';
+//import { ApiService } from '@services/api.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ApiService } from '@services/api.service';
 import { HomeComponent } from './home.component';
 import { HomeService } from './home.service';
@@ -23,22 +24,22 @@ const trip: Trip = {
   endDate: '2020-01-01',
 };
 
-describe('The Home Component with fake imports', () => {
+fdescribe('The Home Component with simple fake imports', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let homeServiceStub: jasmine.SpyObj<HomeService>;
-  beforeEach(async () => {
+  beforeEach(() => {
     homeServiceStub = jasmine.createSpyObj('HomeService', [
       'loadTrips',
       'selectTrips$',
     ]);
-    homeServiceStub.loadTrips.and.returnValue();
+    homeServiceStub.loadTrips.and.callThrough();
     homeServiceStub.selectTrips$.and.returnValue(
       of({ isWorking: false, error: '', data: [trip] })
     );
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [HttpClientTestingModule], // ! no http client dependency double
+      imports: [HttpClientTestingModule], // * still need to import the http client module
       providers: [{ provide: HomeService, useValue: homeServiceStub }],
     }).compileComponents();
 
@@ -52,10 +53,11 @@ describe('The Home Component with fake imports', () => {
   });
 });
 
-describe('The Home Component with nested dependencies', () => {
+fdescribe('The Home Component with nested dependencies', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let homeServiceStub: jasmine.SpyObj<HomeService>;
+  // * this is the double stub for the nested dependency
   let apiServiceStub: jasmine.SpyObj<ApiService>;
   beforeEach(async () => {
     homeServiceStub = jasmine.createSpyObj('HomeService', [
@@ -71,7 +73,7 @@ describe('The Home Component with nested dependencies', () => {
     apiServiceStub.getTrips$.and.returnValue(of([trip]));
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [], // ! no http client dependency double
+      imports: [], // * no http client dependency double
       providers: [
         { provide: HomeService, useValue: homeServiceStub },
         { provide: ApiService, useValue: apiServiceStub },
@@ -102,11 +104,12 @@ describe('The Home Component with testBed providers', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [], // ! no http client dependency double
-      providers: [], // ! provider stub
+      imports: [], // * no http client dependency double
+      providers: [], // * provider stub
     })
       .overrideComponent(HomeComponent, {
         set: {
+          // * overriding the providers takes precedence over the testBed providers
           providers: [{ provide: HomeService, useClass: HomeServiceStub }],
         },
       })
