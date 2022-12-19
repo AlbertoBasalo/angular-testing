@@ -30,7 +30,7 @@ import { HomeService } from './home.service';
 // ! unit test
 // ! the TestBed provides doubles for all its dependencies
 
-fdescribe('The Home Service _isolated_', () => {
+describe('The Home Service _isolated_', () => {
   let homeService: HomeService;
 
   // * define doubles for the HomeService dependencies

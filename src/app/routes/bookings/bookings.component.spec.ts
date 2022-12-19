@@ -7,7 +7,13 @@ import { of } from 'rxjs';
 
 import { BookingsComponent } from './bookings.component';
 
-describe('BookingsComponent', () => {
+// ! session 4
+// ! component view test
+// ! isolated from the ApiService
+
+// ToDo: student task
+
+describe('The Bookings Component', () => {
   let component: BookingsComponent;
   let fixture: ComponentFixture<BookingsComponent>;
   const inputBookings: Booking[] = [
@@ -27,15 +33,16 @@ describe('BookingsComponent', () => {
       status: 'pending',
     },
   ];
-  beforeEach(async () => {
+  beforeEach(() => {
+    //* define api service double stub
     const apiServiceStub = {
       getBookings$: () => of(inputBookings),
       deleteBooking$: () => of({}),
     };
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [BookingsComponent],
-      imports: [HttpClientTestingModule], // ! http client dependency double
-      providers: [{ provide: ApiService, useValue: apiServiceStub }], // ! api service dependency double
+      imports: [HttpClientTestingModule], // * http client dependency double
+      providers: [{ provide: ApiService, useValue: apiServiceStub }], // * inject api service dependency double
     }).compileComponents();
 
     fixture = TestBed.createComponent(BookingsComponent);
@@ -46,57 +53,42 @@ describe('BookingsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  // should present a table with bookings
+
   it('should present a table with bookings', () => {
-    // Arrange
-    const debug = fixture.debugElement;
-    // Act
-    const actualTable = debug.queryAll(By.css('table'))[0];
-    // Assert
-    expect(actualTable).toBeTruthy();
-    let actualBodyRows = debug.queryAll(By.css('tbody>tr'));
-    const actualBodyRowsLength = actualBodyRows.length;
-    const expectedBodyRowsLength = inputBookings.length;
-    expect(actualBodyRowsLength).toBe(expectedBodyRowsLength);
+    const debugEl = fixture.debugElement;
+    const bookingsTable = debugEl.queryAll(By.css('table'))[0];
+    expect(bookingsTable).toBeTruthy();
+    let bookingsRows = debugEl.queryAll(By.css('tbody>tr'));
+    expect(bookingsRows.length).toBe(inputBookings.length);
   });
 
   it('should call onDeleteClick on delete button click', () => {
-    // Arrange
     spyOn(component, 'onDeleteClick');
-    const debug = fixture.debugElement;
-    // Act
-    const actualDeleteButtons = debug.queryAll(By.css('tbody>tr>td>button'));
-    const firstButton = actualDeleteButtons[0];
+    const debugEl = fixture.debugElement;
+    const deleteButtons = debugEl.queryAll(By.css('tbody>tr>td>button'));
+    const firstButton = deleteButtons[0];
     firstButton.triggerEventHandler('click', null);
-    const expected = inputBookings[0].id;
-    // Assert
-    expect(component.onDeleteClick).toHaveBeenCalledWith(expected);
+    expect(component.onDeleteClick).toHaveBeenCalledWith(inputBookings[0].id);
   });
 
-  // should reload bookings after delete
   it('should reload bookings after delete', () => {
-    // Arrange
     const debug = fixture.debugElement;
     spyOn(component, 'loadBookings');
-    // Act
-    const actualDeleteButtons = debug.queryAll(By.css('tbody>tr>td>button'));
-    const firstButton = actualDeleteButtons[0];
+    const deleteButtons = debug.queryAll(By.css('tbody>tr>td>button'));
+    const firstButton = deleteButtons[0];
     firstButton.triggerEventHandler('click', null);
-    // Assert
     expect(component.loadBookings).toHaveBeenCalled();
   });
 
-  it('should call onDeleteClick for each booking', () => {
-    // Arrange
+  it('should call onDeleteClick for each delete click booking', () => {
     const debug = fixture.debugElement;
     spyOn(component, 'onDeleteClick');
-    const allDeleteButtons = debug.queryAll(By.css('tbody>tr>td>button'));
-    // Act
-    allDeleteButtons.forEach((b, i) => {
-      b.triggerEventHandler('click', null);
-      // Assert
-      const expected = inputBookings[i].id;
-      expect(component.onDeleteClick).toHaveBeenCalledWith(expected);
+    const deleteButtons = debug.queryAll(By.css('tbody>tr>td>button'));
+    deleteButtons.forEach((button, index) => {
+      button.triggerEventHandler('click', null);
+      expect(component.onDeleteClick).toHaveBeenCalledWith(
+        inputBookings[index].id
+      );
     });
   });
 });
