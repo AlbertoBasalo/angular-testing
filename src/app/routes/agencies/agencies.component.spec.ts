@@ -1,58 +1,61 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { Agency } from '@models/agency.interface';
 import { ApiService } from '@services/api.service';
 import { of } from 'rxjs';
 
 import { AgenciesComponent } from './agencies.component';
 
-describe('The Agencies Component _semi-integrated_', () => {
+// ! session 4
+// ! component controller test
+// ! integrated with the ApiService
+
+describe('The Agencies Component controller _semi-integrated_', () => {
   let component: AgenciesComponent;
   let fixture: ComponentFixture<AgenciesComponent>;
-  let apiService: ApiService; // ! the real ApiService
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [AgenciesComponent],
-      // ! Real FormsModule just for compiling the component
-      // ! and HttpClientTestingModule fake to not really call the api
+  let apiService: ApiService; // * the real ApiService
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [AgenciesComponent], // * declare itself
+      // * Real FormsModule just for compiling the component
+      // * and HttpClientTestingModule fake to not really call the api
       imports: [FormsModule, HttpClientTestingModule],
-    }).compileComponents();
+    }).compileComponents(); // * compile the template
     apiService = TestBed.inject(ApiService);
     fixture = TestBed.createComponent(AgenciesComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges(); // ! not needed because we are not testing the template
+    // fixture.detectChanges(); // * not needed because we are not testing the template
   });
 
   it('should create', () => {
-    // ! constructor cant be spied
+    // * constructor cant be spied
     // expect(component.loadAgencies).toHaveBeenCalled();
     // * check effects
     expect(component).toBeTruthy();
   });
 
   it('should call loadAgencies on ngOnInit', () => {
-    // Arrange
     spyOn(component, 'loadAgencies');
-    // Act
-    component.ngOnInit(); // ! must call ngOnInit
-    // Assert
+    component.ngOnInit(); // * must call ngOnInit manually
     expect(component.loadAgencies).toHaveBeenCalled();
   });
 
   it('should call getAgencies$ on loadAgencies', () => {
-    // Arrange
-    // ! can make apiService a stub with predefined output
+    // * can make apiService a stub with predefined output
     const output = of([]);
     spyOn(apiService, 'getAgencies$').and.returnValue(output);
-    // Act
     component.loadAgencies();
-    // Assert
     expect(apiService.getAgencies$).toHaveBeenCalled();
   });
 });
 
-describe('The Agencies Component _presentation_', () => {
+// ! session 4
+// ! component view test
+// ! isolated from the ApiService
+
+describe('The Agencies Component view _isolated_', () => {
   let component: AgenciesComponent;
   let fixture: ComponentFixture<AgenciesComponent>;
   let apiServiceStub: any;
@@ -71,6 +74,7 @@ describe('The Agencies Component _presentation_', () => {
     },
   ];
   beforeEach(async () => {
+    // * stub the ApiService with predefined output
     apiServiceStub = {
       getAgencies$: () => of(inputAgencies),
       getOptions$: (r: string) => of([]),
@@ -87,50 +91,42 @@ describe('The Agencies Component _presentation_', () => {
     fixture.detectChanges();
   });
   it('should present a table with agencies', () => {
-    // Arrange
     const native = fixture.nativeElement;
-    // Act
-    const actualTable = native.querySelector('table');
-    // Assert
-    expect(actualTable).toBeTruthy();
-    let actualBodyRows = native.querySelectorAll('tbody>tr');
-    const actualBodyRowsLength = actualBodyRows.length;
-    const expectedBodyRowsLength = inputAgencies.length;
-    expect(actualBodyRowsLength).toBe(expectedBodyRowsLength);
+    const agenciesTable = native.querySelector('table');
+    expect(agenciesTable).toBeTruthy();
+    let agenciesBodyRows = native.querySelectorAll('tbody>tr');
+    expect(agenciesBodyRows.length).toBe(inputAgencies.length);
   });
   it('should call onDeleteClick on delete button click', () => {
-    // Arrange
-    spyOn(component, 'onDeleteClick');
+    spyOn(component, 'onDeleteClick'); // * spy the method
     const native = fixture.nativeElement;
-    // Act
-    const actualDeleteButtons = native.querySelectorAll('tbody>tr>td>button');
-    const firstButton = actualDeleteButtons[0];
+    const deleteButtons = native.querySelectorAll('tbody>tr>td>button');
+    const firstButton = deleteButtons[0];
     firstButton.click();
-    const expected = inputAgencies[0].id;
-    // Assert
-    expect(component.onDeleteClick).toHaveBeenCalledWith(expected);
+    expect(component.onDeleteClick).toHaveBeenCalledWith(inputAgencies[0].id);
   });
 
   it('should call onSaveClick on save button click', () => {
-    // Arrange
-    spyOn(component, 'onSaveClick');
+    spyOn(component, 'onSaveClick').and.callThrough(); // * spy the method
     const native = fixture.nativeElement;
-    // Act
-    const actualSaveButtons = native.querySelectorAll('form>button');
-    const firstButton = actualSaveButtons[0];
+    const saveButtons = native.querySelectorAll('form>button');
+    const firstButton = saveButtons[0];
     firstButton.click();
-    // Assert
-    expect(component.onSaveClick).toHaveBeenCalled();
+    expect(component.onSaveClick).toHaveBeenCalledTimes(1);
+  });
+  it('should update agency name', () => {
+    const native = fixture.nativeElement;
+    const expectedName = 'SpaceX';
+    fixture.detectChanges(); // * to update the template
+    const nameInput = native.querySelector('input[name="name"]');
+    nameInput.value = expectedName;
+    nameInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges(); // * to update the template
+    expect(component.agency.name).toBe(expectedName);
   });
 
-  // ToDo: it should allow to fill the form
-  it('should allow to fill the form', () => {
-    // Arrange
-    const native = fixture.nativeElement;
-    const debug = fixture.debugElement;
-    const expectedName = 'SpaceX';
-    const expectedRange = 'Interplanetary';
-    const expectedStatus = 'Active';
+  it('should fill the option radios', () => {
+    const debugEl = fixture.debugElement;
     component.agencyRanges = [
       { label: 'Interplanetary', value: 'Interplanetary' },
       { label: 'Orbital', value: 'Orbital' },
@@ -139,21 +135,24 @@ describe('The Agencies Component _presentation_', () => {
       { label: 'Active', value: 'Active' },
       { label: 'Inactive', value: 'Inactive' },
     ];
-    fixture.detectChanges();
-    // Act
-    const actualNameInput = native.querySelector('input[name="name"]');
-    const actualRangeElement = native.querySelector('#Interplanetary');
-    actualNameInput.value = expectedName;
-    actualNameInput.dispatchEvent(new Event('input'));
-    console.log(actualRangeElement.checked);
-    actualRangeElement.checked = true;
-    console.log(actualRangeElement.checked);
-    actualRangeElement.dispatchEvent(new Event('change'));
-    fixture.detectChanges();
-    // Assert
-    expect(component.agency.name).toBe(expectedName);
-    expect(component.agency.range).toBe(expectedRange);
+    fixture.detectChanges(); // * to update the template
+    const rangeRadios = debugEl.queryAll(By.css('input[name="range"]'));
+    const statusRadios = debugEl.queryAll(By.css('input[name="status"]'));
+    expect(rangeRadios.length).toBe(component.agencyRanges.length);
+    expect(statusRadios.length).toBe(component.agencyStatuses.length);
   });
-});
 
-// it should call onSaveClick on save button click
+  // it('should update the range value', () => {
+  //   const debugEl = fixture.debugElement;
+  //   component.agencyRanges = [
+  //     { label: 'Interplanetary', value: 'Interplanetary' },
+  //     { label: 'Orbital', value: 'Orbital' },
+  //   ];
+  //   fixture.detectChanges(); // * to update the template
+  //   const rangeRadios = debugEl.queryAll(By.css('input[name="range"]'));
+  //   rangeRadios[0].nativeElement.dispatchEvent(new Event('change'));
+  //   rangeRadios[0].triggerEventHandler('change', { target: rangeRadios[0] });
+  //   fixture.detectChanges(); // * to update the template
+  //   expect(component.agency.range).toBe(component.agencyRanges[0].value);
+  // });
+});

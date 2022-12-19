@@ -35,7 +35,7 @@
 
 ## Component testing
 
-- Agencies Component
+- [Agencies Component](src\app\routes\agencies\agencies.component.ts)(integrated controller - isolated template)
 - Bookings Component
 - Options List (inside / outside)
 - Home Component (dependencies... )
