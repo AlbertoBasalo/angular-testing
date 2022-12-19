@@ -4,17 +4,21 @@ import { By } from '@angular/platform-browser';
 
 import { OptionsList } from './options.list';
 
-describe('The Options List component', () => {
+// ! session 4
+// ! component OnPush
+
+fdescribe('The Options List component', () => {
   let component: OptionsList;
   let fixture: ComponentFixture<OptionsList>;
 
   beforeEach(async () => {
-    // ! hack; changeDetection to default
     await TestBed.configureTestingModule({
       declarations: [OptionsList],
     })
       .overrideComponent(OptionsList, {
-        set: { changeDetection: ChangeDetectionStrategy.Default },
+        set: {
+          changeDetection: ChangeDetectionStrategy.Default, // * hack; changeDetection to default
+        },
       })
       .compileComponents();
 
@@ -28,23 +32,17 @@ describe('The Options List component', () => {
   });
 
   it('should present a list of options', () => {
-    // arrange
     const input = [
       { label: 'test', value: 'test' },
       { label: 'test2', value: 'test2' },
     ];
     component.options = input;
     fixture.detectChanges();
-    // act
-    const actualListItems = fixture.nativeElement.querySelectorAll('li');
-    // assert
-    const actual = actualListItems.length;
-    const expected = input.length;
-    expect(actual).toBe(expected);
+    const listItems = fixture.nativeElement.querySelectorAll('li');
+    expect(listItems.length).toBe(input.length);
   });
-
+  // ToDo: student exercise
   it('should emit delete event when delete button is clicked', () => {
-    // arrange
     const input = [
       { label: 'test', value: 'test' },
       { label: 'test2', value: 'test2' },
@@ -54,14 +52,14 @@ describe('The Options List component', () => {
     const deleteButtons = fixture.debugElement.queryAll(
       By.css('span[name="delete"]')
     );
-    // act
     const actual = spyOn(component.delete, 'emit');
     deleteButtons[0].triggerEventHandler('click', null);
-    // assert
-    const expected = input[0];
-    expect(actual).toHaveBeenCalledWith(expected);
+    expect(actual).toHaveBeenCalledWith(input[0]);
   });
 });
+
+// ! session 4
+// ! component hosted
 
 @Component({
   selector: 'app-host',
@@ -78,13 +76,13 @@ class HostComponent {
     { label: 'test2', value: 'test2' },
   ];
   token: any = null;
-  onDelete(event: any) {
-    this.token = event;
+  onDelete(optionValue: any) {
+    this.token = optionValue;
   }
 }
 
-describe('The Options List hosted component', () => {
-  // ! testing from the host perspective
+fdescribe('The Options List hosted component', () => {
+  // * testing from the host perspective
   let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
   let native: any;
@@ -102,26 +100,14 @@ describe('The Options List hosted component', () => {
   });
 
   it('should sent a list of options to presenter', () => {
-    // arrange
-    fixture.detectChanges();
-    // act
-    const actualListItems = native.querySelectorAll('li');
-    // assert
-    const actual = actualListItems.length;
-    const expected = 2;
-    expect(actual).toBe(expected);
+    const listItems = native.querySelectorAll('li');
+    expect(listItems.length).toBe(2);
   });
 
-  it('should subscribe to delete event', () => {
-    // arrange
-    fixture.detectChanges();
+  it('should perform a deletion after delete click', () => {
     const deleteButtons = debug.queryAll(By.css('span[name="delete"]'));
-    // act
     deleteButtons[0].triggerEventHandler('click', null);
-    fixture.detectChanges();
-    // assert
-    const actual = component.token; // ! using an effect instead of spy
-    const expected = component.input[0];
-    expect(actual).toEqual(expected);
+    // * assert over an effect instead of spy a call
+    expect(component.token).toEqual(component.input[0]);
   });
 });

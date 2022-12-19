@@ -37,7 +37,7 @@
 
 - [Agencies Component](src\app\routes\agencies\agencies.component.ts)(integrated controller - isolated template)
 - [Bookings Component](src\app\routes\bookings\bookings.component.ts)(isolated student task)
-- Options List (inside / outside)
+- [Options List](src\app\routes\options\options.list.ts) (OnPush / Hosted)
 - Home Component (dependencies... )
 
 ## Component interaction testing
