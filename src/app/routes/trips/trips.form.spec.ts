@@ -7,6 +7,9 @@ import { of } from 'rxjs';
 import { TripsForm } from './trips.form';
 import { TripsService } from './trips.service';
 
+// ! session 4
+// ! ReactiveFormsModule test
+
 class TripsServiceStub {
   loadAgencies() {}
   saveTrip() {}
@@ -17,14 +20,14 @@ class TripsServiceStub {
   }
 }
 
-describe('The Trips Form interaction', () => {
+fdescribe('The Trips Form interaction', () => {
   let component: TripsForm;
   let fixture: ComponentFixture<TripsForm>;
   let native: any;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TripsForm],
-      imports: [ReactiveFormsModule, HttpClientTestingModule], // ! ReactiveFormsModule
+      imports: [ReactiveFormsModule, HttpClientTestingModule], // * ReactiveFormsModule
       providers: [{ provide: TripsService, useValue: new TripsServiceStub() }],
     })
       .overrideComponent(TripsForm, {

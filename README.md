@@ -39,10 +39,9 @@
 - [Bookings Component](src\app\routes\bookings\bookings.component.ts)(isolated student task)
 - [Options List](src\app\routes\options\options.list.ts) (OnPush / Hosted)
 - [Home Component](src\app\routes\home\home.component.ts) (nested dependencies )
+- [Trips Form (fill form)](src\app\routes\trips\trips.form.ts) (form interaction)
 
 ## Component interaction testing
-
-- Trips Form (fill form)
 
 ## End to End testing
 

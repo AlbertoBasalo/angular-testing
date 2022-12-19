@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
-import { Trip } from '@models/trip.interface';
-//import { ApiService } from '@services/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Trip } from '@models/trip.interface';
 import { ApiService } from '@services/api.service';
 import { HomeComponent } from './home.component';
 import { HomeService } from './home.service';
+
+// ! session 4
+// ! component dependencies
 
 const trip: Trip = {
   id: '1',
@@ -24,7 +26,7 @@ const trip: Trip = {
   endDate: '2020-01-01',
 };
 
-fdescribe('The Home Component with simple fake imports', () => {
+describe('The Home Component with simple fake imports', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let homeServiceStub: jasmine.SpyObj<HomeService>;
@@ -53,7 +55,7 @@ fdescribe('The Home Component with simple fake imports', () => {
   });
 });
 
-fdescribe('The Home Component with nested dependencies', () => {
+describe('The Home Component with nested dependencies', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let homeServiceStub: jasmine.SpyObj<HomeService>;
