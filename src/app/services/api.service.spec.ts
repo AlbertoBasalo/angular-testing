@@ -111,11 +111,11 @@ describe('The API Service', () => {
   });
 
   describe('The POST operations using a double of utilsService', () => {
-    const outputId = 'space-y';
+    const stubbedId = 'space-y';
     beforeEach(() => {
       // * predefined response for any call
       const utilsServiceStub = {
-        getHyphened: (source: string) => outputId,
+        getHyphened: (source: string) => stubbedId,
       };
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule], // * http client module fake
@@ -147,7 +147,7 @@ describe('The API Service', () => {
       const expectedMethod = 'POST';
       expect(controller.request.method).toEqual(expectedMethod);
       const expectedPayload = {
-        id: outputId, // * stubbed output
+        id: stubbedId, // * stubbed output
         name: 'Space Y',
         range: 'Interplanetary',
         status: 'Active',
