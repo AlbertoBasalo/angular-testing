@@ -12,34 +12,34 @@
 
 - 📕 Read the `docs` folder content for more info.
 
-## Unit and Integration testing with Jasmine alone
+## Unit and Integration testing with only Jasmine alone
 
-- [Base Store](src\app\services\base.store.ts) (Unit)
-- [Api Store](src\app\services\api.store.ts) (Integration)
-- `npm install karma-spec-reporter --save-dev` (Add spec reporter)
-- [tests](src\test.ts) (Choose running context)
-- [Karma Config](karma.conf.js)(Configuration)
+- **Base Store** `src\app\services\base.store.spec.ts` _Unit_
+- **Api Store** `src\app\services\api.store.spec.ts` _Integration_
+- **Spec Reporter** `npm install karma-spec-reporter --save-dev` _Add spec reporter_
+- **tests** `src\test.spec.ts` _Choose running context_
+- **Karma Config** `karma.conf.js` _Configuration_
 
 ## Jasmine Spy and test doubles
 
-- [Options Service](src\app\routes\options\options.service.ts) (Spy calls to Collaborator)
-- [Base Store](src\app\services\base.store.ts) (Spy private methods)
-- [Api Store](src\app\services\api.store.ts) (Spy and stub dependencies)
-- [TimeSpan Pipe](src\app\pipes\time-span\time-span.pipe.ts) (Extract logic from Angular artifacts)
+- **Options Service** `src\app\routes\options\options.service.spec.ts` _Spy calls to Collaborator_
+- **Base Store** `src\app\services\base.store.spec.ts` _Spy private methods_
+- **Api Store** `src\app\services\api.store.spec.ts` _Spy and stub dependencies_
+- **TimeSpan Pipe** `src\app\pipes\time-span\time-span.pipe.spec.ts` _Extract logic from Angular artifacts_
 
 ## Test Bed: imports and providers
 
-- [Api Service](src\app\services\api.service.ts) (HttpClientTestingModule)
-- [Utils Service](src\app\services\utils.service.ts) (inject a mock)
-- [Home Service](src\app\routes\home\home.service.ts) (integrated -> imports vs isolated -> providers)
+- **Api Service** `src\app\services\api.service.spec.ts` _HttpClientTestingModule_
+- **Utils Service** `src\app\services\utils.service.spec.ts` _inject a mock_
+- **Home Service** `src\app\routes\home\home.service.spec.ts` _integrated -> imports vs isolated -> providers_
 
 ## Component testing
 
-- [Agencies Component](src\app\routes\agencies\agencies.component.ts)(integrated controller - isolated template)
-- [Bookings Component](src\app\routes\bookings\bookings.component.ts)(isolated student task)
-- [Options List](src\app\routes\options\options.list.ts) (OnPush / Hosted)
-- [Home Component](src\app\routes\home\home.component.ts) (nested dependencies )
-- [Trips Form (fill form)](src\app\routes\trips\trips.form.ts) (form interaction)
+- **Agencies Component** `src\app\routes\agencies\agencies.component.spec.ts` _integrated controller - isolated template_
+- **Bookings Component** `src\app\routes\bookings\bookings.component.spec.ts` _isolated student task_
+- **Options List** `src\app\routes\options\options.list.spec.ts` _OnPush / Hosted_
+- **Home Component** `src\app\routes\home\home.component.spec.ts` _nested dependencies_
+- **Trips Form filling** `src\app\routes\trips\trips.form.spec.ts` _form interaction_
 
 ## Component interaction testing
 
