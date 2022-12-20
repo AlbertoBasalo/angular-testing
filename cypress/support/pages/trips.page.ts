@@ -4,8 +4,8 @@ export class TripsPage {
     interceptGet('Trips');
     interceptGet('Agencies');
     cy.visit('/trips');
-    cy.wait('@getAgencies');
-    cy.wait('@getTrips');
+    cy.wait('@get_agencies');
+    cy.wait('@get_trips');
   }
   getTripsList() {
     return cy.get('app-trips-list > ul li');

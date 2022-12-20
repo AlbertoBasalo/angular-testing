@@ -5,13 +5,15 @@ import { OptionsModule } from '../options/options.module';
 import { BookForm } from './book.form';
 import { CustomerForm } from './customer.form';
 
-/*
- * 5 Form samples
- */
+// ! session 6
+// ! Form samples
 
 describe('The book form', () => {
   beforeEach(() => {
-    cy.viewport(500, 700);
+    cy.viewport(500, 700); // * set the viewport to 500x700
+    // * configure the module that mounts the component
+    // * even with static data on public properties
+    // * and with a spy on one of them
     cy.mount(BookForm, {
       declarations: [CustomerForm],
       imports: [ReactiveFormsModule, InputModule, OptionsModule],
@@ -25,14 +27,13 @@ describe('The book form', () => {
   it('should display a form', () => {
     cy.get('form').should('exist');
   });
-  // should fill the form
   it('should fill the form', () => {
     cy.get('#name').type('E. Musk');
     cy.get('input[name="email"]').type('e@m.org');
     cy.get('#seats').clear().type('1');
     cy.get('button').click();
     cy.get('@bookSpy').should('have.been.called');
-    cy.get('@bookSpy').should('have.been.calledWith', {
+    const expectedFormValue = {
       id: '',
       tripId: '1',
       customer: {
@@ -46,6 +47,7 @@ describe('The book form', () => {
       paymentMethod: 'credit-card',
       status: 'Pending',
       date: new Date().toISOString().substring(0, 10),
-    });
+    };
+    cy.get('@bookSpy').should('have.been.calledWith', expectedFormValue);
   });
 });

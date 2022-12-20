@@ -1,13 +1,14 @@
 import { TimeSpanModule } from 'src/app/pipes/time-span/time-span.module';
 import { TripsList } from './trips.list';
 
-/*
- * 4 Component samples
- */
+// ! session 6
+// ! 4 Component samples
 
 describe('The trips Component', () => {
   beforeEach(() => {
+    // * wait for initial data to be loaded from fixture files
     cy.fixture('trips').then((trips) => {
+      // * similar to to TestBed.configureTestingModule({imports: [TimeSpanModule]})
       cy.mount(TripsList, {
         imports: [TimeSpanModule],
         componentProperties: {

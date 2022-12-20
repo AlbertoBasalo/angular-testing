@@ -1,8 +1,7 @@
 import { TripsPage } from 'cypress/support/pages/trips.page';
 
-/*
- * 3 Page object samples
- */
+// ! session 6
+// ! 3 Page object samples
 
 describe('The Trips page', () => {
   let tripsPage: TripsPage;
