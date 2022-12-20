@@ -113,5 +113,6 @@ npm install karma-spec-reporter --save-dev
 
 # Fix errors caused by TestBed dependencies
 
-npm install cypress --save-dev
+ng add @cypress/schematic
+# https://www.npmjs.com/package/@cypress/schematic
 ```
