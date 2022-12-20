@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Trip } from '@models/trip.interface';
 import { ApiService } from '@services/api.service';
@@ -6,25 +7,25 @@ import { Observable, of } from 'rxjs';
 
 import { HomeService } from './home.service';
 
-// // ! session 3
-// // ! integration test (not e2e)
-// // ! the TestBed provides its dependencies
-// fdescribe('The Home Service _integrated_', () => {
-//   let homeService: HomeService;
+// ! session 3
+// ! integration test (not e2e)
+// ! the TestBed provides its dependencies
+describe('The Home Service _integrated_', () => {
+  let homeService: HomeService;
 
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({
-//       imports: [HttpClientTestingModule], // * http client dependency fake (no e2e)
-//       providers: [HomeService], // * provide dependencies before using it
-//     });
-//     homeService = TestBed.inject(HomeService); // * constructed by the framework
-//   });
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule], // * http client dependency fake (no e2e)
+      providers: [HomeService], // * provide dependencies before using it
+    });
+    homeService = TestBed.inject(HomeService); // * constructed by the framework
+  });
 
-//   it('should be created', () => {
-//     // * no constructor call at all
-//     expect(homeService).toBeTruthy();
-//   });
-// });
+  it('should be created', () => {
+    // * no constructor call at all
+    expect(homeService).toBeTruthy();
+  });
+});
 
 // ! session 3
 // ! unit test

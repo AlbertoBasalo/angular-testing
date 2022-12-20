@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -16,37 +17,51 @@ describe('The Agencies Component controller _semi-integrated_', () => {
   let component: AgenciesComponent;
   let fixture: ComponentFixture<AgenciesComponent>;
   let apiService: ApiService; // * the real ApiService
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [AgenciesComponent], // * declare itself
       // * Real FormsModule just for compiling the component
       // * and HttpClientTestingModule fake to not really call the api
-      imports: [FormsModule, HttpClientTestingModule],
+      imports: [
+        FormsModule, // * Real FormsModule just for compiling the component
+        HttpClientTestingModule,
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA, // * Or avoid FormsModule but ignore template errors
+      ],
     }).compileComponents(); // * compile the template
     apiService = TestBed.inject(ApiService);
     fixture = TestBed.createComponent(AgenciesComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges(); // * not needed because we are not testing the template
+    //fixture.detectChanges(); // * also calls ngOnInit (moved after spies)
   });
 
   it('should create', () => {
     // * constructor cant be spied
     // expect(component.loadAgencies).toHaveBeenCalled();
-    // * check effects
     expect(component).toBeTruthy();
   });
 
   it('should call loadAgencies on ngOnInit', () => {
     spyOn(component, 'loadAgencies');
-    component.ngOnInit(); // * must call ngOnInit manually
+    fixture.detectChanges();
     expect(component.loadAgencies).toHaveBeenCalled();
   });
 
-  it('should call getAgencies$ on loadAgencies', () => {
+  it('should call getAgencies$ on ngOnInit', () => {
     // * can make apiService a stub with predefined output
     const output = of([]);
     spyOn(apiService, 'getAgencies$').and.returnValue(output);
-    component.loadAgencies();
+    fixture.detectChanges();
+    expect(apiService.getAgencies$).toHaveBeenCalled();
+  });
+
+  it('should call loadAgencies and getAgencies$ on ngOnInit', () => {
+    spyOn(component, 'loadAgencies').and.callThrough(); // * allows to spy inner calls
+    const output = of([]);
+    spyOn(apiService, 'getAgencies$').and.returnValue(output);
+    fixture.detectChanges();
+    expect(component.loadAgencies).toHaveBeenCalled();
     expect(apiService.getAgencies$).toHaveBeenCalled();
   });
 });
@@ -55,7 +70,7 @@ describe('The Agencies Component controller _semi-integrated_', () => {
 // ! component view test
 // ! isolated from the ApiService
 
-describe('The Agencies Component view _isolated_', () => {
+fdescribe('The Agencies Component view _isolated_', () => {
   let component: AgenciesComponent;
   let fixture: ComponentFixture<AgenciesComponent>;
   let apiServiceStub: any;
@@ -84,10 +99,14 @@ describe('The Agencies Component view _isolated_', () => {
     await TestBed.configureTestingModule({
       declarations: [AgenciesComponent],
       imports: [FormsModule, HttpClientTestingModule],
+      schemas: [
+        NO_ERRORS_SCHEMA, // * to ignore template errors while not importing FormsModule
+      ],
       providers: [{ provide: ApiService, useValue: apiServiceStub }],
     }).compileComponents();
     fixture = TestBed.createComponent(AgenciesComponent);
     component = fixture.componentInstance;
+    component.agencies = inputAgencies;
     fixture.detectChanges();
   });
   it('should present a table with agencies', () => {
@@ -141,18 +160,4 @@ describe('The Agencies Component view _isolated_', () => {
     expect(rangeRadios.length).toBe(component.agencyRanges.length);
     expect(statusRadios.length).toBe(component.agencyStatuses.length);
   });
-
-  // it('should update the range value', () => {
-  //   const debugEl = fixture.debugElement;
-  //   component.agencyRanges = [
-  //     { label: 'Interplanetary', value: 'Interplanetary' },
-  //     { label: 'Orbital', value: 'Orbital' },
-  //   ];
-  //   fixture.detectChanges(); // * to update the template
-  //   const rangeRadios = debugEl.queryAll(By.css('input[name="range"]'));
-  //   rangeRadios[0].nativeElement.dispatchEvent(new Event('change'));
-  //   rangeRadios[0].triggerEventHandler('change', { target: rangeRadios[0] });
-  //   fixture.detectChanges(); // * to update the template
-  //   expect(component.agency.range).toBe(component.agencyRanges[0].value);
-  // });
 });

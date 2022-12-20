@@ -20,7 +20,7 @@ class TripsServiceStub {
   }
 }
 
-fdescribe('The Trips Form interaction', () => {
+describe('The Trips Form interaction', () => {
   let component: TripsForm;
   let fixture: ComponentFixture<TripsForm>;
   let native: any;
