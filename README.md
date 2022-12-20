@@ -14,32 +14,43 @@
 
 ## Unit and Integration testing with only Jasmine alone
 
-- Base Store (Unit)
-- Api Store (Integration)
+- **Base Store** `src\app\services\base.store.spec.ts` _Unit_
+- **Api Store** `src\app\services\api.store.spec.ts` _Integration_
+- **Spec Reporter** `npm install karma-spec-reporter --save-dev` _Add spec reporter_
+- **tests** `src\test.spec.ts` _Choose running context_
+- **Karma Config** `karma.conf.js` _Configuration_
 
 ## Jasmine Spy and test doubles
 
-- TimeSpan Pipe (Spy calls to DoC)
-- Options Service (Spy calls to DoC)
+- **Options Service** `src\app\routes\options\options.service.spec.ts` _Spy calls to Collaborator_
+- **Base Store** `src\app\services\base.store.spec.ts` _Spy private methods_
+- **Api Store** `src\app\services\api.store.spec.ts` _Spy and stub dependencies_
+- **TimeSpan Pipe** `src\app\pipes\time-span\time-span.pipe.spec.ts` _Extract logic from Angular artifacts_
 
 ## Test Bed: imports and providers
 
-- Utils Service (inject a mock)
-- Api Service (HttpClientTestingModule)
-- Home Service (integrated -> imports vs isolated -> providers)
+- **Api Service** `src\app\services\api.service.spec.ts` _HttpClientTestingModule_
+- **Utils Service** `src\app\services\utils.service.spec.ts` _inject a mock_
+- **Home Service** `src\app\routes\home\home.service.spec.ts` _integrated -> imports vs isolated -> providers_
 
 ## Component testing
 
-- Agencies Component
-- Bookings Component
-- Options List (inside / outside)
-- Home Component (dependencies... )
-
-## Component interaction testing
-
-- Trips Form (fill form)
+- **Agencies Component** `src\app\routes\agencies\agencies.component.spec.ts` _integrated controller - isolated template_
+- **Bookings Component** `src\app\routes\bookings\bookings.component.spec.ts` _isolated student task_
+- **Options List** `src\app\routes\options\options.list.spec.ts` _OnPush / Hosted_
+- **Home Component** `src\app\routes\home\home.component.spec.ts` _nested dependencies_
+- **Trips Form filling** `src\app\routes\trips\trips.form.spec.ts` _form interaction_
 
 ## End to End testing
+
+- **Home Page** `cypress\e2e\1-home.cy.ts` _Assertions_
+- **Agencies Page** `cypress\e2e\2-agencies.cy.ts` _Network interceptions_
+- **Trips Page** `cypress\e2e\3-trips.cy.ts` _Page Object_
+
+## Components interaction testing
+
+- **TripsList Component** `src\app\routes\home\4-trips.list.cy.ts` _Mount component_
+- **BookForm Component** `src\app\routes\book\5-book.form.cy.ts` _Form interaction_
 
 ---
 
