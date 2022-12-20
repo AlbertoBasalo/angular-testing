@@ -43,14 +43,14 @@
 
 ## End to End testing
 
-- **Home Page** `cypress\e2e\1-home.cy.ts` _Assertions_
-- **Agencies Page** `cypress\e2e\2-agencies.cy.ts` _Network interceptions_
-- **Trips Page** `cypress\e2e\3-trips.cy.ts` _Page Object_
+- **Home Page** `cypress\e2e\home.cy.ts` _Assertions_
+- **Agencies Page** `cypress\e2e\agencies.cy.ts` _Network interceptions_
+- **Trips Page** `cypress\e2e\trips.cy.ts` _Page Object_
 
 ## Components interaction testing
 
-- **TripsList Component** `src\app\routes\home\4-trips.list.cy.ts` _Mount component_
-- **BookForm Component** `src\app\routes\book\5-book.form.cy.ts` _Form interaction_
+- **TripsList Component** `src\app\routes\home\trips.list.cy.ts` _Mount component_
+- **BookForm Component** `src\app\routes\book\book.form.cy.ts` _Form interaction_
 
 ---
 
