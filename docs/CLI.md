@@ -112,4 +112,6 @@ npm install karma-spec-reporter --save-dev
 # choose reporters: ["kjhtml", "mocha", "spec"],
 
 # Fix errors caused by TestBed dependencies
+
+npm install cypress --save-dev
 ```
